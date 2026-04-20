@@ -1,0 +1,24 @@
+{
+  "name": "lab-execution",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "check:env": "node scripts/check-env.js",
+    "check:schema": "node scripts/check-schema.js",
+    "check:dal": "node scripts/check-dal.js",
+    "check:vector": "node scripts/check-vector.js",
+    "check:final": "node scripts/check-final.js",
+    "check:logging": "grep -r 'db_query' src/dal/ && echo '✓ Logging found' || echo '✗ No logging found'",
+    "check:reflection": "node scripts/check-reflection.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "mongodb": "^7.2.0"
+  }
+}
