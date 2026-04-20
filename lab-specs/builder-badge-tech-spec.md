@@ -166,6 +166,9 @@ Expected output:
 ### Maximum iterations
 If the schema lint fails after 3 attempts, record the error in SCHEMA_NOTES.md and proceed.
 
+### Cross-stage note
+Your Stage 1 schema will be tested by Stage 2 queries. If you discover during Stage 2 that a field you need does not exist in your schema (e.g., a compound index key is missing), return here: update `schema/supportdesk-schema.yaml` and SCHEMA_NOTES.md, then run `npm run check:schema` again before continuing. Schema iteration between stages is expected.
+
 ---
 
 ## Stage 2: Optimize Queries for MongoDB
@@ -198,7 +201,7 @@ write complexity, and future schema evolution.
 
 **Step 2 — Implement chosen options**
 
-For each path, implement in `src/dal/tickets.js` (or equivalent DAL file).
+For each path, implement in `src/dal/tickets.js`. This file must export all four access functions with real MongoDB operations — stubs or functions that return hardcoded data will not pass the milestone check.
 
 Example — fetch ticket with embedded comments:
 ```javascript
@@ -296,6 +299,16 @@ Expected index definition:
 }
 ```
 
+**Dependency check — confirm mock embedding server is running**
+
+Before Step 2, verify the embedding endpoint is reachable:
+```bash
+curl http://localhost:3001/health
+```
+Expected: `{"ok":true}`
+
+If the check fails, start the server with `npm run embed-server` and retry. If still unreachable, contact lab support — do not proceed to Step 2 without a working embed endpoint.
+
 **Step 2 — Generate embedding code**
 
 Prompt **AI Integrator**:
@@ -316,15 +329,15 @@ async function semanticSearch(query) {
   const embedding = await generateEmbedding(query);
   return db.collection('knowledge_articles').aggregate([
     {
-      $search: {
-        knnBeta: {
-          vector: embedding,
-          path: "embedding",
-          k: 5
-        }
+      $vectorSearch: {
+        index: "embedding_index",
+        path: "embedding",
+        queryVector: embedding,
+        numCandidates: 50,
+        limit: 5
       }
     },
-    { $project: { title: 1, body: 1, score: { $meta: "searchScore" } } }
+    { $project: { title: 1, body: 1, score: { $meta: "vectorSearchScore" } } }
   ]).toArray();
 }
 ```
@@ -348,7 +361,7 @@ If **AI Integrator** and **MongoDB Schema Design** give conflicting advice on em
 ## Stage 4: Observability and Wrap-Up
 
 ### Goal
-Add minimal observability and validate the full app runs on MongoDB with SQL disabled.
+Add structured logging to every DAL function (minimum fields: `event`, `collection`, `duration_ms`) and validate the full app runs on MongoDB with SQL disabled.
 
 ### Logging requirements
 
@@ -426,5 +439,5 @@ Expected output:
 | **Aggregation pipeline** | A sequence of stages that transform documents, equivalent to complex SQL queries with JOINs, GROUP BY, etc. |
 | **$lookup** | An aggregation stage that joins documents from another collection, similar to SQL JOIN |
 | **Write amplification** | When a single logical write (e.g., add a comment) requires updating multiple fields or documents |
-| **MCP Server** | MongoDB Control Plane Server — exposes MongoDB operations as callable tools for AI agents |
+| **MCP Server** | Model Context Protocol Server — exposes MongoDB operations as callable tools for AI agents |
 | **Agent Skills** | Pre-built, task-specific agent prompts and tools from the MongoDB Agent Skills repo |

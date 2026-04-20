@@ -105,17 +105,19 @@ if (testFiles.length === 0) {
 
   if (fs.existsSync(jestBin)) {
     try {
-      execSync(`"${jestBin}" --passWithNoTests 2>&1`, { cwd: ROOT, stdio: 'pipe' });
+      execSync(`"${jestBin}" --passWithNoTests`, { cwd: ROOT, stdio: 'pipe' });
       pass('Unit tests (MongoDB paths): PASS');
     } catch (err) {
-      fail(`Unit tests (MongoDB paths): FAIL\n${err.stdout?.toString().slice(0, 500)}`);
+      const output = (err.stdout?.toString() || '') + (err.stderr?.toString() || '');
+      fail(`Unit tests (MongoDB paths): FAIL\n${output.slice(0, 500)}`);
     }
   } else if (fs.existsSync(mochaBin)) {
     try {
-      execSync(`"${mochaBin}" '${testFiles[0]}' 2>&1`, { cwd: ROOT, stdio: 'pipe' });
+      execSync(`"${mochaBin}" '${testFiles[0]}'`, { cwd: ROOT, stdio: 'pipe' });
       pass('Unit tests (MongoDB paths): PASS');
     } catch (err) {
-      fail(`Unit tests (MongoDB paths): FAIL\n${err.stdout?.toString().slice(0, 500)}`);
+      const output = (err.stdout?.toString() || '') + (err.stderr?.toString() || '');
+      fail(`Unit tests (MongoDB paths): FAIL\n${output.slice(0, 500)}`);
     }
   } else {
     // No runner installed — report test files found but can't run
@@ -129,7 +131,6 @@ if (!fs.existsSync(NOTES_FILE)) {
   fail('DAL_NOTES.md: NOT FOUND');
 } else {
   const content = fs.readFileSync(NOTES_FILE, 'utf8');
-  let allPathsDocumented = true;
 
   for (const pathName of DAL_NOTES_REQUIRED_PATHS) {
     // Look for the path name as a heading (## ...) or bold (**...**)
@@ -138,7 +139,6 @@ if (!fs.existsSync(NOTES_FILE)) {
       pass(`DAL_NOTES.md: "${pathName}" documented`);
     } else {
       fail(`DAL_NOTES.md: missing documentation for "${pathName}"`);
-      allPathsDocumented = false;
     }
   }
 

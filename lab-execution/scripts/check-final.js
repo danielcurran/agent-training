@@ -149,8 +149,11 @@ async function main() {
   } catch (err) {
     fail(`Happy path: FAIL — ${err.message}`);
   } finally {
-    // Clean up test data regardless of outcome
-    await db.collection('tickets').deleteOne({ _id: testTicketId });
+    try {
+      await db.collection('tickets').deleteOne({ _id: testTicketId });
+    } catch (cleanupErr) {
+      console.warn(`Warning: test data cleanup failed: ${cleanupErr.message}`);
+    }
   }
 
   // ── SQL client disabled ───────────────────────────────────────────────────

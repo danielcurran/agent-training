@@ -209,17 +209,25 @@ async function main() {
   };
 
   for (const [name, docs] of Object.entries(collections)) {
-    if (DROP) {
-      await db.collection(name).drop().catch(() => {}); // ignore if doesn't exist
-      console.log(`  dropped: ${name}`);
-    }
+    try {
+      if (DROP) {
+        await db.collection(name).drop().catch(() => {}); // ignore if doesn't exist
+        console.log(`  dropped: ${name}`);
+      }
 
-    // Upsert each document so the script is safe to re-run without --drop
-    for (const doc of docs) {
-      await db.collection(name).replaceOne({ _id: doc._id }, doc, { upsert: true });
-    }
+      // Upsert all documents in one batch so the script is safe to re-run without --drop
+      const ops = docs.map(doc => ({
+        replaceOne: { filter: { _id: doc._id }, replacement: doc, upsert: true },
+      }));
+      if (ops.length > 0) {
+        await db.collection(name).bulkWrite(ops);
+      }
 
-    console.log(`✓ ${name}: ${docs.length} document(s) seeded`);
+      console.log(`✓ ${name}: ${docs.length} document(s) seeded`);
+    } catch (err) {
+      console.error(`✗ ${name}: seed failed — ${err.message}`);
+      process.exit(1);
+    }
   }
 
   // Verify collections are seeded correctly

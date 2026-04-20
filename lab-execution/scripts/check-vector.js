@@ -176,21 +176,23 @@ async function main() {
 
 function httpGet(url) {
   return new Promise((resolve, reject) => {
-    http.get(url, res => {
+    const req = http.get(url, res => {
       let data = '';
       res.on('data', chunk => data += chunk);
       res.on('end', () => resolve(data));
     }).on('error', reject);
+    req.setTimeout(5000, () => req.destroy(new Error('Request timed out')));
   });
 }
 
 function httpGetWithStatus(url) {
   return new Promise((resolve, reject) => {
-    http.get(url, res => {
+    const req = http.get(url, res => {
       let data = '';
       res.on('data', chunk => data += chunk);
       res.on('end', () => resolve({ statusCode: res.statusCode, body: data }));
     }).on('error', reject);
+    req.setTimeout(5000, () => req.destroy(new Error('Request timed out')));
   });
 }
 
@@ -211,7 +213,8 @@ function httpPost(url, body) {
       res.on('data', chunk => data += chunk);
       res.on('end', () => resolve(data));
     });
-    req.on('error', reject);
+    req.on('error', err => reject(new Error(`POST ${url} failed: ${err.message}`)));
+    req.setTimeout(5000, () => req.destroy(new Error('Request timed out')));
     req.write(payload);
     req.end();
   });
