@@ -1,4 +1,4 @@
-# Agent: Lab Environment Evaluator
+# Agent: Agent Learner
 
 ## Foundation
 

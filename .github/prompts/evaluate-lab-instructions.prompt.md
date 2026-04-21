@@ -3,7 +3,7 @@ mode: ask
 description: Evaluate a lab instruction artifact for how effectively it trains an external AI agent to learn MongoDB
 ---
 
-[agents/ai-agent-training-lab-instruction-evaluator.md](../../agents/ai-agent-training-lab-instruction-evaluator.md)
+[agents/agent-lab-evaluator.md](../../agents/agent-lab-evaluator.md)
 
 Evaluate the attached lab instruction artifact using the agent definition above.
 
