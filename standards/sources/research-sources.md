@@ -8,6 +8,7 @@ Reference materials informing the instructional design approach for AI agent tra
 
 - [Context Engineering — Weaviate](https://weaviate.io/blog/context-engineering)
 - [AutoContext: Instance-Level Context Learning](https://arxiv.org/html/2510.02369)
+- [Experience Compression Spectrum: Unifying Memory, Skills, and Rules in LLM Agents — arXiv](https://arxiv.org/html/2604.15877)
 
 ## Grounding LLMs in Unfamiliar Domains
 
@@ -25,6 +26,7 @@ Reference materials informing the instructional design approach for AI agent tra
 - [EduPlanner: LLM-Based Multi-Agent Systems for Instructional Design](https://arxiv.org/html/2504.05370v1)
 - [ISD-Agent-Bench: Benchmark for Instructional Design Agents](https://arxiv.org/html/2602.10620v1)
 - [Enabling Multi-Agent Systems as Learning Designers — KLI Framework](https://arxiv.org/html/2508.16659)
+- [A Scoping Review of Large Language Model-Based Pedagogical Agents — arXiv](https://arxiv.org/html/2604.12253)
 
 ## Few-Shot Learning & Tool Use
 
