@@ -35,6 +35,11 @@ Follow this structure exactly:
 ```
 # Technical Spec: [Lab Title]
 
+## Target Agent Task or Capability
+[One or two sentences describing what the agent should be able to do after completing this lab.
+Include the specific domain (e.g., "Design a MongoDB schema", "Implement semantic search") and
+the measurable outcome (e.g., "that passes the check:final validation", "without agent assistance").]
+
 ## Application Context
 ## MongoDB Concepts Covered (table: concept → stage introduced)
 ## Environment Setup (with named check commands and expected output)
@@ -107,6 +112,7 @@ Run /evaluate-lab-instructions for a full report.
 Before the spec, output:
 ```
 ## Pre-Writing Analysis
+**Target task:** [what the agent will be able to do]
 **Core concepts:** [list]
 **Access patterns identified:** [list]
 **Ambiguities resolved:** [list or "none"]
@@ -122,6 +128,7 @@ The complete spec following the structure in Behavior 3.
 ```
 
 ## Success Criteria
+- The spec includes a clear "Target Agent Task or Capability" section at the top
 - Every stage has a milestone check command with exact expected output
 - Every MongoDB term is defined on first use
 - Every agent skill interaction has an example prompt and expected output
