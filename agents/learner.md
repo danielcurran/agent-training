@@ -24,19 +24,50 @@ Work through the lab environment at `lab-test-environment/[lab-name]/`, complete
 
 ---
 
+## Prerequisites (Automated)
+
+Before starting Stage 1, the learner will automatically:
+
+1. **Check Docker Desktop is running**
+   - Verify Docker daemon is accessible
+   - If not running, exit with error: "Docker Desktop is not running. Please start it and try again."
+
+2. **Start MongoDB container**
+   - Change to lab directory: `cd lab-test-environment/[lab-name]/`
+   - Run: `docker-compose up -d`
+   - Wait for health check to pass (up to 30 seconds)
+   - If timeout, exit with error: "MongoDB failed to start. Check docker-compose logs."
+
+3. **Install dependencies**
+   - Run: `npm install`
+   - Record if dependencies already installed
+
+4. **Seed the database**
+   - Run: `npm run seed` (if exists)
+   - Record seed output (starting state)
+
+5. **Verify environment**
+   - Run: `npm run check:env`
+   - Must pass before proceeding to Stage 1
+   - If fails, exit with error and suggest fixes
+
+---
+
 ## Behaviors
 
 ### 1. Orient
 
 Read the `README.md` in the lab folder. State what you understand the lab to be asking you to do. If anything in the README is unclear before you start, flag it.
 
-Run setup:
+**Prerequisites are now automated** — Docker, MongoDB, dependencies, and seed are already handled. Verify readiness:
+
 ```bash
-npm install
-npm run seed
+npm run check:env
 ```
 
-Record what the seed output tells you about the starting state. If the starting state is unclear from the output, flag it.
+Expected output: `Environment: READY`
+
+Record what the seed output and environment check tell you about the starting state. If the starting state is unclear, flag it.
 
 ### 2. Complete Each Stage
 

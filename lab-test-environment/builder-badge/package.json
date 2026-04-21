@@ -1,0 +1,22 @@
+{
+  "name": "builder-badge-lab",
+  "version": "1.0.0",
+  "description": "MongoDB lab: design, optimize, and extend a MongoDB application beyond SQL mental model",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "seed": "node scripts/seed.js",
+    "check:env": "node scripts/check-env.js",
+    "check:schema": "node scripts/check-schema.js",
+    "check:dal": "node scripts/check-dal.js",
+    "check:vector": "node scripts/check-vector.js",
+    "check:final": "node scripts/check-final.js",
+    "check:reflection": "node scripts/check-reflection.js",
+    "check:all": "npm run check:env && npm run check:schema && npm run check:dal && npm run check:vector && npm run check:final && npm run check:reflection"
+  },
+  "dependencies": {
+    "dotenv": "^16.0.0",
+    "mongodb": "^6.0.0",
+    "express": "^4.18.0"
+  }
+}

@@ -1,0 +1,19 @@
+version: '3.8'
+services:
+  mongodb:
+    image: mongo:6.0
+    container_name: builder-badge-mongodb
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_DATABASE: builder_badge_lab
+    healthcheck:
+      test: echo 'db.adminCommand("ping")' | mongosh localhost:27017/test --quiet
+      interval: 5s
+      timeout: 3s
+      retries: 5
+    volumes:
+      - mongodb_data:/data/db
+
+volumes:
+  mongodb_data:
