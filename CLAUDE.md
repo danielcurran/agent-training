@@ -18,10 +18,10 @@ The `.github/prompts/` files are thin wrappers that invoke the agents above. Do 
 
 ## Labs
 
-| Lab | Outline | Tech Spec | Latest Evaluation | Score |
-|---|---|---|---|---|
-| Builder Badge | [labs/outlines/builder-badge-outline.md](labs/outlines/builder-badge-outline.md) | [labs/specs/builder-badge-tech-spec.md](labs/specs/builder-badge-tech-spec.md) | [labs/reports/builder-badge-tech-spec-eval-v1.md](labs/reports/builder-badge-tech-spec-eval-v1.md) | 9.6/10 — minor revisions recommended |
-| Insert and Find | [labs/outlines/insert-and-find-outline.md](labs/outlines/insert-and-find-outline.md) | [labs/specs/insert-and-find-tech-spec.md](labs/specs/insert-and-find-tech-spec.md) | — | Not yet evaluated |
+| Lab | Outline | Tech Spec | Spec Eval | Env Eval | Status |
+|---|---|---|---|---|---|
+| Builder Badge | [labs/outlines/builder-badge-outline.md](labs/outlines/builder-badge-outline.md) | [labs/specs/builder-badge-tech-spec.md](labs/specs/builder-badge-tech-spec.md) | [v1](labs/reports/builder-badge-tech-spec-eval-v1.md) (9.6/10) | [v1](labs/reports/builder-badge-env-eval-v1.md) | ✓ Production Ready |
+| Insert and Find | [labs/outlines/insert-and-find-outline.md](labs/outlines/insert-and-find-outline.md) | [labs/specs/insert-and-find-tech-spec.md](labs/specs/insert-and-find-tech-spec.md) | [v1](labs/reports/insert-and-find-tech-spec-eval-v1.md) (8.8/10) | [v2](labs/reports/insert-and-find-env-eval-v2.md) | ✓ Production Ready |
 
 ## Workflow
 
@@ -36,9 +36,11 @@ The `.github/prompts/` files are thin wrappers that invoke the agents above. Do 
 
 ## Lab Execution
 
+Each lab has a self-contained environment in `lab-test-environment/{name}/`:
+
 ```bash
-cd lab-execution
-cp .env.example .env        # set MONGODB_URI
+cd lab-test-environment/builder-badge    # or insert-and-find
+cp .env.example .env
 npm install
 npm run seed                # load starting data
 npm run check:env           # verify setup
@@ -47,15 +49,24 @@ npm run check:all           # run all validation checks in order
 
 Check scripts run in stage order: `check:env` → `check:schema` → `check:dal` → `check:vector` → `check:final` → `check:reflection`
 
-See [lab-execution/README.md](lab-execution/README.md) for the full guide.
+### lab-execution/ (Legacy Template)
+
+`lab-execution/` is a **template/reference** for building new lab environments. It contains generic Node.js harness, mock embedding server (deterministic 1536-dim vectors), and script templates. New labs should copy this structure into `lab-test-environment/{name}/` and customize. See [lab-execution/README.md](lab-execution/README.md) for harness documentation.
 
 ## Standards
 
 All agents must follow the [Instructional Design Rulebook](standards/instructional-design-rulebook.md) when creating or evaluating any content. It is the authoritative reference for learning objectives, stage design, milestone checks, and evaluation criteria.
 
+## Directory Reference
+
+### .claude/
+Reserved for Copilot-specific configuration (e.g., custom instructions, Claude-specific settings). Currently unused; preserved for future extension.
+
 ## Conventions
 
 - Outlines: `labs/outlines/{name}-outline.md`
 - Tech specs: `labs/specs/{name}-tech-spec.md`
-- Evaluations: `labs/reports/{name}-tech-spec-eval-v{N}.md` — increment N each revision cycle
+- Tech spec evaluations: `labs/reports/{name}-tech-spec-eval-v{N}.md` — increment N each revision cycle
+- Environment evaluations: `labs/reports/{name}-env-eval-v{N}.md` — tracks learner execution results
 - Agent definitions live in `agents/` — `.github/prompts/` references them by filename, do not rename
+- Stage deliverables: SCHEMA.md, REFLECTION.md (standard names across all labs)

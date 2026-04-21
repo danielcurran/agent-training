@@ -2,6 +2,10 @@
 
 A repository for designing, evaluating, and iterating AI agent training materials focused on MongoDB education.
 
+**📖 For detailed reference documentation, conventions, and architecture, see [CLAUDE.md](CLAUDE.md) (authoritative source).**
+
+## Quick Start
+
 ## Repo Structure
 
 ```
@@ -41,3 +45,9 @@ standards/           → Instructional design rulebook and research sources
 1. Open this repo in VS Code
 2. Ensure `chat.promptFiles` is enabled in settings: `"chat.promptFiles": true`
 3. Open Copilot Chat and type `/` to see available prompts
+
+## Documentation
+
+- **[CLAUDE.md](CLAUDE.md)** — Comprehensive reference (architecture, conventions, full workflow)
+- **[standards/instructional-design-rulebook.md](standards/instructional-design-rulebook.md)** — Pedagogical guidelines
+- **[lab-execution/README.md](lab-execution/README.md)** — Lab environment setup & execution
