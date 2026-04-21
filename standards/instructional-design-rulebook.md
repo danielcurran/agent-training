@@ -59,22 +59,31 @@ Every lab opens with explicit learning objectives. Objectives must describe what
 
 ## 3. KLI Learning Process Types
 
-The KLI (Knowledge-Learning-Instruction) framework defines three types of learning. Each requires different instruction. Identify the type before writing each stage.
+The KLI (Knowledge-Learning-Instruction) connects three things: what needs to be learned (the knowledge component), how learning happens (the learning process), and what instruction should do to support it (the instructional principle). The core insight is that different types of learning require fundamentally different instruction. Using the wrong instruction for the learning type produces agents that can execute but not decide, or explain but not act.
+
+### How to apply KLI when designing a stage
+
+1. **Identify the knowledge component**: what specific skill or concept must the agent master in this stage?
+2. **Select the learning process**: does the agent need to recall a pattern reliably, extract a rule from examples, or build a mental model?
+3. **Choose the instructional approach**: match the instruction to the process type (see below).
+4. **Design the activity**: provide exactly what that process type requires. Nothing more.
+
+The three process types are defined below. Each definition describes what the agent needs, what instruction must provide, and what to avoid.
 
 ### Memory and Fluency
-The agent recalls and applies a pattern: syntax, commands, conventions. Provide the exact pattern, show a worked example, ask the agent to apply it. Don't ask it to choose between alternatives here.
+The agent needs to recall and apply a pattern reliably: syntax, commands, naming conventions. Instruction must provide the exact pattern, show a worked example, and ask the agent to apply it immediately. Do not ask the agent to choose between alternatives here. That is a different process type.
 
-**Example:** "Run this exact command to create a vector index: `[command]`. Now create a second index on the `products` collection using the same pattern."
+**Lab example:** "Run this exact command to create a vector index: `[command]`. Now create a second index on the `products` collection using the same pattern."
 
 ### Induction and Refinement
-The agent extracts a rule from varied examples: when to embed vs. reference, when to use a pipeline vs. a simple find. Show at least two contrasting examples, name what changes between them, ask the agent to apply the inferred rule to a new case.
+The agent needs to extract a rule from varied examples: when to embed vs. reference, when to use a pipeline vs. a simple find. Instruction must show at least two contrasting examples, name what changes between them, and ask the agent to apply the inferred rule to a new case.
 
-**Example:** "Here is a schema optimised for reads [A]. Here is one optimised for writes [B]. The access pattern determines the choice. Which fits this app? Update the schema and explain your reasoning in SCHEMA_NOTES.md."
+**Lab example:** "Here is a schema optimised for reads [A]. Here is one optimised for writes [B]. The access pattern determines the choice. Which fits this app? Update the schema and explain your reasoning in SCHEMA_NOTES.md."
 
 ### Understanding and Sense-Making
-The agent connects a new concept to its existing mental model. Bridge explicitly from SQL to MongoDB, name the conceptual shift, confirm understanding through a reflection artifact.
+The agent needs to connect a new concept to its existing mental model: why documents exist, why MongoDB has no joins, why schema flexibility is a feature. Instruction must bridge explicitly from SQL to MongoDB, name the conceptual shift, and confirm understanding through a reflection artifact rather than a mechanical task.
 
-**Example:** "In SQL, schema changes require migrations that touch every row. In MongoDB, documents in the same collection can have different shapes. Write one sentence in SCHEMA_NOTES.md describing where this would save time in your app."
+**Lab example:** "In SQL, schema changes require migrations that touch every row. In MongoDB, documents in the same collection can have different shapes. Write one sentence in SCHEMA_NOTES.md describing where this would save time in your app."
 
 **Rule:** Every lab must include at least one stage of each type. Fluency-only labs produce agents that execute but can't decide. Sense-making-only labs produce agents that explain but can't act.
 
@@ -111,20 +120,22 @@ Labs have 3–5 sequential stages.
 
 ## 6. Scaffolding
 
-Scaffolding is support that decreases as the lab progresses. A lab that provides the same support in every stage is scripting, not teaching.
+Scaffolding is support that decreases as the lab progresses, but only for knowledge the agent has already acquired. A lab that provides the same support in every stage is scripting, not teaching. A lab that removes support for concepts the agent hasn't learned yet will fail.
+
+The principle from Section 0 still applies in every stage: agents plan, they don't interpret. Reducing scaffolding means the agent uses knowledge from earlier stages to plan independently. It does not mean providing less information about new concepts. Any new concept introduced in a later stage must be fully scaffolded regardless of where it appears in the lab.
 
 **Rules:**
 - **Stage 1**: fully scaffolded. Provide the exact command, expected output, and what to observe. Leave nothing to inference.
-- **Middle stages**: guided. Provide the goal and available tools. Require the agent to determine the approach.
-- **Final stages**: minimal. State the objective and the milestone check. The agent plans its own path.
-- Never remove scaffolding faster than knowledge has been built. Fluency must be established before induction. Induction must be established before independent sense-making.
+- **Middle stages**: guided for previously-taught knowledge. The agent determines the approach using what it has learned. New concepts introduced here still get exact commands, examples, and expected output.
+- **Final stages**: minimal for previously-taught knowledge. State the objective and the milestone check. New concepts introduced here still get full scaffolding.
+- Never reduce scaffolding for a concept in the same stage it is introduced.
 
-| Stage | Support level | What the spec provides |
+| Stage | Previously-taught knowledge | New knowledge introduced |
 |---|---|---|
-| 1 | Full | Exact command, expected output, what to observe |
-| 2 | Guided | Goal, available skills, example prompt to adapt |
-| 3 | Partial | Goal, milestone check, one hint for likely errors |
-| 4 | Minimal | Objective only. Agent plans its own approach |
+| 1 | N/A | Exact command, expected output, what to observe |
+| 2 | Goal and available tools. Agent determines approach | Exact command, expected output, what to observe |
+| 3 | Goal and milestone check only | Exact command, expected output, what to observe |
+| 4 | Objective only. Agent plans its own approach | Exact command, expected output, what to observe |
 
 ---
 
