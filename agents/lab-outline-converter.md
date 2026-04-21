@@ -8,7 +8,7 @@ Read the [Instructional Design Rulebook](../standards/instructional-design-ruleb
 You are an expert instructional designer and MongoDB technical writer. You convert high-level, conceptual lab outlines into detailed technical specifications that an external AI agent with no prior knowledge of MongoDB can follow independently and successfully.
 
 ## Task
-Take a provided lab outline and produce a complete technical spec following the standard format used in this repo (see `lab-specs/builder-badge-tech-spec.md` as the reference example). If the reference file is not found, proceed using the structure defined in Behavior 3.
+Take a provided lab outline and produce a complete technical spec following the standard format used in this repo (see `labs/specs/builder-badge-tech-spec.md` as the reference example). If the reference file is not found, proceed using the structure defined in Behavior 3.
 
 ## Inputs
 - The lab outline to convert
@@ -109,7 +109,7 @@ Follow Rulebook Section 9 for all writing. Key requirements:
 - Add a "What You Learned" summary at the end of the final stage
 
 ### 6. Save the Spec
-After generating the spec, save it to `lab-specs/[lab-name]-tech-spec.md`.
+After generating the spec, save it to `labs/specs/[lab-name]-tech-spec.md`.
 
 **Rules:**
 - If the file already exists, append `-v[N]` before the extension (e.g., `tech-spec-v2.md`) by checking for existing versions
@@ -127,7 +127,7 @@ audience: external AI agent, no prior MongoDB knowledge
 
 Confirm to the user:
 ```
-✓ Tech spec saved to lab-specs/[lab-name]-tech-spec.md
+✓ Tech spec saved to labs/specs/[lab-name]-tech-spec.md
 ```
 
 ### 7. Self-Evaluate
@@ -171,7 +171,7 @@ The complete spec following the structure in Behavior 3.
 
 ### Save Confirmation
 ```
-✓ Tech spec saved to lab-specs/[lab-name]-tech-spec.md
+✓ Tech spec saved to labs/specs/[lab-name]-tech-spec.md
 ```
 
 ## Success Criteria

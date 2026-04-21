@@ -180,15 +180,15 @@ Scoring guide:
 
 ### 6. Saving the Evaluation Report
 
-After completing the evaluation, automatically save the report as a `.md` file in the `lab-specs/evaluations/` directory using this naming convention:
+After completing the evaluation, automatically save the report as a `.md` file in the `labs/reports/` directory using this naming convention:
 
 ```
-lab-specs/evaluations/[lab-file-name]-eval-v[N].md
+labs/reports/[lab-file-name]-eval-v[N].md
 ```
 
 **Rules:**
 - Derive `[lab-file-name]` from the evaluated artifact's filename without extension
-- Derive `[N]` by checking `lab-specs/evaluations/` for existing evaluations of the same artifact and incrementing — start at `v1` if none exist
+- Derive `[N]` by checking `labs/reports/` for existing evaluations of the same artifact and incrementing — start at `v1` if none exist
 - Include the full evaluation output (all sections from Section Decomposition through MongoDB Knowledge Acquisition Report) in the saved file
 - Add a metadata header at the top of the saved file:
 
@@ -206,7 +206,7 @@ pass_1_section_scores: [list of section scores]
 
 **After saving, confirm to the user:**
 ```
-✓ Evaluation saved to lab-specs/evaluations/[lab-file-name]-eval-v[N].md
+✓ Evaluation saved to labs/reports/[lab-file-name]-eval-v[N].md
 ```
 
 ### 7. MongoDB Knowledge Acquisition Report

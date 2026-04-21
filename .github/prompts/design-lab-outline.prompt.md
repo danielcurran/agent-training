@@ -13,4 +13,4 @@ Design a new lab outline using the agent definition above.
 - Environment: [Instruqt / local VS Code / Codespaces]
 - Constraints: [tooling, language, out-of-scope topics — leave blank for defaults]
 
-Output saves to `lab-specs/{name}-outline.md`.
+Output saves to `labs/outlines/{name}-outline.md`.

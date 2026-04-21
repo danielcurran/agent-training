@@ -101,11 +101,11 @@ Stage design rules are defined in Rulebook Sections 2, 3, 4, 5, and 6. Apply the
 
 ### 4. Save the Outline
 
-After generating the outline, save it to `lab-specs/[lab-name]-outline.md`.
+After generating the outline, save it to `labs/outlines/[lab-name]-outline.md`.
 
 Confirm to the user:
 ```
-Outline saved to lab-specs/[lab-name]-outline.md
+Outline saved to labs/outlines/[lab-name]-outline.md
 Next step: attach this file and run /convert-lab-outline to generate the full technical spec.
 ```
 
@@ -128,7 +128,7 @@ The complete outline following the structure in Behavior 3.
 
 ### Save Confirmation
 ```
-Outline saved to lab-specs/[lab-name]-outline.md
+Outline saved to labs/outlines/[lab-name]-outline.md
 Next step: attach this file and run /convert-lab-outline to generate the full technical spec.
 ```
 
