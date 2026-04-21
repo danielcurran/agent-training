@@ -45,6 +45,10 @@ Check scripts run in stage order: `check:env` → `check:schema` → `check:dal`
 
 See [lab-execution/README.md](lab-execution/README.md) for the full guide.
 
+## Standards
+
+All agents must follow the [Instructional Design Rulebook](standards/instructional-design-rulebook.md) when creating or evaluating any content. It is the authoritative reference for learning objectives, stage design, milestone checks, and evaluation criteria.
+
 ## Conventions
 
 - Outlines: `labs/outlines/{name}-outline.md`
