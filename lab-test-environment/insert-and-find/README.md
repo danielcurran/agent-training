@@ -4,29 +4,49 @@ Working environment for the **Insert and Find — MongoDB Basics** lab.
 
 ## Prerequisites
 
-**MongoDB** must be running on `localhost:27017` before running check scripts.
+**⚠️ IMPORTANT: Start MongoDB FIRST before doing anything else.**
 
-### Start MongoDB with Docker Compose (recommended)
+MongoDB must be running on `localhost:27017` for this lab to work. All validation checks and the lab script depend on it.
+
+### Step 1: Start MongoDB with Docker Compose (required)
+
+**Before you do anything else, run:**
 
 ```bash
 docker-compose up -d
 ```
 
-MongoDB will be ready when health check passes. To verify:
+This starts MongoDB in the background. Wait for the health check to pass. Verify it's running:
+
 ```bash
 docker-compose ps
 ```
 
-When done, stop with:
+You should see:
+```
+NAME                   IMAGE              STATUS
+insert-and-find-mongodb mongo:latest      Up (healthy)
+```
+
+**Do not proceed to Setup until MongoDB shows (healthy).**
+
+### Step 2: Complete Setup
+
+Once MongoDB is running, proceed to [Setup](#setup) below.
+
+### When done: Stop MongoDB
+
 ```bash
 docker-compose down
 ```
 
-### Or: MongoDB locally or in the cloud
+### Alternative: MongoDB locally or in the cloud
 
-See alternatives in the [main README](../../README.md).
+If you don't have Docker, see alternatives in the [main README](../../README.md).
 
 ## Setup
+
+Make sure MongoDB is running (see [Prerequisites](#prerequisites) above), then:
 
 ```bash
 cp .env.example .env
@@ -40,6 +60,8 @@ node src/run.js
 ```
 
 ## Validate
+
+Once you've written your code in `src/run.js`, verify your work with these checks (MongoDB must be running):
 
 ```bash
 npm run check:env         # verify MongoDB is running and collection is empty
