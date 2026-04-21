@@ -68,7 +68,30 @@ Every lab must open with explicit learning objectives. Because agents plan rathe
 
 ---
 
-## 3. Skill Gap Design
+## 3. KLI Learning Process Types
+
+The Knowledge-Learning-Instruction (KLI) framework identifies three fundamentally different types of learning. Each requires different instruction design. Identify which type each stage targets before writing the stage.
+
+### Memory and Fluency
+The agent needs to recall and apply a pattern reliably — syntax, commands, naming conventions. Instruction should: provide the exact pattern, show a worked example, and ask the agent to apply it immediately. Do not ask the agent to choose between alternatives at this stage — that is a different type of learning.
+
+**Lab application:** "Run this exact command to create a vector index: `[command]`. Now create a second index on the `products` collection using the same pattern."
+
+### Induction and Refinement
+The agent needs to see enough varied examples to extract the underlying rule itself — when to embed vs. reference, when to use an aggregation pipeline vs. a simple find. Instruction should: show at least two contrasting examples, name the variable that changes between them, and ask the agent to apply the inferred rule to a new case.
+
+**Lab application:** "Here is a schema optimised for reads [example A]. Here is one optimised for writes [example B]. The access pattern is what determines the choice. Given this app's access patterns, which fits better? Update the schema and explain your reasoning in SCHEMA_NOTES.md."
+
+### Understanding and Sense-Making
+The agent needs to connect a new concept to its existing mental model — why documents exist, why MongoDB has no joins, why schema flexibility is a feature not a bug. Instruction should: explicitly bridge from the known (SQL) to the new (MongoDB), name the conceptual shift required, and confirm understanding through a reflection artifact rather than a mechanical task.
+
+**Lab application:** "In SQL, schema changes require migrations that touch every row. In MongoDB, documents in the same collection can have different shapes — you can add a field to new documents without altering existing ones. Write one sentence in SCHEMA_NOTES.md describing a scenario in your app where this would save you time."
+
+**Rule:** Every lab must include at least one stage of each type. A lab that only drills fluency produces an agent that can execute but not decide. A lab that only asks for sense-making produces an agent that can explain but not act.
+
+---
+
+## 4. Skill Gap Design
 
 Every lab must close a specific, diagnosed gap — not teach MongoDB in the abstract. Before writing a single stage, identify the learner's starting mental model and the target mental model, and design the gap-closing explicitly.
 
@@ -93,10 +116,32 @@ Labs are broken into 3–5 sequential stages.
 - Concepts build **cumulatively**. Stage N may only assume knowledge introduced in Stages 1 through N-1.
 - Every stage must have a **single, unambiguous goal** stated in one sentence.
 - Every stage must produce at least one **artifact** (a file, a schema, a code change) that the milestone check can validate.
+- Every stage must target a specific KLI learning process type (see Section 3). State which type at the top of each stage definition.
 
 ---
 
-## 4. Milestone Checks
+## 6. Scaffolding
+
+Scaffolding is support provided to the agent that is progressively removed as the lab advances. Early stages provide maximum structure; later stages require the agent to apply what it has learned with less guidance. A lab that provides the same level of support in every stage is not teaching — it is scripting.
+
+**Rules:**
+- **Stage 1** must be fully scaffolded: provide the exact command or prompt to use, show the expected output, and confirm what the agent should observe. Leave nothing to inference.
+- **Middle stages** reduce scaffolding incrementally: provide the goal and the available tools, but require the agent to determine the approach. Example prompts shift from "run this exact command" to "ask the Schema Design skill to propose two alternatives."
+- **Final stages** operate with minimal scaffolding: state the objective, name the milestone check, and let the agent plan its own path. The agent should be applying knowledge from earlier stages, not following new instructions.
+- **Never remove scaffolding faster than knowledge has been built.** If Stage 3 removes support for a concept introduced in Stage 2, Stage 2 must have fully established that concept first. Use the KLI type to verify: fluency must be established before induction; induction must be established before sense-making can be applied independently.
+
+**Scaffolding progression example:**
+
+| Stage | Support level | What the spec provides |
+|---|---|---|
+| 1 | Full | Exact command, expected output, what to observe |
+| 2 | Guided | Goal, available skills, example prompt to adapt |
+| 3 | Partial | Goal, milestone check, one hint if a common error is likely |
+| 4 | Minimal | Objective only — agent plans its own approach |
+
+---
+
+## 7. Milestone Checks
 
 Every stage ends with exactly one milestone check.
 
@@ -108,7 +153,7 @@ Every stage ends with exactly one milestone check.
 
 ---
 
-## 6. Agent Skill Interactions
+## 8. Agent Skill Interactions
 
 When a stage involves an agent skill, the spec must fully define the interaction.
 
@@ -120,7 +165,7 @@ When a stage involves an agent skill, the spec must fully define the interaction
 
 ---
 
-## 7. Zero-Knowledge Writing
+## 9. Zero-Knowledge Writing
 
 Write as if the reader has never seen a MongoDB document.
 
@@ -132,7 +177,7 @@ Write as if the reader has never seen a MongoDB document.
 
 ---
 
-## 8. Reflection and Decision Records
+## 10. Reflection and Decision Records
 
 Agents learn best when they record decisions, not just execute steps.
 
@@ -143,7 +188,7 @@ Agents learn best when they record decisions, not just execute steps.
 
 ---
 
-## 9. Buildability
+## 11. Buildability
 
 Every lab must be provisioned without trial-and-error.
 
@@ -154,7 +199,7 @@ Every lab must be provisioned without trial-and-error.
 
 ---
 
-## 10. Evaluation and Scoring
+## 12. Evaluation and Scoring
 
 Evaluation reports score specs against these rules, not against subjective quality.
 
@@ -166,6 +211,6 @@ Evaluation reports score specs against these rules, not against subjective quali
 
 ---
 
-## 11. Living Document
+## 13. Living Document
 
 This rulebook evolves as the program matures. When a rule proves unworkable in practice, update it here and note the reason. Do not work around a rule without updating it — silent workarounds create inconsistency across agents and content.
