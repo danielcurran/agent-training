@@ -10,7 +10,7 @@ Repository for designing, evaluating, and iterating AI agent training materials 
 |---|---|---|---|
 | Lab Instruction Evaluator | [agents/ai-agent-training-lab-instruction-evaluator.md](agents/ai-agent-training-lab-instruction-evaluator.md) | `/evaluate-lab-instructions` in Copilot Chat | Scores lab specs on clarity, completeness, and pedagogy |
 | Lab Outline Converter | [agents/lab-outline-converter.md](agents/lab-outline-converter.md) | `/convert-lab-outline` in Copilot Chat | Converts high-level outlines into detailed technical specs |
-| Instructional Design Coach | [agents/prototype-instructional-design-agent.md](agents/prototype-instructional-design-agent.md) | Attach in Copilot Chat | Helps design and iterate training prompts and rubrics |
+| Lab Outline Designer | [agents/lab-outline-designer.md](agents/lab-outline-designer.md) | Attach in Copilot Chat | Creates lab outlines to feed into the Lab Outline Converter |
 
 The `.github/prompts/` files are thin wrappers that invoke the agents above. Do not add logic there — put it in the agent definition under `agents/`.
 
