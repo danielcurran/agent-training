@@ -12,6 +12,7 @@ Repository for designing, evaluating, and iterating AI agent training materials 
 | Lab Outline Converter | [agents/lab-outline-converter.md](agents/lab-outline-converter.md) | `/convert-lab-outline` in Copilot Chat | Converts high-level outlines into detailed technical specs |
 | Lab Outline Designer | [agents/lab-outline-designer.md](agents/lab-outline-designer.md) | `/design-lab-outline` in Copilot Chat | Creates lab outlines to feed into the Lab Outline Converter |
 | Lab Environment Builder | [agents/lab-environment-builder.md](agents/lab-environment-builder.md) | `/build-lab-environment` in Copilot Chat | Generates a working skeleton app and check scripts from a tech spec |
+| Lab Environment Evaluator | [agents/lab-environment-evaluator.md](agents/lab-environment-evaluator.md) | `/evaluate-lab-environment` in Copilot Chat | Validates a built lab environment against its tech spec |
 
 The `.github/prompts/` files are thin wrappers that invoke the agents above. Do not add logic there — put it in the agent definition under `agents/`.
 
