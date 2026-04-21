@@ -2,6 +2,44 @@
 
 This rulebook governs how all agents in this repository — the Lab Outline Designer, Lab Outline Converter, and Lab Instruction Evaluator — create and assess training content. Every outline, spec, and evaluation report must follow these rules. When in doubt, defer to this document.
 
+Rules are grounded in research on how AI agents learn from documentation. See [standards/sources/research-sources.md](sources/research-sources.md) for the full reference list.
+
+---
+
+## 0. Foundational Principles
+
+Two principles underpin every rule in this document. Read these before anything else.
+
+### Backwards Design
+
+Design every lab in reverse order: define the final capability first, design the assessment that proves it, then design the learning activities that build toward it. Never start with content.
+
+In practice this means:
+1. **State the endpoint** — what should the agent be able to do, without help, after completing the lab?
+2. **Define the milestone check** — what observable artifact or output proves that capability?
+3. **Design the stages** — what prerequisite knowledge and skills must each stage build so the agent arrives ready for the next?
+
+Content that doesn't serve a milestone check doesn't belong in the lab. Stages that don't build toward a learning objective don't belong in the spec.
+
+### Humans Interpret, Agents Plan
+
+This is the most important distinction in designing content for AI agents.
+
+When a human reads documentation, they interpret — filling in gaps with judgment, background knowledge, and contextual reasoning. They can tolerate ambiguity, infer intent, and course-correct when something feels wrong.
+
+When an agent reads documentation, it plans — converting instructions directly into an action sequence. It cannot fill gaps with judgment. Ambiguous instructions don't prompt an agent to pause and think; they produce unpredictable behavior, wrong assumptions, or silent failure.
+
+This distinction has concrete consequences for every content decision:
+
+| If you write for humans | Write this for agents instead |
+|---|---|
+| "Set up the database appropriately" | "Run `npm run seed` — this populates the `orders` collection with 50 sample documents in the shape shown below" |
+| "You may want to consider indexes here" | "Create an index on `{ customerId: 1, createdAt: -1 }`. Here is the exact command and the expected output" |
+| "Review the schema and make improvements" | "Identify at least two fields currently stored as strings that would be better represented as arrays. Update the schema file. The milestone check will verify both fields are changed" |
+| "Understand the tradeoffs" | "Write two sentences in SCHEMA_NOTES.md: one stating which option you chose, one stating what you are giving up by not choosing the alternative" |
+
+Every instruction in every outline, spec, and report should be tested against this question: **if an agent reads this and immediately starts acting, does it know exactly what to do?** If not, it is written for a human interpreter, not an agent planner. Rewrite it.
+
 ---
 
 ## 1. Audience
@@ -14,19 +52,38 @@ Never assume familiarity with MongoDB. Never skip to "just use an index" without
 
 ## 2. Learning Objectives
 
-Every lab must open with explicit learning objectives.
+Every lab must open with explicit learning objectives. Because agents plan rather than interpret, objectives must describe the exact behavior the agent will demonstrate — not knowledge it will "have" or concepts it will "understand."
 
 **Rules:**
 - State 3–6 objectives per lab.
-- Every objective must describe a **measurable, observable behavior** — something you can pass or fail, not something you can only feel.
-- Objectives must be carried forward into stage design. Every stage must serve at least one objective.
+- Every objective must describe a **measurable, observable behavior** — something that produces a checkable artifact, not something that only changes internal state.
+- Objectives must specify **what cognitive process is required**, not just the topic. Recognizing when to use an aggregation pipeline is a different skill than writing one — they require different instruction.
+- Every stage must serve at least one objective. Every objective must be served by at least one stage. Objectives without stages are aspirational; stages without objectives are filler — eliminate both.
+- The milestone check for each stage must directly and unambiguously measure the objective it serves. If you cannot draw a straight line from objective → stage activity → milestone check, rewrite all three.
 
 **Bad:** "Understand why MongoDB is better than SQL."
-**Good:** "Design a MongoDB schema that eliminates at least one multi-table join from the equivalent SQL data model."
+**Good:** "Design a MongoDB schema that eliminates at least one multi-table join from the equivalent SQL data model and record the access pattern that drove that decision in SCHEMA_NOTES.md."
+
+**Cognitive process test:** for each objective, ask — is the agent being asked to *recall and apply* a pattern, *compare and decide* between alternatives, or *evaluate and justify* a choice? Each requires different instruction. Don't conflate them in a single objective.
 
 ---
 
-## 3. Stage Design
+## 3. Skill Gap Design
+
+Every lab must close a specific, diagnosed gap — not teach MongoDB in the abstract. Before writing a single stage, identify the learner's starting mental model and the target mental model, and design the gap-closing explicitly.
+
+**Rules:**
+- State the **starting mental model** in the spec: what does the agent already know, and what harmful assumption will it bring from that prior knowledge? For this program, the default starting model is: *SQL-proficient engineer who will instinctively normalize data, write joins, and separate concerns into tables.*
+- For every MongoDB concept introduced, **name the SQL instinct it will override** and explicitly address it. Do not assume the agent will naturally abandon its prior model.
+- **Teach the anti-pattern before the pattern.** Show what the SQL-instinct approach produces (unnecessary joins, multiple round-trips, rigid schema), then show what the MongoDB approach replaces it with and why. Agents, like humans, learn more durably from contrast than from instruction alone.
+- **Reduce cognitive load at the moment of new concept introduction.** When a stage introduces a new concept, strip everything else to the minimum. Don't introduce two new concepts simultaneously. Don't ask the agent to make a decision and learn a syntax at the same time.
+
+**Example of explicit gap-closing instruction:**
+> You may be tempted to store order line items in a separate `lineItems` collection and reference them by `orderId` — this mirrors the SQL pattern of a foreign key join. In MongoDB, this creates unnecessary round-trips for every order read. Instead, embed line items directly in the order document. Here is what that looks like: [example]. Here is why: [access pattern rationale].
+
+---
+
+## 5. Stage Design
 
 Labs are broken into 3–5 sequential stages.
 
@@ -51,7 +108,7 @@ Every stage ends with exactly one milestone check.
 
 ---
 
-## 5. Agent Skill Interactions
+## 6. Agent Skill Interactions
 
 When a stage involves an agent skill, the spec must fully define the interaction.
 
@@ -63,7 +120,7 @@ When a stage involves an agent skill, the spec must fully define the interaction
 
 ---
 
-## 6. Zero-Knowledge Writing
+## 7. Zero-Knowledge Writing
 
 Write as if the reader has never seen a MongoDB document.
 
@@ -75,7 +132,7 @@ Write as if the reader has never seen a MongoDB document.
 
 ---
 
-## 7. Reflection and Decision Records
+## 8. Reflection and Decision Records
 
 Agents learn best when they record decisions, not just execute steps.
 
@@ -86,7 +143,7 @@ Agents learn best when they record decisions, not just execute steps.
 
 ---
 
-## 8. Buildability
+## 9. Buildability
 
 Every lab must be provisioned without trial-and-error.
 
@@ -97,7 +154,7 @@ Every lab must be provisioned without trial-and-error.
 
 ---
 
-## 9. Evaluation and Scoring
+## 10. Evaluation and Scoring
 
 Evaluation reports score specs against these rules, not against subjective quality.
 
@@ -109,6 +166,6 @@ Evaluation reports score specs against these rules, not against subjective quali
 
 ---
 
-## 10. Living Document
+## 11. Living Document
 
 This rulebook evolves as the program matures. When a rule proves unworkable in practice, update it here and note the reason. Do not work around a rule without updating it — silent workarounds create inconsistency across agents and content.
