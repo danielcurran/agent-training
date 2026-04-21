@@ -8,9 +8,9 @@ Repository for designing, evaluating, and iterating AI agent training materials 
 
 | Agent | File | Invoked via | Role |
 |---|---|---|---|
-| Lab Instruction Evaluator | [agents/ai-agent-training-lab-instruction-evaluator.md](agents/ai-agent-training-lab-instruction-evaluator.md) | `/evaluate-lab-instructions` in Copilot Chat | Scores lab specs on clarity, completeness, and pedagogy |
+| Lab Instruction Evaluator | [agents/agent-lab-evaluator.md](agents/agent-lab-evaluator.md) | `/evaluate-lab-instructions` in Copilot Chat | Scores lab specs on clarity, completeness, and pedagogy |
 | Lab Outline Converter | [agents/lab-outline-converter.md](agents/lab-outline-converter.md) | `/convert-lab-outline` in Copilot Chat | Converts high-level outlines into detailed technical specs |
-| Lab Outline Designer | [agents/lab-outline-designer.md](agents/lab-outline-designer.md) | Attach in Copilot Chat | Creates lab outlines to feed into the Lab Outline Converter |
+| Lab Outline Designer | [agents/lab-outline-designer.md](agents/lab-outline-designer.md) | `/design-lab-outline` in Copilot Chat | Creates lab outlines to feed into the Lab Outline Converter |
 
 The `.github/prompts/` files are thin wrappers that invoke the agents above. Do not add logic there — put it in the agent definition under `agents/`.
 
