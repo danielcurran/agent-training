@@ -12,4 +12,5 @@ Evaluate the attached lab instruction artifact using the agent definition above.
 - Audience: an external AI agent with no prior MongoDB knowledge
 - Current knowledge state: No prior MongoDB knowledge
 
-Attach the lab file you want evaluated using #file before sending.
+Attach the spec file from `labs/specs/` using #file before sending.
+Output saves to `labs/reports/{name}-tech-spec-eval-v{N}.md`.

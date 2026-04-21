@@ -18,14 +18,14 @@ The `.github/prompts/` files are thin wrappers that invoke the agents above. Do 
 
 | Lab | Outline | Tech Spec | Latest Evaluation | Score |
 |---|---|---|---|---|
-| Builder Badge | [lab-specs/builder-badge-outline.md](lab-specs/builder-badge-outline.md) | [lab-specs/builder-badge-tech-spec.md](lab-specs/builder-badge-tech-spec.md) | [evaluations/builder-badge-tech-spec-eval-v1.md](lab-specs/evaluations/builder-badge-tech-spec-eval-v1.md) | 8/10 — needs minor revisions |
+| Builder Badge | [labs/outlines/builder-badge-outline.md](labs/outlines/builder-badge-outline.md) | [labs/specs/builder-badge-tech-spec.md](labs/specs/builder-badge-tech-spec.md) | [labs/reports/builder-badge-tech-spec-eval-v1.md](labs/reports/builder-badge-tech-spec-eval-v1.md) | 9.6/10 — minor revisions recommended |
 
 ## Workflow
 
 ```
-1. Write outline → lab-specs/{name}-outline.md
-2. /convert-lab-outline (attach outline) → saves lab-specs/{name}-tech-spec.md
-3. /evaluate-lab-instructions (attach tech spec) → saves lab-specs/evaluations/{name}-tech-spec-eval-v{N}.md
+1. Write outline → labs/outlines/{name}-outline.md
+2. /convert-lab-outline (attach outline) → saves labs/specs/{name}-tech-spec.md
+3. /evaluate-lab-instructions (attach tech spec) → saves labs/reports/{name}-tech-spec-eval-v{N}.md
 4. Iterate spec on evaluation feedback until score ≥ 8/10
 5. Validate student implementations with lab-execution/ check scripts
 ```
@@ -47,7 +47,7 @@ See [lab-execution/README.md](lab-execution/README.md) for the full guide.
 
 ## Conventions
 
-- Outlines: `lab-specs/{name}-outline.md`
-- Tech specs: `lab-specs/{name}-tech-spec.md`
-- Evaluations: `lab-specs/evaluations/{name}-tech-spec-eval-v{N}.md` — increment N each revision cycle
+- Outlines: `labs/outlines/{name}-outline.md`
+- Tech specs: `labs/specs/{name}-tech-spec.md`
+- Evaluations: `labs/reports/{name}-tech-spec-eval-v{N}.md` — increment N each revision cycle
 - Agent definitions live in `agents/` — `.github/prompts/` references them by filename, do not rename

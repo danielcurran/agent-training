@@ -1,4 +1,7 @@
-# Convert Lab Outline to Technical Spec
+---
+mode: ask
+description: Convert a high-level lab outline into a detailed technical spec for agent training
+---
 
 [agents/lab-outline-converter.md](../../agents/lab-outline-converter.md)
 
@@ -8,4 +11,5 @@ Convert the attached lab outline into a full technical spec using the agent defi
 - Target task: [what should the agent be able to do after completing the lab?]
 - Constraints: [tooling, language, environment — leave blank for defaults]
 
-Attach the outline file you want converted using #file before sending.
+Attach the outline file from `labs/outlines/` using #file before sending.
+Output saves to `labs/specs/{name}-tech-spec.md`.
