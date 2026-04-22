@@ -8,11 +8,12 @@
 
 ## Infrastructure & Tooling
 
+- [x] **Create new agent: Lab Learner Quality Assessor** — Merged into Lab Instruction Evaluator (3-pass evaluation covering spec quality + learner experience)
+- [x] **Merge evaluators** — Combined Lab Instruction Evaluator and Lab Learner Quality Assessor into single 3-pass agent (`agents/lab-instruction-evaluator.md`)
 - [ ] Set up GitHub Actions CI/CD: run `npm run check:all` on PR
 - [ ] Document how to add new agents to `.github/prompts/`
 - [ ] Create GitHub issue templates for lab creation workflow
 - [ ] Add pre-commit hooks to validate lab structure before commit
-- [ ] **Create new agent: Tech Spec Buildability Assessor** — Reviews tech specs for completeness, clarity, and external agent buildability; generates report on spec quality from lab environment builder perspective
 
 ## Documentation
 

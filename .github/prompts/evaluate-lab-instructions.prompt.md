@@ -1,11 +1,14 @@
 ---
 mode: ask
-description: Evaluate a lab instruction artifact for how effectively it trains an external AI agent to learn MongoDB
+description: Evaluate a lab instruction artifact for spec quality and learner experience
 ---
 
-[agents/agent-lab-evaluator.md](../../agents/agent-lab-evaluator.md)
+[agents/lab-instruction-evaluator.md](../../agents/lab-instruction-evaluator.md)
 
-Evaluate the attached lab instruction artifact using the agent definition above.
+Evaluate the attached lab instruction artifact using the agent definition above. The evaluation covers three passes:
+1. **Pass 1:** Section-by-section pedagogical evaluation
+2. **Pass 2:** Full-spec structural synthesis
+3. **Pass 3:** Learner experience assessment (completion likelihood, pacing, recovery)
 
 **Fill in before running:**
 - Target task: [e.g., "help an agent query MongoDB using Atlas Search"]

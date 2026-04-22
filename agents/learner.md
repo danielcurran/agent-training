@@ -136,13 +136,29 @@ Score each dimension as ✓ (effective), △ (partial), or ✗ (ineffective) wit
 **Overall effectiveness score:** [X/6]
 
 ## Where I Got Stuck
-[List every point where you were blocked, confused, or had to make an assumption. For each: what the instruction said, what was unclear, and what you did.]
+[List every point where you were blocked, confused, or had to make an assumption. For each, classify the issue:]
+
+| Stage | Issue | Classification | Description |
+|---|---|---|---|
+| [N] | [brief label] | Lab Instruction / Environment / Learner Comprehension | [what happened] |
+
+**Classification guide:**
+- **Lab Instruction** — The instructions were unclear, ambiguous, or missing information. The spec should be revised.
+- **Environment** — A technical issue (MongoDB not running, dependency error, port conflict). The environment setup should be improved.
+- **Learner Comprehension** — The learner didn't understand a concept. May indicate insufficient scaffolding or may be expected difficulty.
 
 ## Questions I Still Have
 [List any MongoDB concepts the lab introduced but did not fully explain, or questions the lab raised that it did not answer.]
 
 ## Recommendations
 [Specific, actionable changes to the lab instructions or environment that would have made the experience clearer or more effective. Reference the exact stage and instruction.]
+
+## Feedback for Spec Revision
+[This section feeds back into the workflow. After reviewing this report, the spec author should consider revising the tech spec based on the issues classified as "Lab Instruction" above.]
+
+**Stages that need spec revision:** [list stage numbers and the specific instruction issue]
+**Stages that need environment fixes:** [list stage numbers and the technical issue]
+**Stages where scaffolding was insufficient:** [list stage numbers and what additional support would help]
 ```
 
 ---

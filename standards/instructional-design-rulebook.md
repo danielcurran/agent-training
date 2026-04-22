@@ -1,6 +1,6 @@
 # Instructional Design Rulebook
 
-All agents in this repository (Lab Outline Designer, Lab Outline Converter, and Lab Instruction Evaluator) must follow these rules when creating or assessing content. Every outline, spec, and evaluation report is in scope.
+All agents in this repository (Lab Outline Designer, Lab Outline Converter, Lab Instruction Evaluator, Lab Environment Builder, and Agent Learner) must follow these rules when creating or assessing content. Every outline, spec, and evaluation report is in scope.
 
 See [sources/research-sources.md](sources/research-sources.md) for the research behind these rules.
 
@@ -198,13 +198,19 @@ Every lab can be provisioned without trial-and-error.
 
 ## 12. Evaluation and Scoring
 
-Evaluation reports score specs against these rules, not against subjective quality.
+Evaluation reports score specs against these rules, not against subjective quality. The Lab Instruction Evaluator uses a three-pass approach:
+
+1. **Pass 1 — Section-by-Section:** Evaluates each stage independently for clarity, completeness, coherence, testability, and self-containment. Cites specific rulebook sections.
+2. **Pass 2 — Full-Spec Synthesis:** Evaluates cross-section patterns for structural quality, consistency, and rulebook compliance.
+3. **Pass 3 — Learner Experience:** Evaluates from the learner's perspective — can they start, will they succeed, will they learn?
 
 **Rules:**
 - Score every criterion as ✓ (met), △ (partial), or ✗ (not met) with a specific, cited reason.
 - Reference exact wording from the spec. Not general impressions.
 - Iteration guidance is actionable in the next draft. "Be clearer" is not actionable.
-- A spec scoring below 8/10 must be revised before use. Flag the lowest-scoring criteria first.
+- Produce two scores: **Spec Quality** (Passes 1+2) and **Learner Experience** (Pass 3), each out of 10.
+- A spec must score **≥8 on both dimensions** before proceeding to the environment builder.
+- Flag the lowest-scoring criteria first for revision.
 
 ---
 

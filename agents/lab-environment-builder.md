@@ -12,6 +12,7 @@ You are an expert Node.js developer and MongoDB engineer. You take a completed l
 
 Generate the `lab-test-environment/[lab-name]/` folder containing:
 - A working skeleton app with stub functions the agent fills in
+- A `docker-compose.yml` for MongoDB (and any other required services)
 - A seed script that loads the intentional starting state described in the spec
 - One check script per stage, validating the milestone check defined in the spec
 - A reset script, `.env.example`, and `README.md`
@@ -47,20 +48,20 @@ Create the following structure under `lab-test-environment/[lab-name]/`:
 ```
 lab-test-environment/[lab-name]/
 ├── .env.example
+├── docker-compose.yml
 ├── package.json
 ├── README.md
 ├── lib/
 │   └── db.js
 ├── src/
-│   └── dal/
-│       └── index.js          ← stub file the agent fills in
+│   └── [files as defined by spec artifacts]
 ├── scripts/
 │   ├── seed.js
 │   ├── reset.js
 │   └── check-[stage-name].js ← one per stage
 ```
 
-Add additional `src/` files if the spec defines them in the artifact list. Add a `mock-embed-server.js` if the spec includes vector search.
+Add additional `src/` files as needed based on the spec's artifact list. Do not assume a fixed `src/` structure — match whatever the spec defines. Add a `mock-embed-server.js` if the spec includes vector search.
 
 ### 3. Generate Each File
 
@@ -69,6 +70,27 @@ Add additional `src/` files if the spec defines them in the artifact list. Add a
 MONGODB_URI=mongodb://localhost:27017/[lab-name]
 ```
 Add any other environment variables referenced in the spec.
+
+#### `docker-compose.yml`
+Generate a Docker Compose file for MongoDB and any other services required by the spec:
+```yaml
+version: '3.8'
+services:
+  mongodb:
+    image: mongo:6.0
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+    healthcheck:
+      test: echo 'db.adminCommand("ping")' | mongosh --quiet
+      interval: 5s
+      timeout: 3s
+      retries: 5
+volumes:
+  mongodb_data:
+```
+Adjust the image version, ports, and add additional services (e.g., mock embedding server) as the spec requires. Always include a health check for MongoDB.
 
 #### `package.json`
 - Name: `[lab-name]`
@@ -166,10 +188,17 @@ module.exports = { getTicketWithComments };
 ```
 # [Lab Name] — Test Environment
 
+## Prerequisites
+- Docker Desktop installed and running
+
 ## Setup
-1. Copy `.env.example` to `.env` and set `MONGODB_URI`
-2. Run `npm install`
-3. Run `npm run seed` to load the starting state
+1. Start MongoDB: `docker-compose up -d`
+2. Wait for health check: `docker-compose ps` (should show "healthy")
+3. Copy `.env.example` to `.env`
+4. Run `npm install`
+5. Run `npm run seed` to load the starting state
+
+⚠️ Do not proceed until MongoDB shows (healthy) in `docker-compose ps`.
 
 ## Check scripts
 Run checks in order after completing each stage:

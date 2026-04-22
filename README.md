@@ -25,19 +25,19 @@ standards/           → Instructional design rulebook and research sources
 |---|---|---|
 | [Lab Outline Designer](agents/lab-outline-designer.md) | Design new lab outlines | `/design-lab-outline` |
 | [Lab Outline Converter](agents/lab-outline-converter.md) | Convert outlines into zero-knowledge technical specs | `/convert-lab-outline` |
-| [Lab Instruction Evaluator](agents/agent-lab-evaluator.md) | Evaluate lab specs for training effectiveness | `/evaluate-lab-instructions` |
+| [Lab Instruction Evaluator](agents/lab-instruction-evaluator.md) | Evaluate lab specs for spec quality and learner experience | `/evaluate-lab-instructions` |
 | [Lab Environment Builder](agents/lab-environment-builder.md) | Generate skeleton app and check scripts from a tech spec | `/build-lab-environment` |
 | [Agent Learner](agents/learner.md) | Complete a lab as an AI learner and produce a learning report | `/run-learner-agent` |
 
 ## Workflow
 
 ```
-1. Design a lab outline       → /design-lab-outline → labs/outlines/[name]-outline.md
-2. Convert to tech spec       → /convert-lab-outline → labs/specs/[name]-tech-spec.md
-3. Evaluate the tech spec     → /evaluate-lab-instructions → labs/reports/[name]-eval-v1.md
-4. Fix issues, re-evaluate    → repeat until score ≥ 8/10
-5. Build lab environment      → /build-lab-environment → lab-test-environment/[name]/
-6. Run learner agent          → /run-learner-agent → labs/reports/[name]-env-eval-v1.md
+1. Design a lab outline           → /design-lab-outline → labs/outlines/[name]-outline.md
+2. Convert to tech spec           → /convert-lab-outline → labs/specs/[name]-tech-spec.md
+3. Evaluate spec quality & learner experience → /evaluate-lab-instructions → labs/reports/[name]-tech-spec-eval-v{N}.md
+4. Iterate spec on feedback       → repeat until both scores ≥ 8/10
+5. Build lab environment          → /build-lab-environment → lab-test-environment/[name]/
+6. Run learner agent              → /run-learner-agent → labs/reports/[name]-env-eval-v{N}.md
 ```
 
 ## Setup
