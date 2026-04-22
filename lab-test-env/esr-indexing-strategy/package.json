@@ -1,0 +1,23 @@
+{
+  "name": "esr-indexing-strategy-lab",
+  "version": "1.0.0",
+  "description": "MongoDB ESR Indexing Strategy Lab — Learn how to design indexes using the Equality, Sort, Range guideline",
+  "main": "index.js",
+  "scripts": {
+    "seed": "node scripts/seed.js",
+    "check:env": "node scripts/check-env.js",
+    "check:stage1": "node scripts/check-stage1.js",
+    "check:indexes": "node scripts/check-indexes.js",
+    "check:explain": "node scripts/check-explain.js",
+    "check:decisions": "node scripts/check-decisions.js",
+    "check:reflection": "node scripts/check-reflection.js",
+    "check:all": "node scripts/check-all.js"
+  },
+  "keywords": ["mongodb", "indexing", "esr", "performance", "education"],
+  "author": "MongoDB Education",
+  "license": "MIT",
+  "dependencies": {
+    "mongodb": "^6.3.0",
+    "dotenv": "^16.3.1"
+  }
+}

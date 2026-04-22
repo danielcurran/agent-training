@@ -1,0 +1,20 @@
+{
+  "timestamp": "2026-04-22T16:09:40.125Z",
+  "checks": {
+    "fileExists": {
+      "passed": true,
+      "message": "INDEX_DECISIONS.md found"
+    },
+    "wordCount": {
+      "passed": true,
+      "message": "Word count: 599 (minimum: 100)",
+      "actual": 599
+    },
+    "keywords": {
+      "passed": true,
+      "message": "All required keywords present",
+      "missing": []
+    }
+  },
+  "passed": true
+}

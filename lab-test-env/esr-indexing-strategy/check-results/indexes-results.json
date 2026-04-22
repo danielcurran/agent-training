@@ -1,0 +1,68 @@
+{
+  "timestamp": "2026-04-22T16:12:16.447Z",
+  "checks": {
+    "query1-status": {
+      "passed": true,
+      "expected": {
+        "status": 1
+      },
+      "actual": {
+        "status": 1
+      },
+      "message": "Fields and order correct"
+    },
+    "query2-category-createdAt": {
+      "passed": true,
+      "expected": {
+        "category": 1,
+        "createdAt": -1
+      },
+      "actual": {
+        "category": 1,
+        "createdAt": -1
+      },
+      "message": "Fields and order correct"
+    },
+    "query3-status-price": {
+      "passed": true,
+      "expected": {
+        "status": 1,
+        "price": 1
+      },
+      "actual": {
+        "status": 1,
+        "price": 1
+      },
+      "message": "Fields and order correct"
+    },
+    "query4-status-rating-price": {
+      "passed": true,
+      "expected": {
+        "status": 1,
+        "rating": -1,
+        "price": 1
+      },
+      "actual": {
+        "status": 1,
+        "rating": -1,
+        "price": 1
+      },
+      "message": "Fields and order correct"
+    },
+    "query5-tags-createdAt-rating": {
+      "passed": true,
+      "expected": {
+        "tags": 1,
+        "createdAt": -1,
+        "rating": 1
+      },
+      "actual": {
+        "tags": 1,
+        "createdAt": -1,
+        "rating": 1
+      },
+      "message": "Fields and order correct"
+    }
+  },
+  "passed": true
+}

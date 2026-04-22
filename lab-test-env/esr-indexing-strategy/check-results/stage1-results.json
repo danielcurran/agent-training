@@ -1,0 +1,97 @@
+{
+  "timestamp": "2026-04-22T16:12:16.281Z",
+  "checks": {
+    "query1": {
+      "passed": true,
+      "expected": {
+        "E": "status",
+        "S": "none",
+        "R": "none"
+      },
+      "actual": {
+        "E": "status",
+        "S": "none",
+        "R": "none"
+      },
+      "details": {
+        "E": "✓",
+        "S": "✓",
+        "R": "✓"
+      }
+    },
+    "query2": {
+      "passed": true,
+      "expected": {
+        "E": "category",
+        "S": "createdAt",
+        "R": "none"
+      },
+      "actual": {
+        "E": "category",
+        "S": "createdAt",
+        "R": "none"
+      },
+      "details": {
+        "E": "✓",
+        "S": "✓",
+        "R": "✓"
+      }
+    },
+    "query3": {
+      "passed": true,
+      "expected": {
+        "E": "none",
+        "S": "none",
+        "R": "price"
+      },
+      "actual": {
+        "E": "none",
+        "S": "none",
+        "R": "price"
+      },
+      "details": {
+        "E": "✓",
+        "S": "✓",
+        "R": "✓"
+      }
+    },
+    "query4": {
+      "passed": true,
+      "expected": {
+        "E": "status",
+        "S": "rating",
+        "R": "price"
+      },
+      "actual": {
+        "E": "status",
+        "S": "rating",
+        "R": "price"
+      },
+      "details": {
+        "E": "✓",
+        "S": "✓",
+        "R": "✓"
+      }
+    },
+    "query5": {
+      "passed": true,
+      "expected": {
+        "E": "tags",
+        "S": "createdAt",
+        "R": "none"
+      },
+      "actual": {
+        "E": "tags",
+        "S": "createdAt",
+        "R": "none"
+      },
+      "details": {
+        "E": "✓",
+        "S": "✓",
+        "R": "✓"
+      }
+    }
+  },
+  "passed": true,
+  "score": "5/5"
+}

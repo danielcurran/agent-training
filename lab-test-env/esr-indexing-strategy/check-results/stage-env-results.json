@@ -1,0 +1,29 @@
+{
+  "timestamp": "2026-04-22T16:12:16.138Z",
+  "checks": {
+    "connection": {
+      "passed": true,
+      "message": "Connected to mongodb://localhost:27018"
+    },
+    "collection": {
+      "passed": true,
+      "message": "Collection 'products' exists"
+    },
+    "count": {
+      "passed": true,
+      "message": "Document count: 10000 (expected 10000)",
+      "actual": 10000
+    },
+    "noCustomIndexes": {
+      "passed": true,
+      "message": "No custom indexes (clean baseline)",
+      "customIndexes": []
+    },
+    "structure": {
+      "passed": true,
+      "message": "Document structure valid",
+      "sampleId": "69e8f14d46db05e1bc3d9c85"
+    }
+  },
+  "passed": true
+}

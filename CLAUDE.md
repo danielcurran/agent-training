@@ -22,6 +22,7 @@ The `.github/prompts/` files are thin wrappers that invoke the agents above. Do 
 |---|---|---|---|---|---|
 | Builder Badge | [labs/outlines/builder-badge-outline.md](labs/outlines/builder-badge-outline.md) | [labs/specs/builder-badge-tech-spec.md](labs/specs/builder-badge-tech-spec.md) | [v1](labs/reports/builder-badge-tech-spec-eval-v1.md) (9.6/10) | [v1](labs/reports/builder-badge-env-eval-v1.md) | ✓ Production Ready |
 | Insert and Find | [labs/outlines/insert-and-find-outline.md](labs/outlines/insert-and-find-outline.md) | [labs/specs/insert-and-find-tech-spec.md](labs/specs/insert-and-find-tech-spec.md) | [v1](labs/reports/insert-and-find-tech-spec-eval-v1.md) (8.8/10) | [v2](labs/reports/insert-and-find-env-eval-v2.md) | ⚠️ Reference Spec (Environment Archived) |
+| ESR Indexing Strategy | [labs/outlines/esr-indexing-strategy-outline.md](labs/outlines/esr-indexing-strategy-outline.md) | [labs/specs/esr-indexing-strategy-tech-spec.md](labs/specs/esr-indexing-strategy-tech-spec.md) | [v1](labs/reports/esr-indexing-strategy-tech-spec-eval-v1.md) (8.6/10) | — | ✓ Environment Ready |
 
 ## Workflow
 
