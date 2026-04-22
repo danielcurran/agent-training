@@ -30,16 +30,16 @@ The `.github/prompts/` files are thin wrappers that invoke the agents above. Do 
 2. /convert-lab-outline (attach outline) → saves labs/specs/{name}-tech-spec.md
 3. /evaluate-lab-instructions (attach tech spec) → saves labs/reports/{name}-tech-spec-eval-v{N}.md
 4. Iterate spec on feedback until both scores ≥ 8/10 (spec quality + learner experience)
-5. /build-lab-environment (attach tech spec) → saves lab-test-environment/{name}/
+5. /build-lab-environment (attach tech spec) → saves lab-test-env/{name}/
 6. /run-learner-agent (provide lab name) → saves labs/reports/{name}-env-eval-v{N}.md
 ```
 
 ## Lab Execution
 
-Each lab has a self-contained environment in `lab-test-environment/{name}/`. Currently only Builder Badge has an active environment:
+Each lab has a self-contained environment in `lab-test-env/{name}/`. Currently only Builder Badge has an active environment:
 
 ```bash
-cd lab-test-environment/builder-badge
+cd lab-test-env/builder-badge
 cp .env.example .env
 npm install
 npm run seed                # load starting data
@@ -53,7 +53,7 @@ Check scripts run in stage order: `check:env` → `check:schema` → `check:dal`
 
 ### lab-execution/ (Legacy Template)
 
-`lab-execution/` is a **template/reference** for building new lab environments. It contains generic Node.js harness, mock embedding server (deterministic 1536-dim vectors), and script templates. New labs should copy this structure into `lab-test-environment/{name}/` and customize. See [lab-execution/README.md](lab-execution/README.md) for harness documentation.
+`lab-execution/` is a **template/reference** for building new lab environments. It contains generic Node.js harness, mock embedding server (deterministic 1536-dim vectors), and script templates. New labs should copy this structure into `lab-test-env/{name}/` and customize. See [lab-execution/README.md](lab-execution/README.md) for harness documentation.
 
 ## Standards
 
@@ -81,5 +81,6 @@ Reserved for Copilot-specific configuration (e.g., custom instructions, Claude-s
 - Tech specs: `labs/specs/{name}-tech-spec.md`
 - Tech spec evaluations: `labs/reports/{name}-tech-spec-eval-v{N}.md` — increment N each revision cycle
 - Environment evaluations: `labs/reports/{name}-env-eval-v{N}.md` — tracks learner execution results
+- Lab environments: `lab-test-env/{name}/` — self-contained Node.js + Docker environment per lab
 - Agent definitions live in `agents/` — `.github/prompts/` references them by filename, do not rename
 - Stage deliverables: `REFLECTION.md` (required in all labs). `SCHEMA.md` is optional for intro labs (labs with fewer than 3 stages or no schema design component); complex labs like Builder Badge include it to document the data model.

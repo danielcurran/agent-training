@@ -1,5 +1,5 @@
 ---
-mode: ask
+mode: agent
 description: Generate a working skeleton app and check scripts from a lab tech spec
 ---
 
@@ -17,4 +17,4 @@ Build the test environment using the agent definition above.
 - Lab name: [kebab-case name for the output folder]
 
 Attach the tech spec from `labs/specs/` using #file before sending.
-Output saves to `lab-test-environment/[lab-name]/`.
+Output saves to `lab-test-env/[lab-name]/`.

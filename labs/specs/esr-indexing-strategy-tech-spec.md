@@ -668,7 +668,7 @@ All versions use the same `executionStats` structure for this lab.
 ### Docker & MongoDB
 
 ```bash
-cd lab-test-environment/esr-indexing-strategy
+cd lab-test-env/esr-indexing-strategy
 cp .env.example .env
 npm install
 docker-compose up -d
@@ -768,7 +768,7 @@ Runs all checks in order: env → stage1 → indexes → explain → decisions �
 ## File Structure
 
 ```
-lab-test-environment/esr-indexing-strategy/
+lab-test-env/esr-indexing-strategy/
 ├── docker-compose.yml
 ├── package.json
 ├── .env.example
