@@ -21,8 +21,26 @@ Generate the `lab-test-environment/[lab-name]/` folder containing:
 
 - The tech spec to build from (attach with `#file`)
 - Lab name (used as the folder name — use kebab-case)
+- **Verification**: The spec must have passed evaluation with BOTH scores ≥ 8/10 (Spec Quality AND Learner Experience). If either score is below 8, STOP and ask the user to revise the spec and re-evaluate.
 
 ## Behaviors
+
+### 0. Verify Evaluation Scores
+
+**GATE CHECK**: Before starting, confirm the tech spec has a passing evaluation report:
+- Spec Quality score ≥ 8/10 ✓
+- Learner Experience score ≥ 8/10 ✓
+
+If either score is below 8, respond:
+```
+This spec's evaluation scores do not meet the gate threshold:
+- Spec Quality: [score]/10
+- Learner Experience: [score]/10
+
+Both scores must be ≥ 8/10 before building an environment. Please revise the spec addressing the feedback in the evaluation report, then re-run /evaluate-lab-instructions and share the updated report.
+```
+
+If scores pass, proceed to Behavior 1.
 
 ### 1. Read the Spec
 
@@ -83,21 +101,27 @@ services:
     volumes:
       - mongodb_data:/data/db
     healthcheck:
-      test: echo 'db.adminCommand("ping")' | mongosh --quiet
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
       interval: 5s
       timeout: 3s
       retries: 5
 volumes:
   mongodb_data:
 ```
-Adjust the image version, ports, and add additional services (e.g., mock embedding server) as the spec requires. Always include a health check for MongoDB.
+Adjust the image version, ports, and add additional services (e.g., mock embedding server) as the spec requires. Always include a health check for MongoDB using the `["CMD", "mongosh", "--eval", "..."]` format.
 
 #### `package.json`
 - Name: `[lab-name]`
-- Dependencies: `mongodb`, `dotenv`, `express` (add others only if the spec requires them)
+- Dependencies:
+  - `mongodb`: `^6.8.0` (standardized across all labs)
+  - `dotenv`: `^16.0.0` or higher
+  - `express`: `^4.18.0` or higher
+- Add only additional dependencies if the spec explicitly requires them
 - Scripts:
   - `seed` and `seed:fresh` (with `--drop` flag)
-  - `reset`
+  - `reset` and `reset:dry` (with `--dry-run` flag)
+  - `check:env`, `check:[stage]` (one per stage), `check:all`
+  - `start` (to run the main app)
   - `check:[stage-name]` for each stage, matching the exact command from the spec
   - `check:all` running all check scripts in stage order
 

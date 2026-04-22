@@ -8,7 +8,7 @@ services:
     environment:
       MONGO_INITDB_DATABASE: builder_badge_lab
     healthcheck:
-      test: echo 'db.adminCommand("ping")' | mongosh localhost:27017/test --quiet
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
       interval: 5s
       timeout: 3s
       retries: 5

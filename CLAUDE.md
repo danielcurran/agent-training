@@ -21,7 +21,7 @@ The `.github/prompts/` files are thin wrappers that invoke the agents above. Do 
 | Lab | Outline | Tech Spec | Spec Eval | Env Eval | Status |
 |---|---|---|---|---|---|
 | Builder Badge | [labs/outlines/builder-badge-outline.md](labs/outlines/builder-badge-outline.md) | [labs/specs/builder-badge-tech-spec.md](labs/specs/builder-badge-tech-spec.md) | [v1](labs/reports/builder-badge-tech-spec-eval-v1.md) (9.6/10) | [v1](labs/reports/builder-badge-env-eval-v1.md) | ✓ Production Ready |
-| Insert and Find | [labs/outlines/insert-and-find-outline.md](labs/outlines/insert-and-find-outline.md) | [labs/specs/insert-and-find-tech-spec.md](labs/specs/insert-and-find-tech-spec.md) | [v1](labs/reports/insert-and-find-tech-spec-eval-v1.md) (8.8/10) | [v2](labs/reports/insert-and-find-env-eval-v2.md) | ✓ Production Ready |
+| Insert and Find | [labs/outlines/insert-and-find-outline.md](labs/outlines/insert-and-find-outline.md) | [labs/specs/insert-and-find-tech-spec.md](labs/specs/insert-and-find-tech-spec.md) | [v1](labs/reports/insert-and-find-tech-spec-eval-v1.md) (8.8/10) | [v2](labs/reports/insert-and-find-env-eval-v2.md) | ⚠️ Reference Spec (Environment Archived) |
 
 ## Workflow
 
@@ -36,10 +36,10 @@ The `.github/prompts/` files are thin wrappers that invoke the agents above. Do 
 
 ## Lab Execution
 
-Each lab has a self-contained environment in `lab-test-environment/{name}/`:
+Each lab has a self-contained environment in `lab-test-environment/{name}/`. Currently only Builder Badge has an active environment:
 
 ```bash
-cd lab-test-environment/builder-badge    # or insert-and-find
+cd lab-test-environment/builder-badge
 cp .env.example .env
 npm install
 npm run seed                # load starting data
@@ -48,6 +48,8 @@ npm run check:all           # run all validation checks in order
 ```
 
 Check scripts run in stage order: `check:env` → `check:schema` → `check:dal` → `check:vector` → `check:final` → `check:reflection`
+
+**Note:** Insert and Find has a complete spec and evaluation reports but the environment was archived. Use as a reference for new lab development.
 
 ### lab-execution/ (Legacy Template)
 
@@ -69,4 +71,4 @@ Reserved for Copilot-specific configuration (e.g., custom instructions, Claude-s
 - Tech spec evaluations: `labs/reports/{name}-tech-spec-eval-v{N}.md` — increment N each revision cycle
 - Environment evaluations: `labs/reports/{name}-env-eval-v{N}.md` — tracks learner execution results
 - Agent definitions live in `agents/` — `.github/prompts/` references them by filename, do not rename
-- Stage deliverables: SCHEMA.md, REFLECTION.md (standard names across all labs)
+- Stage deliverables: `REFLECTION.md` (required in all labs). `SCHEMA.md` is optional for intro labs (labs with fewer than 3 stages or no schema design component); complex labs like Builder Badge include it to document the data model.

@@ -1,0 +1,65 @@
+name: Validate Labs
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'lab-test-environment/**'
+      - 'labs/specs/**'
+      - 'agents/**'
+      - '.github/workflows/validate-labs.yml'
+  pull_request:
+    branches: [ main ]
+    paths:
+      - 'lab-test-environment/**'
+      - 'labs/specs/**'
+      - 'agents/**'
+      - '.github/workflows/validate-labs.yml'
+
+jobs:
+  validate-builder-badge:
+    runs-on: ubuntu-latest
+    
+    services:
+      mongodb:
+        image: mongo:6.0
+        options: >-
+          --health-cmd="mongosh --eval \"db.adminCommand('ping')\""
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
+        ports:
+          - 27017:27017
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+          cache-dependency-path: 'lab-test-environment/builder-badge/package-lock.json'
+
+      - name: Install dependencies
+        working-directory: lab-test-environment/builder-badge
+        run: npm install
+
+      - name: Configure environment
+        working-directory: lab-test-environment/builder-badge
+        run: |
+          cp .env.example .env
+          echo "MONGODB_URI=mongodb://localhost:27017/builder_badge_lab" >> .env
+
+      - name: Seed database
+        working-directory: lab-test-environment/builder-badge
+        run: npm run seed
+
+      - name: Run environment check
+        working-directory: lab-test-environment/builder-badge
+        run: npm run check:env
+
+      - name: Run all validation checks
+        working-directory: lab-test-environment/builder-badge
+        run: npm run check:all
+        continue-on-error: false
