@@ -59,6 +59,17 @@ Check scripts run in stage order: `check:env` → `check:schema` → `check:dal`
 
 All agents must follow the [Instructional Design Rulebook](standards/instructional-design-rulebook.md) when creating or evaluating any content. It is the authoritative reference for learning objectives, stage design, milestone checks, and evaluation criteria.
 
+## Skills
+
+Custom Claude skills are stored in the `skills/` directory. These teach Claude specialized knowledge for use with this repository:
+
+| Skill | Purpose |
+|---|---|
+| [template](skills/template/SKILL.md) | Template and examples for creating new skills |
+| [mongodb-learning-design](skills/mongodb-learning-design/SKILL.md) | Core principles for designing effective MongoDB training labs and learning experiences |
+
+See [skills/README.md](skills/README.md) for details on using and creating skills.
+
 ## Directory Reference
 
 ### .claude/

@@ -3,6 +3,8 @@ mode: ask
 description: Generate a working skeleton app and check scripts from a lab tech spec
 ---
 
+**Recommended:** First activate the `mongodb-learning-design` skill in your Claude session.
+
 [agents/lab-environment-builder.md](../../agents/lab-environment-builder.md)
 
 Build the test environment using the agent definition above.

@@ -2,7 +2,7 @@
 mode: ask
 description: Design a new lab outline for MongoDB agent training
 ---
-
+**Recommended:** First activate the `mongodb-learning-design` skill in your Claude session for better outline quality.
 [agents/lab-outline-designer.md](../../agents/lab-outline-designer.md)
 
 Design a new lab outline using the agent definition above.

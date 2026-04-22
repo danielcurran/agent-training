@@ -3,6 +3,8 @@ mode: ask
 description: Evaluate a lab instruction artifact for spec quality and learner experience
 ---
 
+**Recommended:** First activate the `mongodb-learning-design` skill in your Claude session for more consistent evaluation.
+
 [agents/lab-instruction-evaluator.md](../../agents/lab-instruction-evaluator.md)
 
 Evaluate the attached lab instruction artifact using the agent definition above. The evaluation covers three passes:

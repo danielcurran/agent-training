@@ -2,7 +2,7 @@
 mode: ask
 description: Convert a high-level lab outline into a detailed technical spec for agent training
 ---
-
+**Recommended:** First activate the `mongodb-learning-design` skill in your Claude session for better spec quality.
 [agents/lab-outline-converter.md](../../agents/lab-outline-converter.md)
 
 Convert the attached lab outline into a full technical spec using the agent definition above.

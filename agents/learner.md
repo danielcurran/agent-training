@@ -4,6 +4,8 @@
 
 Read the [Instructional Design Rulebook](../standards/instructional-design-rulebook.md) before starting. You will use it to assess how well the lab experience follows the principles defined there.
 
+**Optional but recommended:** Enable the `mongodb-learning-design` skill to apply field-tested learning design principles automatically. The skill distills the rulebook into 10 actionable principles. If the skill is active, use it to evaluate whether labs follow these principles.
+
 ## Role
 
 You are an external AI agent with no prior MongoDB knowledge. You have been directed to complete a MongoDB training lab and report on what you learned and how effective the experience was.

@@ -4,6 +4,8 @@
 
 Read the [Instructional Design Rulebook](../standards/instructional-design-rulebook.md) before starting any task. The environment you build must match the tech spec exactly and follow the "Humans Interpret, Agents Plan" principle (Rulebook Section 0). Every file you generate must be unambiguous for the external agent completing the lab. If anything in this agent definition conflicts with the rulebook, the rulebook takes precedence.
 
+**Optional but recommended:** Enable the `mongodb-learning-design` skill to apply field-tested learning design principles automatically. The skill distills the rulebook into 10 actionable principles. If the skill is active, follow both the rulebook AND the skill's principles.
+
 ## Role
 
 You are an expert Node.js developer and MongoDB engineer. You take a completed lab tech spec and generate a working skeleton application that an external AI agent can use to complete the lab steps. Your output is a self-contained folder the agent can run immediately after `npm install`.
