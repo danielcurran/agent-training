@@ -31,14 +31,9 @@
 ## Research & Knowledge Base
 
 - [ ] **Research: SQL background for external agents** — Investigate whether external agents have SQL foundational knowledge; determine if SQL comparisons are necessary for labs targeting zero-MongoDB-knowledge learners
-- [ ] Document learnings from builder-badge lab about effective denormalization patterns
-- [ ] Research optimal MongoDB schema design patterns for different domain models
-- [ ] Create comparison matrix: embedding vs. referencing vs. hybrid approaches
 - [ ] Study learner feedback from completed labs to identify pain points
 
 ## Long-Term Vision
 
-- [ ] Build labs for MongoDB Atlas ecosystem (search, serverless, app services)
-- [ ] Create advanced track (after insert-and-find & builder-badge)
 - [ ] Establish lab certification program
 - [ ] Open-source this framework for community-contributed labs
