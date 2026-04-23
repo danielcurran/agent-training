@@ -20,17 +20,17 @@ If content doesn't serve a milestone check, remove it. If a stage doesn't build 
 
 ### Learning is Not Knowledge Transfer
 
-Labs are not reference guides. A reference guide tells an agent "how to operate" a tool (syntax, parameters, error codes). A learning lab builds conceptual understanding through **concept progression**, **deliberate practice**, and **self-reflection**.
+Labs are not reference guides. A reference guide tells an agent how to operate a tool. A learning lab builds conceptual understanding through **concept progression**, **deliberate practice**, and **self-reflection**.
 
-The distinction matters because agents that memorize operational context cannot decide when to apply it. They execute scripts but cannot adapt to novel situations. Sustainable learning requires three elements:
+Agents that memorize operational context can execute but cannot decide when to apply it. Three elements are required:
 
-1. **Concept Progression**: Concepts build sequentially. Each stage introduces 1–2 new concepts and connects them explicitly to prior knowledge. Agents must understand *why* a MongoDB pattern exists before they apply it, grounded in the SQL mental model they bring from prior experience (Section 4: Skill Gap Design).
+1. **Concept Progression**: Each stage introduces 1–2 new concepts and connects them to prior knowledge. Agents understand *why* a pattern exists before they apply it, grounded in the SQL mental model they already have (Section 4).
 
-2. **Deliberate Practice**: Agents must apply concepts in varied contexts, not in isolation. Each KLI type (memory, induction, sense-making) requires different practice; fluency requires repetition with feedback, induction requires comparative examples, sense-making requires articulating choices (Section 3: KLI Learning Process Types). Practice tasks should build complexity: first with full scaffolding, then with guidance, then with goals only.
+2. **Deliberate Practice**: Each KLI type requires different practice: fluency needs repetition with feedback, induction needs comparative examples, sense-making needs articulating choices (Section 3). Tasks build complexity: full scaffolding → guidance → goals only.
 
-3. **Self-Reflection**: Agents must articulate what they chose, why they chose it, and what trade-offs they made. Reflection is not journaling—it is the mechanism by which agents validate that they understand, not just execute. Every lab includes at least one artifact per stage where the agent records a design decision (Section 11: Reflection and Decision Records).
+3. **Self-Reflection**: Agents articulate what they chose, why, and what they gave up. Reflection is not journaling — it is how agents confirm they understand, not just execute. Every lab includes at least one decision-record artifact per stage (Section 11).
 
-**Contrast:** Teaching an agent to call MongoDB APIs efficiently is not a learning lab. It assumes the agent already understands MongoDB and only needs operational instructions. Use this rulebook for labs. Use SKILL.md for reference documentation.
+Teaching an agent to call MongoDB APIs is not a learning lab. Use this rulebook for labs. Use SKILL.md for reference documentation.
 
 ### Humans Interpret, Agents Plan
 
@@ -62,7 +62,7 @@ Every lab opens with explicit learning objectives. Objectives must describe what
 **Rules:**
 - State 3–6 objectives per lab.
 - Every objective produces a checkable artifact. If it can't be checked, rewrite it.
-- Specify the cognitive process required: recalling a pattern, comparing alternatives, and evaluating a choice each require different instruction. Don't conflate them.
+- Specify the cognitive process: recalling a pattern, comparing alternatives, and evaluating a choice each require different instruction. Don't conflate them.
 - Every stage serves at least one objective. Every objective is served by at least one stage.
 - Draw a straight line from objective to stage activity to milestone check. If you can't, rewrite all three.
 
@@ -73,16 +73,16 @@ Every lab opens with explicit learning objectives. Objectives must describe what
 
 ## 3. KLI Learning Process Types
 
-The KLI (Knowledge-Learning-Instruction) connects three things: what needs to be learned (the knowledge component), how learning happens (the learning process), and what instruction should do to support it (the instructional principle). The core insight is that different types of learning require fundamentally different instruction. Using the wrong instruction for the learning type produces agents that can execute but not decide, or explain but not act.
+KLI (Knowledge-Learning-Instruction) connects what needs to be learned, how learning happens, and what instruction should do to support it. Different types of learning require fundamentally different instruction. Wrong instruction for the learning type produces agents that can execute but not decide, or explain but not act.
 
 ### How to apply KLI when designing a stage
 
-1. **Identify the knowledge component**: what specific skill or concept must the agent master in this stage?
-2. **Select the learning process**: does the agent need to recall a pattern reliably, extract a rule from examples, or build a mental model?
-3. **Choose the instructional approach**: match the instruction to the process type (see below).
+1. **Identify the knowledge component**: what must the agent master?
+2. **Select the learning process**: recall a pattern, extract a rule from examples, or build a mental model?
+3. **Match instruction to process type** (see below).
 4. **Design the activity**: provide exactly what that process type requires. Nothing more.
 
-The three process types are defined below. Each definition describes what the agent needs, what instruction must provide, and what to avoid.
+The three process types:
 
 ### Memory and Fluency
 The agent needs to recall and apply a pattern reliably: syntax, commands, naming conventions. Instruction must provide the exact pattern, show a worked example, and ask the agent to apply it immediately. Do not ask the agent to choose between alternatives here. That is a different process type.
@@ -136,7 +136,7 @@ Labs have 3–5 sequential stages.
 
 Scaffolding is support that decreases as the lab progresses, but only for knowledge the agent has already acquired. A lab that provides the same support in every stage is scripting, not teaching. A lab that removes support for concepts the agent hasn't learned yet will fail.
 
-The principle from Section 0 still applies in every stage: agents plan, they don't interpret. Reducing scaffolding means the agent uses knowledge from earlier stages to plan independently. It does not mean providing less information about new concepts. Any new concept introduced in a later stage must be fully scaffolded regardless of where it appears in the lab.
+Reducing scaffolding means the agent uses earlier knowledge to plan independently. It does not mean less information about new concepts. New concepts get full scaffolding regardless of where they appear in the lab.
 
 **Rules:**
 - **Stage 1**: fully scaffolded. Provide the exact command, expected output, and what to observe. Leave nothing to inference.
@@ -191,30 +191,30 @@ Write as if the reader has never seen a MongoDB document.
 
 ## 10. Structured, Accurate, and Authoritative Content
 
-Labs are designed to teach agents and to be crawlable, structured, and learnable by LLMs. This requires deliberate formatting, accuracy validation, and MongoDB authoritativeness.
+Lab content must be structured, accurate, and authoritative. Agents and LLMs parse it directly — formatting, accuracy, and sourcing all affect learning quality.
 
 **Rules:**
 
 ### Information Retrieval and Agent Parsing
 
-- Use consistent, hierarchical formatting with clear visual structure: headers, bullet lists, code blocks, and labeled examples allow agents to parse content reliably.
-- Every concept introduction follows a pattern: **term definition** → **SQL equivalent** → **why it matters** → **example code** → **when to use it**. This pattern is consistent across all specs so agents can reliably extract the information they need.
-- Use inline code formatting (`term`) for all MongoDB terms, command names, and field names on first and every subsequent use. This signals to agents what is extractable.
-- Every code example includes context: what collections are involved, what the example produces, and what the learner should observe. Isolated snippets are not sufficient.
+- Use consistent hierarchical formatting: headers, bullet lists, code blocks, labeled examples.
+- Every concept introduction follows: **term definition** → **SQL equivalent** → **why it matters** → **example code** → **when to use it**.
+- Use inline code formatting (`term`) for all MongoDB terms, command names, and field names. Every use, not just first use.
+- Every code example includes context: what collections are involved, what it produces, and what to observe.
 
 ### Accuracy and Response Quality
 
-- Every MongoDB concept, command, and code example must be validated against the [MongoDB documentation](https://www.mongodb.com/docs/) and tested in a real MongoDB instance before inclusion in a spec.
-- Every stage includes a **source citation** for concepts: either MongoDB documentation URL, a research source listed in [sources/research-sources.md](sources/research-sources.md), or "tested in Builder Badge environment" if sourced from lab validation.
-- Check scripts (e.g., `check-schema.js`, `check-dal.js`) must validate not just that a task is done, but that it is done *correctly* according to MongoDB best practices. Ambiguous pass conditions produce ambiguous learning.
-- If a spec contradicts MongoDB documentation, cite the specific reason and link to the documentation. Don't work around authoritative sources.
+- Validate every MongoDB concept, command, and code example against the [MongoDB documentation](https://www.mongodb.com/docs/) and test in a real instance before inclusion.
+- Every stage cites its source: MongoDB documentation URL, a reference from [sources/research-sources.md](sources/research-sources.md), or "tested in Builder Badge environment."
+- Check scripts validate correctness against MongoDB best practices, not just task completion. Ambiguous pass conditions produce ambiguous learning.
+- If a spec contradicts MongoDB documentation, cite the reason and link to the docs. Don't work around authoritative sources.
 
 ### Machine Readability and LLM Learning
 
-- Structure all collections, schema examples, and output examples as JSON or BSON syntax that a language model can parse and understand. Do not describe structures in prose alone.
-- Include a **Glossary** section in every tech spec formatted as a table with three columns: Term | MongoDB Definition | SQL Equivalent. This allows language models to build accurate mental maps.
-- Every access pattern, trade-off, and design decision includes its **rationale** explicitly stated. Language models learn trade-offs through contrasts; state what is gained and what is given up in every choice.
-- Use semantic formatting for key information: prefix requirements with "**Required:**", prefix optional content with "**Optional:**", prefix cautions with "**Caution:**". This helps both agents and LLMs distinguish essential from auxiliary information.
+- Structure all schema examples and output as JSON or BSON. Don't describe structures in prose alone.
+- Include a **Glossary** table in every tech spec: Term | MongoDB Definition | SQL Equivalent.
+- State the **rationale** for every access pattern, trade-off, and design decision. State what is gained and what is given up.
+- Use semantic prefixes: **Required:**, **Optional:**, **Caution:**.
 
 ---
 
