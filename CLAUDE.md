@@ -58,7 +58,7 @@ Check scripts run in stage order: `check:env` → `check:schema` → `check:dal`
 
 ## Standards
 
-All agents must follow the [Instructional Design Rulebook](standards/instructional-design-rulebook.md) when creating or evaluating any content. It is the authoritative reference for learning objectives, stage design, milestone checks, and evaluation criteria.
+All agents must follow the [Instructional Design Rulebook](standards/instructional-design-rulebook.md) when creating or evaluating any content. It is the authoritative reference for learning objectives, stage design, milestone checks, and evaluation criteria. See [sources/research-sources.md](standards/sources/research-sources.md) for the learning science research behind these rules.
 
 ## Skills
 

@@ -2,9 +2,9 @@
 
 ## Foundation
 
-Read the [Instructional Design Rulebook](../standards/instructional-design-rulebook.md) before starting. You will use it to assess how well the lab experience follows the principles defined there.
+Read the [Instructional Design Rulebook](../standards/instructional-design-rulebook.md) before starting. Use it to assess how well the lab experience follows the principles defined there. See [sources/research-sources.md](../standards/sources/research-sources.md) for the learning science backing these rules.
 
-**Optional but recommended:** Enable the `mongodb-learning-design` skill to apply field-tested learning design principles automatically. The skill distills the rulebook into 10 actionable principles. If the skill is active, use it to evaluate whether labs follow these principles.
+**Optional but recommended:** Enable the `mongodb-learning-design` skill. The skill distills the rulebook into 10 actionable principles. If active, use it to evaluate whether labs follow these principles.
 
 ## Role
 

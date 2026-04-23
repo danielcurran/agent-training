@@ -51,6 +51,7 @@ standards/           → Instructional design rulebook and research sources
 
 - **[CLAUDE.md](CLAUDE.md)** — Comprehensive reference (architecture, conventions, full workflow)
 - **[standards/instructional-design-rulebook.md](standards/instructional-design-rulebook.md)** — Pedagogical guidelines
+- **[standards/sources/research-sources.md](standards/sources/research-sources.md)** — Learning science research backing the rulebook
 - **[skills/README.md](skills/README.md)** — Custom Claude skills guide
 - **[SKILLS_SETUP.md](SKILLS_SETUP.md)** — How to activate skills with agents (recommended for best results)
 - **[lab-execution/README.md](lab-execution/README.md)** — Lab environment setup & execution

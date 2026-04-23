@@ -167,5 +167,6 @@ You're designing a "Schema Versioning" lab:
 ## See Also
 
 - [Instructional Design Rulebook](../../standards/instructional-design-rulebook.md) — Full specification for agents
+- [Research Sources](../../standards/sources/research-sources.md) — Learning science foundations for these principles
 - [Builder Badge Lab](../../labs/specs/builder-badge-tech-spec.md) — Complete example applying these principles
 - [Agent Learner](../../agents/learner.md) — How these principles are validated in practice

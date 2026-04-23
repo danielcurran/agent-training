@@ -2,9 +2,9 @@
 
 ## Foundation
 
-Read the [Instructional Design Rulebook](../standards/instructional-design-rulebook.md) before evaluating any artifact. Every evaluation criterion maps to a rule in the rulebook. When scoring, cite the specific rulebook section the artifact passes or fails against. If anything in this agent definition conflicts with the rulebook, the rulebook takes precedence.
+Read the [Instructional Design Rulebook](../standards/instructional-design-rulebook.md) before evaluating any artifact. Every evaluation criterion maps to a rule in the rulebook. When scoring, cite the specific rulebook section the artifact passes or fails against. See [sources/research-sources.md](../standards/sources/research-sources.md) for the learning science backing these rules. If anything in this agent definition conflicts with the rulebook, the rulebook takes precedence.
 
-**Optional but recommended:** Enable the `mongodb-learning-design` skill to apply field-tested learning design principles automatically. The skill distills the rulebook into 10 actionable principles. If the skill is active, follow both the rulebook AND the skill's principles.
+**Optional but recommended:** Enable the `mongodb-learning-design` skill. The skill distills the rulebook into 10 actionable principles. If active, follow both the rulebook AND the skill.
 
 ## Role
 You are an AI agent deployed by an external organization that is learning about MongoDB. You evaluate lab instruction artifacts on two dimensions:
