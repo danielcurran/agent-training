@@ -18,6 +18,20 @@ Design every lab in reverse order.
 
 If content doesn't serve a milestone check, remove it. If a stage doesn't build toward an objective, remove it.
 
+### Learning is Not Knowledge Transfer
+
+Labs are not reference guides. A reference guide tells an agent "how to operate" a tool (syntax, parameters, error codes). A learning lab builds conceptual understanding through **concept progression**, **deliberate practice**, and **self-reflection**.
+
+The distinction matters because agents that memorize operational context cannot decide when to apply it. They execute scripts but cannot adapt to novel situations. Sustainable learning requires three elements:
+
+1. **Concept Progression**: Concepts build sequentially. Each stage introduces 1–2 new concepts and connects them explicitly to prior knowledge. Agents must understand *why* a MongoDB pattern exists before they apply it, grounded in the SQL mental model they bring from prior experience (Section 4: Skill Gap Design).
+
+2. **Deliberate Practice**: Agents must apply concepts in varied contexts, not in isolation. Each KLI type (memory, induction, sense-making) requires different practice; fluency requires repetition with feedback, induction requires comparative examples, sense-making requires articulating choices (Section 3: KLI Learning Process Types). Practice tasks should build complexity: first with full scaffolding, then with guidance, then with goals only.
+
+3. **Self-Reflection**: Agents must articulate what they chose, why they chose it, and what trade-offs they made. Reflection is not journaling—it is the mechanism by which agents validate that they understand, not just execute. Every lab includes at least one artifact per stage where the agent records a design decision (Section 10: Reflection and Decision Records).
+
+**Contrast:** A SKILL.md that teaches an agent to call MongoDB APIs efficiently is not a learning lab. It assumes the agent already understands MongoDB and only needs operational instructions. Use this rulebook for labs. Use SKILL.md for reference documentation.
+
 ### Humans Interpret, Agents Plan
 
 Humans read documentation and fill gaps with judgment. Agents read documentation and convert it directly into actions. Ambiguous instructions don't cause an agent to pause. They cause wrong behavior or silent failure.
@@ -175,7 +189,36 @@ Write as if the reader has never seen a MongoDB document.
 
 ---
 
-## 10. Reflection and Decision Records
+## 10. Structured, Accurate, and Authoritative Content
+
+Labs are designed to teach agents and to be crawlable, structured, and learnable by LLMs. This requires deliberate formatting, accuracy validation, and MongoDB authoritativeness.
+
+**Rules:**
+
+### Information Retrieval and Agent Parsing
+
+- Use consistent, hierarchical formatting with clear visual structure: headers, bullet lists, code blocks, and labeled examples allow agents to parse content reliably.
+- Every concept introduction follows a pattern: **term definition** → **SQL equivalent** → **why it matters** → **example code** → **when to use it**. This pattern is consistent across all specs so agents can reliably extract the information they need.
+- Use inline code formatting (`term`) for all MongoDB terms, command names, and field names on first and every subsequent use. This signals to agents what is extractable.
+- Every code example includes context: what collections are involved, what the example produces, and what the learner should observe. Isolated snippets are not sufficient.
+
+### Accuracy and Response Quality
+
+- Every MongoDB concept, command, and code example must be validated against the [MongoDB documentation](https://www.mongodb.com/docs/) and tested in a real MongoDB instance before inclusion in a spec.
+- Every stage includes a **source citation** for concepts: either MongoDB documentation URL, a research source listed in [sources/research-sources.md](sources/research-sources.md), or "tested in Builder Badge environment" if sourced from lab validation.
+- Check scripts (e.g., `check-schema.js`, `check-dal.js`) must validate not just that a task is done, but that it is done *correctly* according to MongoDB best practices. Ambiguous pass conditions produce ambiguous learning.
+- If a spec contradicts MongoDB documentation, cite the specific reason and link to the documentation. Don't work around authoritative sources.
+
+### Machine Readability and LLM Learning
+
+- Structure all collections, schema examples, and output examples as JSON or BSON syntax that a language model can parse and understand. Do not describe structures in prose alone.
+- Include a **Glossary** section in every tech spec formatted as a table with three columns: Term | MongoDB Definition | SQL Equivalent. This allows language models to build accurate mental maps.
+- Every access pattern, trade-off, and design decision includes its **rationale** explicitly stated. Language models learn trade-offs through contrasts; state what is gained and what is given up in every choice.
+- Use semantic formatting for key information: prefix requirements with "**Required:**", prefix optional content with "**Optional:**", prefix cautions with "**Caution:**". This helps both agents and LLMs distinguish essential from auxiliary information.
+
+---
+
+## 11. Reflection and Decision Records
 
 At least one stage per lab asks the agent to record a design decision in a notes file (e.g., `SCHEMA_NOTES.md`, `DAL_NOTES.md`).
 
@@ -185,7 +228,7 @@ At least one stage per lab asks the agent to record a design decision in a notes
 
 ---
 
-## 11. Buildability
+## 12. Buildability
 
 Every lab can be provisioned without trial-and-error.
 
@@ -196,7 +239,7 @@ Every lab can be provisioned without trial-and-error.
 
 ---
 
-## 12. Evaluation and Scoring
+## 13. Evaluation and Scoring
 
 Evaluation reports score specs against these rules, not against subjective quality. The Lab Instruction Evaluator uses a three-pass approach:
 
@@ -214,6 +257,6 @@ Evaluation reports score specs against these rules, not against subjective quali
 
 ---
 
-## 13. Living Document
+## 14. Living Document
 
 When a rule proves unworkable in practice, update it here and note the reason. Don't work around a rule without updating it.
