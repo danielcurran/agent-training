@@ -28,9 +28,9 @@ The distinction matters because agents that memorize operational context cannot 
 
 2. **Deliberate Practice**: Agents must apply concepts in varied contexts, not in isolation. Each KLI type (memory, induction, sense-making) requires different practice; fluency requires repetition with feedback, induction requires comparative examples, sense-making requires articulating choices (Section 3: KLI Learning Process Types). Practice tasks should build complexity: first with full scaffolding, then with guidance, then with goals only.
 
-3. **Self-Reflection**: Agents must articulate what they chose, why they chose it, and what trade-offs they made. Reflection is not journaling—it is the mechanism by which agents validate that they understand, not just execute. Every lab includes at least one artifact per stage where the agent records a design decision (Section 10: Reflection and Decision Records).
+3. **Self-Reflection**: Agents must articulate what they chose, why they chose it, and what trade-offs they made. Reflection is not journaling—it is the mechanism by which agents validate that they understand, not just execute. Every lab includes at least one artifact per stage where the agent records a design decision (Section 11: Reflection and Decision Records).
 
-**Contrast:** A SKILL.md that teaches an agent to call MongoDB APIs efficiently is not a learning lab. It assumes the agent already understands MongoDB and only needs operational instructions. Use this rulebook for labs. Use SKILL.md for reference documentation.
+**Contrast:** Teaching an agent to call MongoDB APIs efficiently is not a learning lab. It assumes the agent already understands MongoDB and only needs operational instructions. Use this rulebook for labs. Use SKILL.md for reference documentation.
 
 ### Humans Interpret, Agents Plan
 
