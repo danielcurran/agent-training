@@ -19,22 +19,24 @@ The `.github/prompts/` files are thin wrappers that invoke the agents above. Do 
 
 ## Labs
 
+Reports are organized by lab topic in `labs/reports/{lab-name}/`:
+
 | Lab | Outline | Tech Spec | Spec Eval | Env Eval | Status |
 |---|---|---|---|---|---|
-| Builder Badge | [labs/outlines/builder-badge-outline.md](labs/outlines/builder-badge-outline.md) | [labs/specs/builder-badge-tech-spec.md](labs/specs/builder-badge-tech-spec.md) | [v1](labs/reports/builder-badge-tech-spec-eval-v1.md) (9.6/10) | [v1](labs/reports/builder-badge-env-eval-v1.md) | ✓ Production Ready |
-| Insert and Find | [labs/outlines/insert-and-find-outline.md](labs/outlines/insert-and-find-outline.md) | [labs/specs/insert-and-find-tech-spec.md](labs/specs/insert-and-find-tech-spec.md) | [v1](labs/reports/insert-and-find-tech-spec-eval-v1.md) (8.8/10) | [v2](labs/reports/insert-and-find-env-eval-v2.md) | ⚠️ Reference Spec (Environment Archived) |
-| ESR Indexing Strategy | [labs/outlines/esr-indexing-strategy-outline.md](labs/outlines/esr-indexing-strategy-outline.md) | [labs/specs/esr-indexing-strategy-tech-spec.md](labs/specs/esr-indexing-strategy-tech-spec.md) | [v1](labs/reports/esr-indexing-strategy-tech-spec-eval-v1.md) (8.6/10) | — | ✓ Environment Ready |
+| Builder Badge | [labs/outlines/builder-badge-outline.md](labs/outlines/builder-badge-outline.md) | [labs/specs/builder-badge-tech-spec.md](labs/specs/builder-badge-tech-spec.md) | [v1](labs/reports/builder-badge/builder-badge-tech-spec-eval-v1.md) (9.6/10) | [v1](labs/reports/builder-badge/builder-badge-env-eval-v1.md) | ✓ Production Ready |
+| Insert and Find | [labs/outlines/insert-and-find-outline.md](labs/outlines/insert-and-find-outline.md) | [labs/specs/insert-and-find-tech-spec.md](labs/specs/insert-and-find-tech-spec.md) | [v1](labs/reports/insert-and-find/insert-and-find-tech-spec-eval-v1.md) (8.8/10) | [v2](labs/reports/insert-and-find/insert-and-find-env-eval-v2.md) | ⚠️ Reference Spec (Environment Archived) |
+| ESR Indexing Strategy | [labs/outlines/esr-indexing-strategy-outline.md](labs/outlines/esr-indexing-strategy-outline.md) | [labs/specs/esr-indexing-strategy-tech-spec.md](labs/specs/esr-indexing-strategy-tech-spec.md) | [v1](labs/reports/esr-indexing-strategy/esr-indexing-strategy-tech-spec-eval-v1.md) (8.6/10) | — | ✓ Environment Ready |
 
 ## Workflow
 
 ```
 1. Write outline → /design-lab-outline → labs/outlines/{name}-outline.md
 2. /convert-lab-outline (attach outline) → saves labs/specs/{name}-tech-spec.md
-3. /evaluate-lab-instructions (attach tech spec) → saves labs/reports/{name}-tech-spec-eval-v{N}.md
+3. /evaluate-lab-instructions (attach tech spec) → saves labs/reports/{name}/{name}-tech-spec-eval-v{N}.md
 4. Iterate spec on feedback until both scores ≥ 8/10 (spec quality + learner experience)
 5. /build-lab-environment (attach tech spec) → saves lab-test-env/{name}/
-6. /run-learner-agent (provide lab name) → saves labs/reports/{name}-env-eval-v{N}.md
-7. /score-transfer-task (attach spec + env-eval) → saves labs/reports/{name}-transfer-v{N}.md + Section 14 finding
+6. /run-learner-agent (provide lab name) → saves labs/reports/{name}/{name}-env-eval-v{N}.md
+7. /score-transfer-task (attach spec + env-eval) → saves labs/reports/{name}/{name}-transfer-v{N}.md + Section 14 finding
 ```
 
 ## Lab Execution
@@ -82,8 +84,8 @@ Reserved for Copilot-specific configuration (e.g., custom instructions, Claude-s
 
 - Outlines: `labs/outlines/{name}-outline.md`
 - Tech specs: `labs/specs/{name}-tech-spec.md`
-- Tech spec evaluations: `labs/reports/{name}-tech-spec-eval-v{N}.md` — increment N each revision cycle
-- Environment evaluations: `labs/reports/{name}-env-eval-v{N}.md` — tracks learner execution results
+- Tech spec evaluations: `labs/reports/{name}/{name}-tech-spec-eval-v{N}.md` — increment N each revision cycle
+- Environment evaluations: `labs/reports/{name}/{name}-env-eval-v{N}.md` — tracks learner execution results
 - Lab environments: `lab-test-env/{name}/` — self-contained Node.js + Docker environment per lab
 - Agent definitions live in `agents/` — `.github/prompts/` references them by filename, do not rename
 - Stage deliverables: `REFLECTION.md` (required in all labs). `SCHEMA.md` is optional for intro labs (labs with fewer than 3 stages or no schema design component); complex labs like Builder Badge include it to document the data model.

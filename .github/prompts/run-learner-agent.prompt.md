@@ -12,4 +12,4 @@ Complete the lab using the agent definition above.
 **Fill in before running:**
 - Lab name: [kebab-case name matching the folder in lab-test-environment/]
 
-Output saves to `labs/reports/{lab-name}-env-eval-v{N}.md`.
+Output saves to `labs/reports/{lab-name}/{lab-name}-env-eval-v{N}.md`.

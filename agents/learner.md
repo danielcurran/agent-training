@@ -194,11 +194,11 @@ Score each dimension as ✓ (effective), △ (partial), or ✗ (ineffective) wit
 
 ---
 
-Save the report to `labs/reports/[lab-name]-env-eval-v[N].md`. Increment N if a previous evaluation exists.
+Save the report to `labs/reports/[lab-name]/[lab-name]-env-eval-v[N].md`. Increment N if a previous evaluation exists.
 
 Confirm:
 ```
-Report saved to labs/reports/[lab-name]-env-eval-v[N].md
+Report saved to labs/reports/[lab-name]/[lab-name]-env-eval-v[N].md
 ```
 
 ---

@@ -112,7 +112,7 @@ Then write a second sentence stating what the rulebook should do with this findi
 
 ### 5. Save the Report
 
-Save the transfer task score to `labs/reports/[lab-name]-transfer-v[N].md`. Increment N if a previous transfer score exists for this lab.
+Save the transfer task score to `labs/reports/[lab-name]/[lab-name]-transfer-v[N].md`. Increment N if a previous transfer score exists for this lab.
 
 Include a metadata header:
 
@@ -133,7 +133,7 @@ hypothesis_3_decision_records: [Supported / Partially supported / Not supported 
 
 Confirm:
 ```
-Transfer task score saved to labs/reports/[lab-name]-transfer-v[N].md
+Transfer task score saved to labs/reports/[lab-name]/[lab-name]-transfer-v[N].md
 Add this finding to Rulebook Section 14: [the one-sentence finding]
 ```
 

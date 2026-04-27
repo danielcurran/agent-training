@@ -271,15 +271,16 @@ A spec must score **≥8 on both dimensions** before proceeding to the environme
 
 ### 7. Saving the Evaluation Report
 
-After completing the evaluation, automatically save the report as a `.md` file in the `labs/reports/` directory using this naming convention:
+After completing the evaluation, automatically save the report as a `.md` file in the `labs/reports/[lab-name]/` directory using this naming convention:
 
 ```
-labs/reports/[lab-file-name]-tech-spec-eval-v[N].md
+labs/reports/[lab-name]/[lab-file-name]-tech-spec-eval-v[N].md
 ```
 
 **Rules:**
+- Derive `[lab-name]` from the spec filename (e.g., `builder-badge` from `builder-badge-tech-spec.md`)
 - Derive `[lab-file-name]` from the evaluated artifact's filename without extension
-- Derive `[N]` by checking `labs/reports/` for existing evaluations of the same artifact and incrementing — start at `v1` if none exist
+- Derive `[N]` by checking `labs/reports/[lab-name]/` for existing evaluations of the same artifact and incrementing — start at `v1` if none exist
 - Include the full evaluation output in the saved file
 - Add a metadata header at the top of the saved file:
 
@@ -299,7 +300,7 @@ pass_1_section_scores: [list of section scores]
 
 **After saving, confirm to the user:**
 ```
-✓ Evaluation saved to labs/reports/[lab-file-name]-tech-spec-eval-v[N].md
+✓ Evaluation saved to labs/reports/[lab-name]/[lab-file-name]-tech-spec-eval-v[N].md
 ```
 
 ### 8. MongoDB Knowledge Acquisition Report

@@ -265,4 +265,4 @@ The Insert and Find lab successfully teaches the core MongoDB workflow. With the
 
 ---
 
-**Report saved to:** `labs/reports/insert-and-find-env-eval-v2.md`
+**Report saved to:** `labs/reports/insert-and-find/insert-and-find-env-eval-v2.md`

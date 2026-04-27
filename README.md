@@ -36,11 +36,11 @@ standards/           → Instructional design rulebook and research sources
 ```
 1. Design a lab outline           → /design-lab-outline → labs/outlines/[name]-outline.md
 2. Convert to tech spec           → /convert-lab-outline → labs/specs/[name]-tech-spec.md
-3. Evaluate spec quality & learner experience → /evaluate-lab-instructions → labs/reports/[name]-tech-spec-eval-v{N}.md
+3. Evaluate spec quality & learner experience → /evaluate-lab-instructions → labs/reports/[name]/[name]-tech-spec-eval-v{N}.md
 4. Iterate spec on feedback       → repeat until both scores ≥ 8/10
 5. Build lab environment          → /build-lab-environment → lab-test-environment/[name]/
-6. Run learner agent              → /run-learner-agent → labs/reports/[name]-env-eval-v{N}.md
-7. Score transfer task            → /score-transfer-task → labs/reports/[name]-transfer-v{N}.md
+6. Run learner agent              → /run-learner-agent → labs/reports/[name]/[name]-env-eval-v{N}.md
+7. Score transfer task            → /score-transfer-task → labs/reports/[name]/[name]-transfer-v{N}.md
 ```
 
 ## Setup
