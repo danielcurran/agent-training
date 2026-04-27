@@ -1,5 +1,24 @@
 # Agent Training Repository TODO
 
+## Priority: Rulebook Testing
+
+The rulebook has 3 data points (ESR v1, ESR v2, Memory for AI). SQL Bridging hypothesis is the only unresolved hypothesis. The next lab run should be designed to resolve it.
+
+### Resolve SQL Bridging Hypothesis
+- [ ] **Run ESR v2 with explicit Rule 3 scaffolding** — Add "name the SQL instinct, explain why it fails here, state the MongoDB approach" prompts to the ESR v2 transfer task. If Sense-Making improves to ✓, SQL Bridging hypothesis is fully supported. If it stays △, revise Rule 3's ✓ bar to accept mechanistic contrast without SQL language.
+- [ ] **Update Rulebook Section 14** after the above run — move Rule 3 from 🔄 Observing to ✓ Confirmed or revise the criterion, based on outcome.
+
+### Expand Evidence Base
+- [ ] **Run a 4th lab** from a domain unrelated to indexing or memory (e.g., aggregation pipelines, change streams, schema design) — confirms whether the KLI + SQL bridging + decision record cluster generalises beyond the current two domains.
+- [ ] **Resolve Rule 3 ✓ bar ambiguity** — decide: does ✓ require the learner to *name* the SQL instinct, or is mechanistic contrast (without SQL language) sufficient? Document the decision in Section 14.
+
+### New Agents to Test
+- [ ] **Test RAG Chunker** on Builder Badge (most complete lab, best candidate for first chunk run)
+- [ ] **Test RAG Chunk Evaluator** on Builder Badge chunks
+- [ ] Assess chunk quality results and refine chunker agent definition if needed
+
+---
+
 ## Lab Enhancements
 
 ### Builder Badge
@@ -10,6 +29,8 @@
 
 - [x] **Create new agent: Lab Learner Quality Assessor** — Merged into Lab Instruction Evaluator (3-pass evaluation covering spec quality + learner experience)
 - [x] **Merge evaluators** — Combined Lab Instruction Evaluator and Lab Learner Quality Assessor into single 3-pass agent (`agents/lab-instruction-evaluator.md`)
+- [x] **Create RAG Chunker agent** — `agents/rag-chunker.md` + `/chunk-lab-content` slash command. Converts validated lab content into semantically self-contained chunks for LLM retrieval.
+- [x] **Create RAG Chunk Evaluator agent** — `agents/rag-chunk-evaluator.md` + `/evaluate-lab-chunks` slash command. Scores chunks on 5 criteria; PASS/REVISE/FAIL per chunk.
 - [ ] Set up GitHub Actions CI/CD: run `npm run check:all` on PR
 - [ ] Document how to add new agents to `.github/prompts/`
 - [ ] Create GitHub issue templates for lab creation workflow
@@ -17,6 +38,7 @@
 
 ## Documentation
 
+- [x] **Restructure Rulebook Section 14** — Renamed "Living Document" to "Research Findings & Hypothesis Validation"; added Purpose, Research Method, per-lab findings with structured layout, Hypothesis Validation Summary table, and Revision Log with update instructions.
 - [ ] Add troubleshooting guide for common lab environment issues
 - [ ] Document best practices for designing new labs
 - [ ] Create quick-start guide for lab authors using the agent workflow
@@ -46,7 +68,8 @@ Two categories of issue were approved by the tech spec evaluator and only caught
 
 ## Research & Knowledge Base
 
-- [ ] **Research: SQL background for external agents** — Investigate whether external agents have SQL foundational knowledge; determine if SQL comparisons are necessary for labs targeting zero-MongoDB-knowledge learners
+- [x] **Memory for AI Applications lab** — Built environment, ran learner (2/2 challenges ✓), scored transfer task (4/4), added findings to Rulebook Section 14. All three hypotheses supported.
+- [x] **Research: SQL background for external agents** — Confirmed through 3 lab runs: SQL instinct is present in learner agents and SQL bridging scaffolding strengthens transfer. See Section 14 findings.
 - [ ] Study learner feedback from completed labs to identify pain points
 
 ## Long-Term Vision
