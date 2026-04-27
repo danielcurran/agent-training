@@ -286,13 +286,7 @@ Evaluation reports score specs against these rules, not against subjective quali
 
 This section documents the **research hypothesis validation** that grounds this rulebook. The rules in Sections 1–13 are not established practice. They are working theories about how to teach external AI agents using human learning science principles (KLI, cognitive load theory, metacognitive reflection).
 
-This rulebook makes three falsifiable hypotheses (stated in Section 0):
-
-1. **KLI Typing Hypothesis:** Instructional structures that type learning processes (fluency, induction, sense-making) produce agents that can *decide* and *transfer*, not just execute and memorize.
-
-2. **SQL Bridging Hypothesis:** Explicit bridging from SQL instincts (the learner's prior mental model) to MongoDB approaches reduces failure rates more than structural clarity alone.
-
-3. **Decision-Record Hypothesis:** Requiring agents to record design decisions (artifact-based reflection) improves novel task performance beyond what scaffolding alone produces.
+The three hypotheses under test are stated in Section 0.
 
 ### Research Method
 
@@ -303,15 +297,13 @@ Each lab run is a data point. We:
 - Map the scores to hypothesis verdicts
 - Update the rulebook based on evidence
 
-A single lab is not conclusive. A pattern across multiple labs is.
-
 When evidence contradicts a rule, **revise the rule**. Do not work around the data. The goal is a rulebook that actually works, not one that sounds reasonable.
 
 ### Findings
 
 ---
 
-#### Lab 1: ESR Indexing Strategy (April 2026)
+#### Lab 1: ESR Indexing Strategy (27 April 2026)
 
 | Hypothesis | Result |
 |---|---|
@@ -334,7 +326,7 @@ When evidence contradicts a rule, **revise the rule**. Do not work around the da
 
 ---
 
-#### Lab 2: ESR Indexing Strategy v2 — Controlled Test (April 2026)
+#### Lab 2: ESR Indexing Strategy v2 — Controlled Test (27 April 2026)
 
 | Hypothesis | Result |
 |---|---|
@@ -399,24 +391,7 @@ When evidence contradicts a rule, **revise the rule**. Do not work around the da
 
 ---
 
-**Key Insights:**
-
-> **KLI Typing (Rules 3, 5, 6):** All three learning processes (fluency, induction, sense-making) produce transferable agent behavior when scaffolded correctly. Confirmed across two distinct domains (indexing strategy, namespace isolation).
-
-> **SQL Bridging (Rule 4):** Explicit "name the SQL instinct, explain why it fails here, state the MongoDB approach" scaffolding strengthens transfer performance. Two labs showed △ when SQL contrasts were implicit or removed; one lab showed ✓ when scaffolding was explicit. Pattern suggests Rule 3 needs refinement: either require explicit SQL contrasts in transfer task prompts, or revise the ✓ bar.
-
-> **Decision Records (Rule 11):** Reflection artifacts directly inform transfer reasoning. Learners in all three labs cited decision-record content when reasoning about novel problems. No contradictions.
-
----
-
-**System-Level Finding:**
-
-The three rules form an **integrated system**. When all three are present:
-- Transfer scores are high (4/4 in Memory for AI)
-- Learners demonstrate all three KLI types
-- Novel reasoning draws explicitly from decision artifacts
-
-Implication: Do not apply individual rules in isolation. The synergy comes from the cluster.
+**System-Level Finding:** The three-rule cluster (KLI typing + SQL bridging + decision records) works as an integrated system, not independent components. When all three are present, transfer scores are high. Do not apply rules in isolation.
 
 ---
 
@@ -456,27 +431,13 @@ When a new lab completes and is scored:
 
 #### Rules Under Active Observation
 
-**Rule 3 (SQL Bridging):** 
+**Rule 3 (SQL Bridging):**
 - Current evidence: 3 data points (ESR v1 △, ESR v2 △, Memory for AI ✓)
 - Hypothesis status: Trending toward confirmation, pending explicit scaffolding test
-- Next test: Apply Rule 3 scaffolding to ESR v2 materials (add "name the SQL instinct" prompts to transfer task) and rerun learner. Expected outcome: if Sense-Making improves to ✓, SQL bridging becomes fully supported.
-
-**Rule 1 (Dual Expertise):**
-- Current evidence: 3 labs completed; no contradictions yet
-- Hypothesis status: No evidence against. Standing as written.
-- Next test: Watch for labs where learner struggles with SQL mental model; may indicate Rule 1 needs clarification.
-
-**Rule 2 (Progressive Complexity):**
-- Current evidence: 3 labs completed; no contradictions yet
-- Hypothesis status: No evidence against. Standing as written.
-- Next test: Monitor scaffolding reduction patterns in future labs; look for stages where learner struggles after scaffolding removal.
+- Next test: Apply Rule 3 scaffolding to ESR v2 materials (add "name the SQL instinct" prompts to transfer task) and rerun learner. If Sense-Making improves to ✓, SQL bridging becomes fully supported.
 
 ---
 
 #### Rules Confirmed in Practice
 
-**Rules 4–13:** Standing as written. No contradictory evidence to date across 3 lab runs.
-- Rule 4 (Skill Gap): Confirmed across all 3 labs. SQL contrast bridging is essential when present.
-- Rule 5 (Stage Design): Confirmed. 3-stage and 4-stage designs both produce learning transfer.
-- Rule 6 (Scaffolding): Confirmed. Progressive reduction of scaffolding for prior knowledge works as designed.
-- Rules 7–13: Operating as designed. No anomalies yet.
+**Rules 4–13:** Standing as written. No contradictory evidence across 3 lab runs.

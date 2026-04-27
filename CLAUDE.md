@@ -14,6 +14,8 @@ Repository for designing, evaluating, and iterating AI agent training materials 
 | Lab Environment Builder | [agents/lab-environment-builder.md](agents/lab-environment-builder.md) | `/build-lab-environment` in Copilot Chat | Generates a working skeleton app and check scripts from a tech spec |
 | Agent Learner | [agents/learner.md](agents/learner.md) | `/run-learner-agent` in Copilot Chat | Completes a lab as an external AI agent learner and produces a learning report |
 | Transfer Task Scorer | [agents/transfer-task-scorer.md](agents/transfer-task-scorer.md) | `/score-transfer-task` in Copilot Chat | Scores the learner's transfer task response against the three KLI hypotheses; produces a Section 14 finding |
+| RAG Chunker | [agents/rag-chunker.md](agents/rag-chunker.md) | `/chunk-lab-content` in Copilot Chat | Converts validated lab content into semantically self-contained chunks for LLM retrieval and RAG pipelines |
+| RAG Chunk Evaluator | [agents/rag-chunk-evaluator.md](agents/rag-chunk-evaluator.md) | `/evaluate-lab-chunks` in Copilot Chat | Scores every chunk for standalone coherence, heading retrievability, structural completeness, relationship explicitness, and metadata accuracy |
 
 The `.github/prompts/` files are thin wrappers that invoke the agents above. Do not add logic there — put it in the agent definition under `agents/`.
 
@@ -37,6 +39,8 @@ Reports are organized by lab topic in `labs/reports/{lab-name}/`:
 5. /build-lab-environment (attach tech spec) → saves lab-test-env/{name}/
 6. /run-learner-agent (provide lab name) → saves labs/reports/{name}/{name}-env-eval-v{N}.md
 7. /score-transfer-task (attach spec + env-eval) → saves labs/reports/{name}/{name}-transfer-v{N}.md + Section 14 finding
+8. /chunk-lab-content (attach spec + env-eval) → saves labs/chunks/{name}/ (concepts/ + tasks/ + manifest.json)
+9. /evaluate-lab-chunks (attach chunk dir + spec) → saves labs/reports/{name}/{name}-chunk-eval-v{N}.md
 ```
 
 ## Lab Execution
