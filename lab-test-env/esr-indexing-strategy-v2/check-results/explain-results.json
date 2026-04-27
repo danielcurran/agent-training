@@ -1,0 +1,34 @@
+{
+  "timestamp": "2026-04-27T14:22:13.790Z",
+  "query": {
+    "filter": {
+      "status": "active",
+      "price": {
+        "$gte": 50,
+        "$lte": 500
+      }
+    },
+    "sort": {
+      "rating": -1
+    }
+  },
+  "checks": {
+    "noIndex": {
+      "docsExamined": 10000,
+      "executionTimeMillis": 7,
+      "hasSortStage": true
+    },
+    "esr": {
+      "index": {
+        "status": 1,
+        "rating": -1,
+        "price": 1
+      },
+      "docsExamined": 775,
+      "executionTimeMillis": 1,
+      "hasSortStage": false
+    },
+    "esrNoSortStage": true
+  },
+  "passed": true
+}

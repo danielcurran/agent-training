@@ -1,0 +1,28 @@
+{
+  "timestamp": "2026-04-27T14:20:55.563Z",
+  "checks": {
+    "connection": {
+      "passed": true,
+      "message": "Connected to mongodb://localhost:27019/esr-lab-v2"
+    },
+    "collection": {
+      "passed": true,
+      "message": "Collection 'products' exists"
+    },
+    "count": {
+      "passed": true,
+      "message": "Document count: 10000 (expected 10000)",
+      "actual": 10000
+    },
+    "noCustomIndexes": {
+      "passed": true,
+      "message": "No custom indexes (clean baseline)",
+      "customIndexes": []
+    },
+    "structure": {
+      "passed": true,
+      "message": "Document structure valid"
+    }
+  },
+  "passed": true
+}

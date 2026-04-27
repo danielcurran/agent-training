@@ -4,16 +4,12 @@ on:
   push:
     branches: [ main ]
     paths:
-      - 'lab-test-environment/**'
-      - 'labs/specs/**'
-      - 'agents/**'
+      - 'lab-test-env/builder-badge/**'
       - '.github/workflows/validate-labs.yml'
   pull_request:
     branches: [ main ]
     paths:
-      - 'lab-test-environment/**'
-      - 'labs/specs/**'
-      - 'agents/**'
+      - 'lab-test-env/builder-badge/**'
       - '.github/workflows/validate-labs.yml'
 
 jobs:
@@ -39,27 +35,27 @@ jobs:
         with:
           node-version: '18'
           cache: 'npm'
-          cache-dependency-path: 'lab-test-environment/builder-badge/package-lock.json'
+          cache-dependency-path: 'lab-test-env/builder-badge/package-lock.json'
 
       - name: Install dependencies
-        working-directory: lab-test-environment/builder-badge
+        working-directory: lab-test-env/builder-badge
         run: npm install
 
       - name: Configure environment
-        working-directory: lab-test-environment/builder-badge
+        working-directory: lab-test-env/builder-badge
         run: |
           cp .env.example .env
           echo "MONGODB_URI=mongodb://localhost:27017/builder_badge_lab" >> .env
 
       - name: Seed database
-        working-directory: lab-test-environment/builder-badge
+        working-directory: lab-test-env/builder-badge
         run: npm run seed
 
       - name: Run environment check
-        working-directory: lab-test-environment/builder-badge
+        working-directory: lab-test-env/builder-badge
         run: npm run check:env
 
       - name: Run all validation checks
-        working-directory: lab-test-environment/builder-badge
+        working-directory: lab-test-env/builder-badge
         run: npm run check:all
         continue-on-error: false
