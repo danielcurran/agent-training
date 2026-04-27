@@ -1,5 +1,8 @@
 # Instructional Design Rulebook
 
+> **⚠️ Work in Progress — Not Final**
+> This rulebook is under active development and testing. Rules are working hypotheses being validated through lab runs. Expect revisions. Do not treat any rule as settled until confirmed by evidence in Section 14.
+
 All agents in this repository (Lab Outline Designer, Lab Outline Converter, Lab Instruction Evaluator, Lab Environment Builder, and Agent Learner) must follow these rules when creating or assessing content. Every outline, spec, and evaluation report is in scope.
 
 See [sources/research-sources.md](sources/research-sources.md) for the research behind these rules.
@@ -15,7 +18,7 @@ The rules in this document apply human learning science — cognitive load theor
 The hypothesis: instructional structures that produce durable learning in humans (concept progression, deliberate practice, self-reflection) also produce more reliable and transferable performance in agents, because the underlying mechanism — structured context that forces the agent to apply, contrast, and articulate knowledge — maps closely to how in-context learning works.
 
 **What is not assumed:**
-- That LLMs form persistent schemas in the Piagetian sense
+- That LLMs form persistent schemas
 - That scaffolding reduction across stages mirrors memory consolidation in humans
 - That reflection artifacts produce genuine metacognition rather than plausible text
 
