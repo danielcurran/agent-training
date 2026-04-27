@@ -13,6 +13,7 @@ Repository for designing, evaluating, and iterating AI agent training materials 
 | Lab Instruction Evaluator | [agents/lab-instruction-evaluator.md](agents/lab-instruction-evaluator.md) | `/evaluate-lab-instructions` in Copilot Chat | Scores lab specs on spec quality and learner experience (3-pass evaluation) |
 | Lab Environment Builder | [agents/lab-environment-builder.md](agents/lab-environment-builder.md) | `/build-lab-environment` in Copilot Chat | Generates a working skeleton app and check scripts from a tech spec |
 | Agent Learner | [agents/learner.md](agents/learner.md) | `/run-learner-agent` in Copilot Chat | Completes a lab as an external AI agent learner and produces a learning report |
+| Transfer Task Scorer | [agents/transfer-task-scorer.md](agents/transfer-task-scorer.md) | `/score-transfer-task` in Copilot Chat | Scores the learner's transfer task response against the three KLI hypotheses; produces a Section 14 finding |
 
 The `.github/prompts/` files are thin wrappers that invoke the agents above. Do not add logic there — put it in the agent definition under `agents/`.
 
@@ -33,6 +34,7 @@ The `.github/prompts/` files are thin wrappers that invoke the agents above. Do 
 4. Iterate spec on feedback until both scores ≥ 8/10 (spec quality + learner experience)
 5. /build-lab-environment (attach tech spec) → saves lab-test-env/{name}/
 6. /run-learner-agent (provide lab name) → saves labs/reports/{name}-env-eval-v{N}.md
+7. /score-transfer-task (attach spec + env-eval) → saves labs/reports/{name}-transfer-v{N}.md + Section 14 finding
 ```
 
 ## Lab Execution

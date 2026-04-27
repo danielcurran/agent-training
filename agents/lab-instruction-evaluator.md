@@ -227,6 +227,10 @@ For each stage, assess:
 
 ---
 
+> **Transfer task scoring is handled by a dedicated agent.** After the learner completes the lab, run `/score-transfer-task` (attach the tech spec and env-eval report). Transfer scoring is intentionally separate — the scorer must be blind to the lab instructions to produce valid evidence. See [agents/transfer-task-scorer.md](transfer-task-scorer.md).
+
+---
+
 ## Combined Output Format
 
 The complete evaluation report follows this structure:

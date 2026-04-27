@@ -86,6 +86,14 @@ After completing this lab, the agent will:
 ## Stage N...
 ## File Checklist (table)
 ## Glossary (all MongoDB terms introduced, with SQL-equivalent comparisons)
+## Transfer Task
+  - **Domain:** [a domain never mentioned anywhere in the lab — different industry, different entity types]
+  - **Problem:** [one concrete problem that requires the lab's core skill to solve — stated in 2–3 sentences with no hints, no scaffolding, and no MongoDB syntax provided]
+  - **KLI mapping:**
+    - Fluency: [what correct syntax or pattern application looks like]
+    - Induction: [what a reasoned choice — not just the last pattern seen — looks like]
+    - Sense-making: [what a correct SQL-to-MongoDB explanation looks like]
+  - **Passing bar:** [the minimum response that demonstrates transfer, not just recall]
 ```
 
 ### Stage Scoping Rules

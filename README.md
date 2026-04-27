@@ -29,6 +29,7 @@ standards/           → Instructional design rulebook and research sources
 | [Lab Instruction Evaluator](agents/lab-instruction-evaluator.md) | Evaluate lab specs for spec quality and learner experience | `/evaluate-lab-instructions` |
 | [Lab Environment Builder](agents/lab-environment-builder.md) | Generate skeleton app and check scripts from a tech spec | `/build-lab-environment` |
 | [Agent Learner](agents/learner.md) | Complete a lab as an AI learner and produce a learning report | `/run-learner-agent` |
+| [Transfer Task Scorer](agents/transfer-task-scorer.md) | Score learner's transfer task; produce KLI hypothesis verdicts and Section 14 finding | `/score-transfer-task` |
 
 ## Workflow
 
@@ -39,6 +40,7 @@ standards/           → Instructional design rulebook and research sources
 4. Iterate spec on feedback       → repeat until both scores ≥ 8/10
 5. Build lab environment          → /build-lab-environment → lab-test-environment/[name]/
 6. Run learner agent              → /run-learner-agent → labs/reports/[name]-env-eval-v{N}.md
+7. Score transfer task            → /score-transfer-task → labs/reports/[name]-transfer-v{N}.md
 ```
 
 ## Setup

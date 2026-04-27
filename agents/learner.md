@@ -177,6 +177,19 @@ Score each dimension as ✓ (effective), △ (partial), or ✗ (ineffective) wit
 **Stages that need spec revision:** [list stage numbers and the specific instruction issue]
 **Stages that need environment fixes:** [list stage numbers and the technical issue]
 **Stages where scaffolding was insufficient:** [list stage numbers and what additional support would help]
+
+## Transfer Task
+
+[The transfer task is included verbatim from the lab's Transfer Task section. Do not look it up — it will be provided to you as part of the lab spec. Complete it now, immediately after finishing the lab stages, using only what the lab taught you. Do not use prior MongoDB knowledge from training data.]
+
+**Problem statement:** [copied from spec]
+
+**Your response:**
+[Write your solution here. Explain your reasoning. Name the MongoDB concepts you applied and why. If you would make a different choice than the lab's pattern, explain why.]
+
+**What I drew on from the lab:** [list the specific concepts, examples, or patterns from the lab stages that informed this response]
+
+**What I had to figure out that the lab didn't cover:** [anything you reasoned beyond what was explicitly taught — or state "nothing"]
 ```
 
 ---
