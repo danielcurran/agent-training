@@ -197,24 +197,26 @@ ESR index `{ category: 1, rating: -1, price: 1 }`:
 // filepath: src/stage1-esr-identification.js
 module.exports = {
   query1: { E: "status", S: "none", R: "none" },
-  query2: { E: "category", S: "createdAt", R: "none" },
+  query2: { E: "status", S: "createdAt", R: "none" },
   query3: { E: "status", S: "none", R: "price" },
   query4: { E: "status", S: "rating", R: "price" },
   query5: { E: "tags", S: "createdAt", R: "rating" }
 };
 ```
 
+**Note:** The same 5 queries are used in Stage 2 to design indexes. Your E, S, R answers here feed directly into the index field order in Stage 2.
+
 **Expected Queries:**
 1. `db.products.find({ status: "active" })`
    - Expected answer: E = status; S = none; R = none
-2. `db.products.find({ category: "electronics" }).sort({ createdAt: -1 })`
-   - Expected: E = category; S = createdAt; R = none
-3. `db.products.find({ price: { $gte: 50, $lte: 500 } })`
-   - Expected: E = none; S = none; R = price
+2. `db.products.find({ status: "active" }).sort({ createdAt: -1 })`
+   - Expected: E = status; S = createdAt; R = none
+3. `db.products.find({ status: "active", price: { $gte: 50, $lte: 500 } })`
+   - Expected: E = status; S = none; R = price
 4. `db.products.find({ status: "active", price: { $gte: 50 } }).sort({ rating: -1 })`
    - Expected: E = status; S = rating; R = price
-5. `db.products.find({ tags: "sale" }).sort({ createdAt: -1, rating: -1 })`
-   - Expected: E = tags; S = createdAt, rating; R = none
+5. `db.products.find({ tags: "sale", rating: { $gte: 4 } }).sort({ createdAt: -1 })`
+   - Expected: E = tags; S = createdAt; R = rating
 
 **Automated Check:**
 - Parse learner's answers from `src/stage1-esr-identification.js`
@@ -264,17 +266,30 @@ db.products.createIndex({ ??? })
 db.products.createIndex({ status: 1, createdAt: -1 })
 ```
 
+**Before Query 3 — Why Field Order Matters (Contrast Example)**
+
+Consider this query: `db.products.find({ status: "active", price: { $gte: 50, $lte: 500 } }).sort({ rating: -1 })`
+
+Two possible index orderings:
+- Non-ESR: `{ status: 1, price: 1, rating: -1 }` — Range before Sort
+- ESR: `{ status: 1, rating: -1, price: 1 }` — Sort before Range
+
+The non-ESR version forces MongoDB to apply the price range first, then sort remaining results in memory (`stage: "SORT"` in explain output). The ESR version uses the index to sort — no in-memory step.
+
+**Rule:** Place Sort fields before Range fields in your index. The Sort field must come after all Equality fields and before any Range fields.
+
 **Query 3 (Guided; they fill in field order):**
 ```javascript
 // Query:
 db.products.find({ status: "active", price: { $gte: 50, $lte: 500 } })
 
-// This is Equality + Range. Use ESR guideline.
+// This is Equality + Range (no Sort). ESR order: E → R.
 // Your index:
 db.products.createIndex({ ??? })
 
 // Expected answer:
 db.products.createIndex({ status: 1, price: 1 })
+// E=status (equality), R=price (range). No Sort field in this query.
 ```
 
 **Query 4 (Guided; they fill in field order):**
@@ -298,13 +313,14 @@ db.products.createIndex({ status: 1, rating: -1, price: 1 })
 // Query:
 db.products.find({ tags: "sale", rating: { $gte: 4 } }).sort({ createdAt: -1 })
 
-// Apply ESR guideline. What should the index be?
+// Apply ESR guideline. Identify E, S, and R first, then write the index in that order.
 // Your index:
 db.products.createIndex({ ??? })
 
 // Expected answer:
 db.products.createIndex({ tags: 1, createdAt: -1, rating: 1 })
-// Note: Sort comes before Range here because we're sorting within the "sale" tag results
+// E=tags (equality), S=createdAt (sort), R=rating (range)
+// Sort comes before Range — this is the critical ESR ordering that eliminates the SORT stage.
 ```
 
 **Section 2.2: Edge Cases**
@@ -441,6 +457,32 @@ Explanation: Index provides equality (status), sort (rating), and range (price) 
 **Scaffold:**
 Provide all three explain outputs side-by-side. Ask: "Why does Strategy C not have a SORT stage? Why is it faster?"
 
+**Section 3.3: Learner-Active Observation (Required before automated check)**
+
+Before running `npm run check:explain`, run the following commands yourself and observe the output directly:
+
+```javascript
+// Step 1: Drop custom indexes and observe collection scan
+db.products.dropIndexes()
+db.products.find({ status: "active", price: { $gte: 50, $lte: 500 } }).sort({ rating: -1 }).explain("executionStats")
+// Look for: executionStages.stage — is "SORT" present?
+
+// Step 2: Create non-ESR index and re-run
+db.products.createIndex({ status: 1, price: 1, rating: -1 })
+db.products.find({ status: "active", price: { $gte: 50, $lte: 500 } }).sort({ rating: -1 }).explain("executionStats")
+// Look for: is "SORT" still present? Why?
+
+// Step 3: Drop and create ESR index
+db.products.dropIndexes()
+db.products.createIndex({ status: 1, rating: -1, price: 1 })
+db.products.find({ status: "active", price: { $gte: 50, $lte: 500 } }).sort({ rating: -1 }).explain("executionStats")
+// Look for: is "SORT" gone? What changed?
+```
+
+Write one sentence in your notes: *"The ESR index eliminates the SORT stage because..."*
+
+The SORT stage — not execution time — is the signal that ESR is working. Wall-clock timing varies by machine and dataset size. The presence or absence of `stage: "SORT"` is deterministic.
+
 #### Milestone Check: Stage 3
 
 **Task:** Run three queries with three different index strategies and compare explain output.
@@ -476,9 +518,11 @@ npm run check:explain
    ```
 
 **Pass Criteria:**
+- ESR index has no SORT stage ✓ (primary signal — deterministic regardless of machine speed)
+- Non-ESR index has a SORT stage ✓ (confirms ESR ordering is the differentiator, not index presence alone)
 - ESR strategy examines ≤ 10% more docs than non-ESR (acceptable due to range filtering)
-- ESR strategy is ≥ 50x faster than no index
-- ESR strategy has no SORT stage
+
+**Note on timing:** Wall-clock speedup is not a pass criterion. On small datasets (10K docs) running on fast hardware, all strategies complete in under 25ms. The SORT stage is the only reliable signal at this scale.
 
 **File:** Check script `npm run check:explain` runs automatically; learner doesn't write code here.
 
@@ -733,11 +777,11 @@ npm run check:indexes
 ```bash
 npm run check:explain
 ```
-- Run query with no index; capture `docsExamined`, `executionTimeMillis`, stage
-- Create non-ESR index; run query; capture metrics
-- Create ESR index; run query; capture metrics
-- Compare and output performance gain
-- Pass if ESR is ≥ 50x faster than no index
+- Run query with no index; capture `docsExamined`, `executionTimeMillis`, `hasSortStage`
+- Create non-ESR index `{ status: 1, price: 1, rating: -1 }`; run same query; capture metrics
+- Create ESR index `{ status: 1, rating: -1, price: 1 }`; run same query; capture metrics
+- Compare and output all three results
+- Pass if: ESR index has no SORT stage AND non-ESR index has a SORT stage
 
 ### check:decisions
 ```bash
@@ -800,7 +844,7 @@ lab-test-env/esr-indexing-strategy/
 
 1. **Stage 1 Complete:** Learner correctly identifies E, S, R for 4+ queries (pass Stage 1 check)
 2. **Stage 2 Complete:** 5 indexes defined in ESR order (pass Stage 2 check)
-3. **Stage 3 Complete:** ESR index is ≥ 50x faster than no index (pass Stage 3 check)
+3. **Stage 3 Complete:** ESR index has no SORT stage; non-ESR index does (pass Stage 3 check)
 4. **Stage 4 Complete:** `INDEX_DECISIONS.md` articulates trade-offs (pass Stage 4 check)
 5. **Stage 5 Complete:** `REFLECTION.md` addresses all 4 sections (pass Stage 5 check)
 6. **All Checks Pass:** `npm run check:all` output shows "✓ All stages PASS"
@@ -843,6 +887,30 @@ lab-test-env/esr-indexing-strategy/
 
 **SQL Developer Mental Model:**
 SQL developers often assume index order is automatic or less important. This lab names that assumption, shows why it fails in MongoDB, and provides the ESR rule as a replacement mental model.
+
+---
+
+## Transfer Task
+
+**Domain:** Hospital appointment scheduling system (no overlap with the product catalog domain used in this lab)
+
+**Problem:** A hospital app runs this query thousands of times per day:
+
+```javascript
+db.appointments.find({
+  doctorId: "dr-smith",
+  appointmentDate: { $gte: new Date("2026-05-01"), $lte: new Date("2026-05-31") }
+}).sort({ urgency: -1 })
+```
+
+The `appointments` collection has 500,000 documents. The query currently takes 800ms. Design the optimal ESR index. Explain your field order choice. State what the explain output will look like before and after your index is applied.
+
+**KLI mapping:**
+- **Fluency:** Correct index syntax written without errors: `db.appointments.createIndex({ doctorId: 1, urgency: -1, appointmentDate: 1 })`
+- **Induction:** Field order justified by the query's E/S/R roles — not by analogy to the product catalog queries. Learner identifies `doctorId` as E, `urgency` as S, `appointmentDate` as R and places them in that order.
+- **Sense-Making:** Learner explains that the non-ESR alternative (e.g., `{ doctorId: 1, appointmentDate: 1, urgency: -1 }`) would produce a SORT stage because the range field precedes the sort field, and that ESR eliminates this by placing sort before range.
+
+**Passing bar:** Index is syntactically correct, field order matches E→S→R, and the learner explains *why* urgency must come before appointmentDate — not just that it should.
 
 ---
 
