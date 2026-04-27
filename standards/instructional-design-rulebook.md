@@ -8,6 +8,26 @@ See [sources/research-sources.md](sources/research-sources.md) for the research 
 
 ## 0. Foundational Principles
 
+### Design Hypothesis
+
+The rules in this document apply human learning science — cognitive load theory, KLI process types, spaced retrieval, metacognitive reflection — to LLM-based agent instruction. This is a **working hypothesis, not established practice**.
+
+The hypothesis: instructional structures that produce durable learning in humans (concept progression, deliberate practice, self-reflection) also produce more reliable and transferable performance in agents, because the underlying mechanism — structured context that forces the agent to apply, contrast, and articulate knowledge — maps closely to how in-context learning works.
+
+**What is not assumed:**
+- That LLMs form persistent schemas in the Piagetian sense
+- That scaffolding reduction across stages mirrors memory consolidation in humans
+- That reflection artifacts produce genuine metacognition rather than plausible text
+
+**What is being tested:**
+- Whether KLI-typed instruction produces agents that can *decide*, not just *execute*
+- Whether explicit SQL-to-MongoDB bridging reduces failure rates more than structural clarity alone
+- Whether decision-record artifacts improve performance on novel tasks not covered in the lab
+
+When evidence from lab runs confirms or contradicts a rule, update it in Section 14 and note the finding. Don't preserve rules that the data refutes.
+
+---
+
 ### Backwards Design
 
 Design every lab in reverse order.
