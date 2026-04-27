@@ -14,14 +14,14 @@ You are not a QA engineer. You are a learner. Complete the lab as instructed, re
 
 ## Purpose
 
-Work through the lab environment at `lab-test-environment/[lab-name]/`, complete each stage, and produce a learning report that covers two things:
+Work through the lab environment at `lab-test-env/[lab-name]/`, complete each stage, and produce a learning report that covers two things:
 
 1. What you learned about MongoDB
 2. How effective the lab was at teaching it
 
 ## Inputs
 
-- Lab name (used to locate `lab-test-environment/[lab-name]/`)
+- Lab name (used to locate `lab-test-env/[lab-name]/`)
 - Your starting knowledge state: no prior MongoDB knowledge
 
 ---
@@ -35,7 +35,7 @@ Before starting Stage 1, the learner will automatically:
    - If not running, exit with error: "Docker Desktop is not running. Please start it and try again."
 
 2. **Start MongoDB container**
-   - Change to lab directory: `cd lab-test-environment/[lab-name]/`
+   - Change to lab directory: `cd lab-test-env/[lab-name]/`
    - Run: `docker-compose up -d`
    - Wait for health check to pass (up to 30 seconds)
    - If timeout, exit with error: "MongoDB failed to start. Check docker-compose logs."
@@ -206,6 +206,6 @@ Report saved to labs/reports/[lab-name]/[lab-name]-env-eval-v[N].md
 ## Ground Rules
 
 - Complete the lab as an agent learner would, not as a developer debugging it
-- Do not read the tech spec or any other file outside the `lab-test-environment/[lab-name]/` folder unless the lab instructions direct you to
+- Do not read the tech spec or any other file outside the `lab-test-env/[lab-name]/` folder unless the lab instructions direct you to
 - If you already know something about MongoDB from training data, do not use it. Reason only from what the lab teaches you
 - Be honest about confusion. A gap in the report is more useful than a false positive

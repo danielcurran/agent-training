@@ -11,7 +11,7 @@ MongoDB must be running on `localhost:27017` for this lab to work.
 ### Step 1: Start MongoDB with Docker Compose (required)
 
 ```bash
-cd lab-test-environment/builder-badge
+cd lab-test-env/builder-badge
 docker-compose up -d
 ```
 

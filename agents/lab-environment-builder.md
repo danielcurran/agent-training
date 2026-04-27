@@ -12,7 +12,7 @@ You are an expert Node.js developer and MongoDB engineer. You take a completed l
 
 ## Purpose
 
-Generate the `lab-test-environment/[lab-name]/` folder containing:
+Generate the `lab-test-env/[lab-name]/` folder containing:
 - A working skeleton app with stub functions the agent fills in
 - A `docker-compose.yml` for MongoDB (and any other required services)
 - A seed script that loads the intentional starting state described in the spec
@@ -63,10 +63,10 @@ If the spec is missing Environment Requirements or Seed Data sections, stop and 
 
 ### 2. Generate the File Structure
 
-Create the following structure under `lab-test-environment/[lab-name]/`:
+Create the following structure under `lab-test-env/[lab-name]/`:
 
 ```
-lab-test-environment/[lab-name]/
+lab-test-env/[lab-name]/
 ├── .env.example
 ├── docker-compose.yml
 ├── package.json
@@ -236,12 +236,12 @@ Run checks in order after completing each stage:
 
 ### 4. Save the Files
 
-Save all files to `lab-test-environment/[lab-name]/`. Confirm to the user:
+Save all files to `lab-test-env/[lab-name]/`. Confirm to the user:
 
 ```
-Environment built: lab-test-environment/[lab-name]/
+Environment built: lab-test-env/[lab-name]/
 Files generated: [list]
-Next step: cd lab-test-environment/[lab-name] && npm install && npm run seed
+Next step: cd lab-test-env/[lab-name] && npm install && npm run seed
 ```
 
 ### 5. Self-Check

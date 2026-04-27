@@ -28,6 +28,7 @@ Reports are organized by lab topic in `labs/reports/{lab-name}/`:
 | Builder Badge | [labs/outlines/builder-badge-outline.md](labs/outlines/builder-badge-outline.md) | [labs/specs/builder-badge-tech-spec.md](labs/specs/builder-badge-tech-spec.md) | [v1](labs/reports/builder-badge/builder-badge-tech-spec-eval-v1.md) (9.6/10) | [v1](labs/reports/builder-badge/builder-badge-env-eval-v1.md) | ✓ Production Ready |
 | Insert and Find | [labs/outlines/insert-and-find-outline.md](labs/outlines/insert-and-find-outline.md) | [labs/specs/insert-and-find-tech-spec.md](labs/specs/insert-and-find-tech-spec.md) | [v1](labs/reports/insert-and-find/insert-and-find-tech-spec-eval-v1.md) (8.8/10) | [v2](labs/reports/insert-and-find/insert-and-find-env-eval-v2.md) | ⚠️ Reference Spec (Environment Archived) |
 | ESR Indexing Strategy | [labs/outlines/esr-indexing-strategy-outline.md](labs/outlines/esr-indexing-strategy-outline.md) | [labs/specs/esr-indexing-strategy-tech-spec.md](labs/specs/esr-indexing-strategy-tech-spec.md) | [v1](labs/reports/esr-indexing-strategy/esr-indexing-strategy-tech-spec-eval-v1.md) (8.6/10) | — | ✓ Environment Ready |
+| Memory for AI | [labs/outlines/memory-for-ai-outline.md](labs/outlines/memory-for-ai-outline.md) | [labs/specs/memory-for-ai-tech-spec.md](labs/specs/memory-for-ai-tech-spec.md) | [v1](labs/reports/memory-for-ai/memory-for-ai-tech-spec-eval-v1.md) | [v1](labs/reports/memory-for-ai/memory-for-ai-env-eval-v1.md) | ✓ Production Ready |
 
 ## Workflow
 
@@ -82,7 +83,7 @@ See [skills/README.md](skills/README.md) for details on using and creating skill
 ## Directory Reference
 
 ### .claude/
-Reserved for Copilot-specific configuration (e.g., custom instructions, Claude-specific settings). Currently unused; preserved for future extension.
+Contains Copilot permission rules (`settings.local.json`) for git operations and web access.
 
 ## Conventions
 
@@ -91,5 +92,6 @@ Reserved for Copilot-specific configuration (e.g., custom instructions, Claude-s
 - Tech spec evaluations: `labs/reports/{name}/{name}-tech-spec-eval-v{N}.md` — increment N each revision cycle
 - Environment evaluations: `labs/reports/{name}/{name}-env-eval-v{N}.md` — tracks learner execution results
 - Lab environments: `lab-test-env/{name}/` — self-contained Node.js + Docker environment per lab
+- Chunk output: `labs/chunks/{name}/` — concept and task chunks for RAG pipelines (concepts/ + tasks/ + manifest.json)
 - Agent definitions live in `agents/` — `.github/prompts/` references them by filename, do not rename
 - Stage deliverables: `REFLECTION.md` (required in all labs). `SCHEMA.md` is optional for intro labs (labs with fewer than 3 stages or no schema design component); complex labs like Builder Badge include it to document the data model.

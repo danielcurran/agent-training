@@ -56,7 +56,7 @@ When you invoke any agent command (`/design-lab-outline`, `/evaluate-lab-instruc
 
 ## Agents That Benefit From This Skill
 
-All 5 agents in the repository have been updated to acknowledge and use this skill:
+All agents in the repository have been updated to acknowledge and use this skill:
 
 | Agent | Benefit |
 |---|---|
@@ -65,6 +65,9 @@ All 5 agents in the repository have been updated to acknowledge and use this ski
 | Lab Instruction Evaluator | Evaluates against learning principles, not just rules |
 | Lab Environment Builder | Generates environments that support the learning design |
 | Agent Learner | Assesses labs based on learning effectiveness |
+| Transfer Task Scorer | Scores transfer tasks against KLI hypothesis framework |
+| RAG Chunker | Produces chunks aligned with KLI types and learning structure |
+| RAG Chunk Evaluator | Evaluates chunk quality against learning design standards |
 
 ## Making It Automatic (Long-term)
 

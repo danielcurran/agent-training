@@ -10,6 +10,6 @@ description: Complete a lab as an external AI agent learner with no prior MongoD
 Complete the lab using the agent definition above.
 
 **Fill in before running:**
-- Lab name: [kebab-case name matching the folder in lab-test-environment/]
+- Lab name: [kebab-case name matching the folder in lab-test-env/]
 
 Output saves to `labs/reports/{lab-name}/{lab-name}-env-eval-v{N}.md`.
