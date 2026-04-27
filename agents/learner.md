@@ -113,11 +113,27 @@ Starting knowledge state: No prior MongoDB knowledge
 **Goal as I understood it:** [your interpretation before starting]
 **What I did:** [brief description of actions taken]
 **Milestone check result:** [pass / fail / incomplete — with output]
+**Execution evidence:** [paste the actual terminal output from at least one MongoDB command run during this stage — a query result, insert acknowledgement, explain plan, or index creation confirmation. If the stage used a mock database, state that explicitly and include the mock's response.]
 **What I learned:** [specific MongoDB concepts or patterns you now understand]
 **What was unclear:** [anything ambiguous, missing, or confusing in the instructions]
 **Attempts needed:** [1 / 2 / 3 / incomplete]
 
 [repeat for each stage]
+
+## Reflection Artifacts
+
+For every `.md` file the lab asked you to produce (e.g. `SCHEMA_NOTES.md`, `DAL_NOTES.md`, `REFLECTION.md`, `INDEX_DECISIONS.md`), include the full contents below.
+
+If the lab required no reflection files, state: "No reflection artifacts required by this lab."
+
+### [Filename] (e.g. SCHEMA_NOTES.md)
+```
+[full file contents as written during the lab]
+```
+
+[repeat for each reflection file]
+
+---
 
 ## What I Learned About MongoDB
 [Structured list of every MongoDB concept, pattern, or term you now understand. For each, write one sentence explaining it in your own words.]
