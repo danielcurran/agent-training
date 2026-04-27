@@ -101,27 +101,24 @@ async function checkExplain() {
     // --- Evaluate ---
     console.log('\n--- Results ---');
     const esrNoSortStage = !esrHasSort;
-    // Lenient: pass if ESR has no SORT stage, OR if ESR time is <=5ms (already fast enough)
-    const speedupRatio = noIndexTime > 0 ? noIndexTime / esrTime : 1;
-    const esrFasterEnough = speedupRatio >= 50 || esrTime <= 5;
+    const nonEsrHasSortStage = nonEsrHasSort;
 
     results.checks.esrNoSortStage = esrNoSortStage;
-    results.checks.speedupRatio = speedupRatio;
-    results.checks.esrFasterEnough = esrFasterEnough;
+    results.checks.nonEsrHasSortStage = nonEsrHasSortStage;
 
-    console.log(`  ESR has no SORT stage: ${esrNoSortStage ? '✓' : '✗'}`);
-    console.log(`  Speedup (no index / ESR): ${speedupRatio.toFixed(1)}x ${esrFasterEnough ? '✓' : '✗'}`);
+    console.log(`  ESR has no SORT stage:     ${esrNoSortStage ? '✓' : '✗'}`);
+    console.log(`  Non-ESR has SORT stage:    ${nonEsrHasSortStage ? '✓' : '✗'}`);
 
-    const passed = esrNoSortStage && esrFasterEnough;
+    const passed = esrNoSortStage && nonEsrHasSortStage;
     results.passed = passed;
 
     if (passed) {
-      console.log('\n✓ Performance check passed! ESR index outperforms alternatives.');
+      console.log('\n✓ Performance check passed! ESR index eliminates the SORT stage.');
     } else {
       if (!esrNoSortStage) {
         console.log('\n✗ ESR index still has a SORT stage. Check your index field order in src/indexes.js.');
       } else {
-        console.log(`\n✗ ESR speedup ${speedupRatio.toFixed(1)}x is below 50x threshold. Ensure your indexes are created: npm run check:indexes`);
+        console.log('\n✗ Non-ESR index does not have a SORT stage. The test indexes may not have been set up correctly — run npm run check:indexes first.');
       }
     }
 

@@ -13,7 +13,7 @@ const INDEXES_PATH = path.join(__dirname, '..', 'src', 'indexes.js');
 // Expected index definitions
 const EXPECTED_INDEXES = [
   { name: 'query1-status', fields: { status: 1 } },
-  { name: 'query2-category-createdAt', fields: { category: 1, createdAt: -1 } },
+  { name: 'query2-status-createdAt', fields: { status: 1, createdAt: -1 } },
   { name: 'query3-status-price', fields: { status: 1, price: 1 } },
   { name: 'query4-status-rating-price', fields: { status: 1, rating: -1, price: 1 } },
   { name: 'query5-tags-createdAt-rating', fields: { tags: 1, createdAt: -1, rating: 1 } }

@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-04-22T16:12:16.138Z",
+  "timestamp": "2026-04-27T13:41:55.678Z",
   "checks": {
     "connection": {
       "passed": true,
@@ -22,7 +22,7 @@
     "structure": {
       "passed": true,
       "message": "Document structure valid",
-      "sampleId": "69e8f14d46db05e1bc3d9c85"
+      "sampleId": "69ef671fa99544221c11aa02"
     }
   },
   "passed": true

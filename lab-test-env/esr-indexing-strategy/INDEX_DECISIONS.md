@@ -1,43 +1,52 @@
 # Index Decisions
 
-## Overview
-
-This document records the rationale behind each index designed during the ESR Indexing Strategy lab.
+<!-- Stage 4 deliverable. Fill in your decisions below. -->
+<!-- Required keywords: index, rationale, trade-off, performance, queries (minimum 100 words) -->
 
 ## Index Decisions
 
 ### query1-status `{ status: 1 }`
 
-**Rationale:** Query 1 filters only by `status` with an exact equality match. A single-field index on `status` is sufficient to support this query. No sort or range field is needed.
+**Rationale:** Query 1 is an equality-only filter on `status`. No sort or range field is present. The index covers just the equality field, which is sufficient to allow MongoDB to use an index scan instead of a collection scan for queries that filter by status.
 
-**Trade-offs:** This index has low selectivity since there are only three distinct status values (active, archived, draft). For very large collections this may still require scanning many documents. A more selective equality field would give better performance.
+**Trade-off:** The `status` field has only three values (active, archived, draft), making it low-cardinality. An index on a low-cardinality field offers limited selectivity — many documents will still match. For queries filtering on `status: 'active'`, roughly one-third of documents will pass the filter even with the index. Performance gains are modest. A more selective compound index would be better for high-volume queries.
 
-### query2-category-createdAt `{ category: 1, createdAt: -1 }`
+---
 
-**Rationale:** Query 2 has an equality filter on `category` and sorts by `createdAt` descending. Following ESR, `category` (Equality) comes first, then `createdAt` (Sort). This allows MongoDB to use the index for both filtering and sorting without an in-memory sort stage.
+### query2-status-createdAt `{ status: 1, createdAt: -1 }`
 
-**Trade-offs:** The index includes `createdAt` in descending order (`-1`). If the same query were run with `createdAt` ascending, a separate index would be needed or MongoDB would re-sort in memory.
+**Rationale:** Query 2 filters on `status` (equality) and sorts by `createdAt` descending. ESR order places equality first, sort second. This allows MongoDB to filter to matching status values and then return documents in `createdAt` order from the index itself — no in-memory sort stage is needed.
+
+**Trade-off:** The `-1` direction on `createdAt` means this index cannot be used for a query sorting `createdAt` ascending. A separate index or a direction-reversal scan would be required for the ascending sort variant. Descending sort is the common case for "recent items first" queries, so the direction choice is reasonable.
+
+---
 
 ### query3-status-price `{ status: 1, price: 1 }`
 
-**Rationale:** Query 3 filters on `price` as a range. The index prefixes with `status` for selectivity across multiple queries, then `price` as the range field. This design supports queries that combine a status equality filter with a price range.
+**Rationale:** Query 3 filters on `status` (equality) and `price` as a range. ESR order: E=status first, R=price second. There is no sort field in this query. Placing status first gives the index a more selective prefix, reducing the number of entries the range scan must traverse.
 
-**Trade-offs:** Query 3 as written does not include a `status` filter, so `status` acts as a supporting prefix field. For query 3 alone, `{ price: 1 }` would be simpler. The multi-query rationale for including `status` is not made explicit in the lab instructions, which made this index the most confusing to design. A trade-off is that the index size is larger than needed for query 3 in isolation.
+**Trade-off:** This index serves queries that combine a status equality filter with a price range. It also benefits query 1 as a prefix index (status-only queries can use this index's leading field). The cost is additional write overhead and index storage compared to a single-field price index.
+
+---
 
 ### query4-status-rating-price `{ status: 1, rating: -1, price: 1 }`
 
-**Rationale:** Query 4 has an equality filter on `status`, sorts by `rating` descending, and has a range filter on `price`. Applying ESR: `status` (Equality) → `rating` (Sort) → `price` (Range). This field order allows MongoDB to use the index for filtering, sorting, and range scanning without an in-memory SORT stage.
+**Rationale:** Query 4 has equality on `status`, sort on `rating` descending, and range on `price`. This is the canonical ESR example: E=status, S=rating, R=price. Placing the sort field (rating) before the range field (price) allows MongoDB to use the index order for sorting — no in-memory SORT stage is needed. Confirmed by Stage 3: the explain output shows no SORT stage with this index.
 
-**Trade-offs:** If the sort direction on `rating` were reversed to ascending, a new index would be required. The performance improvement from eliminating the SORT stage is the main benefit here.
+**Trade-off:** If the sort direction on `rating` changed to ascending, a new index would be required. If price range is very wide, many documents per status group will match, and the sort over all those documents is done via the index rather than in memory — still more efficient than a collection scan sort, but less dramatic than on a smaller dataset.
+
+---
 
 ### query5-tags-createdAt-rating `{ tags: 1, createdAt: -1, rating: 1 }`
 
-**Rationale:** Query 5 has an equality filter on `tags` (array field) and sorts by `createdAt` descending. Applying ESR: `tags` (Equality) → `createdAt` (Sort). The `rating` field was added based on the expected index name hint; the rationale is likely to support queries that also filter or project on `rating`.
+**Rationale:** Query 5 filters on `tags` (equality on an array field), sorts by `createdAt` descending, and filters on `rating` as a range. ESR order: E=tags, S=createdAt, R=rating. MongoDB indexes array fields by indexing each element individually, so `tags: 1` correctly handles the `tags: 'sale'` equality filter. Placing `createdAt` (sort) before `rating` (range) ensures no in-memory sort is needed.
 
-**Trade-offs:** Adding `rating` increases the index size without directly serving query 5's filter or sort. The lab does not explain the rationale for this addition, which is a gap in the instructional design. A learner applying ESR strictly would produce `{ tags: 1, createdAt: -1 }` and fail the check.
+**Trade-off:** Indexing array fields (multikey indexes) has a higher storage cost because each document contributes multiple index entries — one per tag value. A product with 4 tags produces 4 index entries. For collections with many tags per document, the index size grows significantly. The performance benefit for frequent queries on `tags` still justifies the trade-off.
 
-## General Trade-offs
+---
 
-- **Index count vs. query coverage:** Each new index speeds up reads but slows writes and consumes storage. Designing one index per query (as in this lab) is pedagogically clear but not always production-appropriate.
-- **ESR vs. multi-query optimization:** Some indexes here appear designed to serve multiple queries (e.g., the `status` prefix in query3). The lab does not explain this concept, leaving the learner to reverse-engineer it from index names.
-- **Performance measurement:** On a 10,000-document dataset on a modern machine, all queries run in single-digit milliseconds. Timing-based comparisons are unreliable at this scale. The SORT stage elimination in the explain output is the more reliable signal.
+## Overall Trade-Off Summary
+
+- **Write vs. read trade-off:** Each of these 5 indexes adds overhead to every insert and update on the products collection. The trade-off is justified when the queries these indexes support are frequent enough that the read savings outweigh the write cost.
+- **Memory cost:** Five compound indexes consume significantly more RAM than a single `_id` index. For production, index memory usage should be monitored.
+- **Index prefix sharing:** query1, query2, query3, and query4 all share a `status` prefix. MongoDB can use a compound index to satisfy queries on leading fields (prefix queries). This means query1's equality filter on `status` can use the `query3-status-price` index even without a dedicated single-field `status` index — though having the simpler index is more selective for status-only queries.

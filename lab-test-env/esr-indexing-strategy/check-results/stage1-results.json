@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-04-22T16:12:16.281Z",
+  "timestamp": "2026-04-27T13:41:55.805Z",
   "checks": {
     "query1": {
       "passed": true,
@@ -22,12 +22,12 @@
     "query2": {
       "passed": true,
       "expected": {
-        "E": "category",
+        "E": "status",
         "S": "createdAt",
         "R": "none"
       },
       "actual": {
-        "E": "category",
+        "E": "status",
         "S": "createdAt",
         "R": "none"
       },
@@ -40,12 +40,12 @@
     "query3": {
       "passed": true,
       "expected": {
-        "E": "none",
+        "E": "status",
         "S": "none",
         "R": "price"
       },
       "actual": {
-        "E": "none",
+        "E": "status",
         "S": "none",
         "R": "price"
       },
@@ -78,12 +78,12 @@
       "expected": {
         "E": "tags",
         "S": "createdAt",
-        "R": "none"
+        "R": "rating"
       },
       "actual": {
         "E": "tags",
         "S": "createdAt",
-        "R": "none"
+        "R": "rating"
       },
       "details": {
         "E": "✓",

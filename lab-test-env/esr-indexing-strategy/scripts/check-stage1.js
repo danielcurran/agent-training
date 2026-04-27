@@ -9,10 +9,10 @@ const STAGE1_PATH = path.join(__dirname, '..', 'src', 'stage1-esr-identification
 // Expected answers for each query
 const EXPECTED = {
   query1: { E: 'status', S: 'none', R: 'none' },
-  query2: { E: 'category', S: 'createdAt', R: 'none' },
-  query3: { E: 'none', S: 'none', R: 'price' },
+  query2: { E: 'status', S: 'createdAt', R: 'none' },
+  query3: { E: 'status', S: 'none', R: 'price' },
   query4: { E: 'status', S: 'rating', R: 'price' },
-  query5: { E: 'tags', S: 'createdAt', R: 'none' }
+  query5: { E: 'tags', S: 'createdAt', R: 'rating' }
 };
 
 function normalize(val) {

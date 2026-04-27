@@ -283,3 +283,7 @@ Evaluation reports score specs against these rules, not against subjective quali
 ## 14. Living Document
 
 When a rule proves unworkable in practice, update it here and note the reason. Don't work around a rule without updating it.
+
+### Findings
+
+**ESR Indexing Strategy (April 2026):** KLI hypothesis fully supported and decision-record hypothesis supported; SQL bridging hypothesis partially supported — learner produced correct non-ESR contrast without naming the SQL instinct at transfer. Rule 3 (SQL bridging) should be tested in a second lab run where the SQL contrast is *removed* from the learner-active materials in Stage 3; if sense-making scores remain △ without the contrast scaffolding, the rule is confirmed; if they drop to ✗, the scaffolding (not the SQL bridge framing) is the active ingredient.

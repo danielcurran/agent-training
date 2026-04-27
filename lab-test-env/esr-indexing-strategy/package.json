@@ -5,6 +5,9 @@
   "main": "index.js",
   "scripts": {
     "seed": "node scripts/seed.js",
+    "seed:fresh": "node scripts/seed.js --drop",
+    "reset": "node scripts/reset.js",
+    "reset:dry": "node scripts/reset.js --dry-run",
     "check:env": "node scripts/check-env.js",
     "check:stage1": "node scripts/check-stage1.js",
     "check:indexes": "node scripts/check-indexes.js",

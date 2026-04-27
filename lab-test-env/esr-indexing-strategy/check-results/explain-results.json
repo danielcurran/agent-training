@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-04-22T16:12:16.767Z",
+  "timestamp": "2026-04-27T13:41:56.281Z",
   "query": {
     "filter": {
       "status": "active",
@@ -23,7 +23,7 @@
         "price": 1,
         "rating": -1
       },
-      "time": 9,
+      "time": 10,
       "hasSortStage": true
     },
     "esr": {
@@ -32,12 +32,11 @@
         "rating": -1,
         "price": 1
       },
-      "time": 11,
+      "time": 13,
       "hasSortStage": false
     },
     "esrNoSortStage": true,
-    "speedupRatio": 1.7272727272727273,
-    "esrFasterEnough": false
+    "nonEsrHasSortStage": true
   },
-  "passed": false
+  "passed": true
 }

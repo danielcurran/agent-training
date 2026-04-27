@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-04-22T16:12:16.447Z",
+  "timestamp": "2026-04-27T13:41:55.970Z",
   "checks": {
     "query1-status": {
       "passed": true,
@@ -11,14 +11,14 @@
       },
       "message": "Fields and order correct"
     },
-    "query2-category-createdAt": {
+    "query2-status-createdAt": {
       "passed": true,
       "expected": {
-        "category": 1,
+        "status": 1,
         "createdAt": -1
       },
       "actual": {
-        "category": 1,
+        "status": 1,
         "createdAt": -1
       },
       "message": "Fields and order correct"

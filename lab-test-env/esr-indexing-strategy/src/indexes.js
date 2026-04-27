@@ -26,16 +26,15 @@ const indexes = [
     fields: { status: 1 }
   },
 
-  // Query 2: db.products.find({ category: 'Electronics' }).sort({ createdAt: -1 })
-  // ESR: E=category, S=createdAt, R=none → category first (equality), then createdAt (sort)
+  // Query 2: db.products.find({ status: 'active' }).sort({ createdAt: -1 })
+  // ESR: E=status, S=createdAt, R=none → status first (equality), then createdAt (sort)
   {
-    name: 'query2-category-createdAt',
-    fields: { category: 1, createdAt: -1 }
+    name: 'query2-status-createdAt',
+    fields: { status: 1, createdAt: -1 }
   },
 
-  // Query 3: db.products.find({ price: { $gte: 100, $lte: 500 } })
-  // The index name hints at status + price. Assumption: status is added for selectivity
-  // even though it is not in this specific query's filter.
+  // Query 3: db.products.find({ status: 'active', price: { $gte: 50, $lte: 500 } })
+  // ESR: E=status, S=none, R=price → status first (equality), then price (range)
   {
     name: 'query3-status-price',
     fields: { status: 1, price: 1 }
@@ -48,9 +47,8 @@ const indexes = [
     fields: { status: 1, rating: -1, price: 1 }
   },
 
-  // Query 5: db.products.find({ tags: 'sale' }).sort({ createdAt: -1 })
-  // The index name hints at tags + createdAt + rating. Assumption: rating is added
-  // as a covered field even though it is not in this query's filter or sort.
+  // Query 5: db.products.find({ tags: 'sale', rating: { $gte: 4 } }).sort({ createdAt: -1 })
+  // ESR: E=tags, S=createdAt, R=rating → tags first (equality), createdAt (sort), rating (range) last
   {
     name: 'query5-tags-createdAt-rating',
     fields: { tags: 1, createdAt: -1, rating: 1 }
