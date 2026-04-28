@@ -1,11 +1,11 @@
 # Instructional Design Rulebook
 
 > **⚠️ Work in Progress — Not Final**
-> This rulebook is under active development and testing. Rules are working hypotheses being validated through lab runs. Expect revisions. Do not treat any rule as settled until confirmed by evidence in Section 14.
+> Rules are working hypotheses validated through lab runs. Expect revisions. Don't treat any rule as settled until confirmed in Section 13.
 
-All agents in this repository (Lab Outline Designer, Lab Outline Converter, Lab Instruction Evaluator, Lab Environment Builder, and Agent Learner) must follow these rules when creating or assessing content. Every outline, spec, and evaluation report is in scope.
+All agents in this repo (Lab Outline Designer, Lab Outline Converter, Lab Instruction Evaluator, Lab Environment Builder, Agent Learner) must follow these rules for outlines, specs, evaluations.
 
-See [sources/research-sources.md](sources/research-sources.md) for the research behind these rules.
+See [sources/research-sources.md](sources/research-sources.md) for research.
 
 ---
 
@@ -15,17 +15,17 @@ See [sources/research-sources.md](sources/research-sources.md) for the research 
 
 The rules in this document apply human learning science — cognitive load theory, KLI process types, spaced retrieval, metacognitive reflection — to LLM-based agent instruction. This is a **working hypothesis, not established practice**.
 
-The hypothesis: instructional structures that produce durable learning in humans (concept progression, deliberate practice, self-reflection) also produce more reliable and transferable performance in agents, because the underlying mechanism — structured context that forces the agent to apply, contrast, and articulate knowledge — maps closely to how in-context learning works.
+The hypothesis: Structured tasks requiring agents to apply prior knowledge, compare alternatives, and explain reasoning improve transfer — mirroring cognitive load theory in humans. Spaced retrieval, deliberate practice, metacognitive reflection build durable models. Mechanism: structured context constrains attention, forcing contrast and articulation.
 
 **What is not assumed:**
-- That LLMs form persistent schemas
-- That scaffolding reduction across stages mirrors memory consolidation in humans
-- That reflection artifacts produce genuine metacognition rather than plausible text
+- LLMs form persistent schemas
+- Scaffolding reduction mirrors memory consolidation
+- Reflection artifacts produce genuine metacognition rather than plausible text
 
 **What is being tested:**
-- Whether KLI-typed instruction produces agents that can *decide*, not just *execute*
-- Whether explicit SQL-to-MongoDB bridging reduces failure rates more than structural clarity alone
-- Whether decision-record artifacts improve performance on novel tasks not covered in the lab
+- Whether KLI-typed instruction produces agents that can *decide*, not just *execute* (Section 3)
+- Whether explicit SQL-to-MongoDB bridging reduces failure rates more than structural clarity alone (Section 4)
+- Whether decision-record artifacts improve performance on novel tasks not covered in the lab (Section 10)
 
 When evidence from lab runs confirms or contradicts a rule, update it in Section 14 and note the finding. Don't preserve rules that the data refutes.
 
@@ -33,275 +33,192 @@ When evidence from lab runs confirms or contradicts a rule, update it in Section
 
 ### Backwards Design
 
-Design every lab in reverse order.
+Design every lab in reverse order:
+1. State the endpoint — what should the agent do, without help, when done?
+2. Define the milestone check — what artifact proves this?
+3. Design the stages — what must each build so the agent is ready for the next?
 
-1. **State the endpoint**: what should the agent be able to do, without help, after completing the lab?
-2. **Define the milestone check**: what artifact or output proves that capability?
-3. **Design the stages**: what must each stage build so the agent is ready for the next?
-
-If content doesn't serve a milestone check, remove it. If a stage doesn't build toward an objective, remove it.
+Remove content not serving a milestone check. Remove stages not building toward an objective.
 
 ### Learning is Not Knowledge Transfer
 
-Labs are not reference guides. A reference guide tells an agent how to operate a tool. A learning lab builds conceptual understanding through **concept progression**, **deliberate practice**, and **self-reflection**.
+Labs build conceptual understanding. Reference guides tell agents how to call tools. Labs teach *when* and *why*. Agents memorizing operational context execute without deciding when to apply it.
 
-Agents that memorize operational context can execute but cannot decide when to apply it. Three elements are required:
-
-1. **Concept Progression**: Each stage introduces 1–2 new concepts and connects them to prior knowledge. Agents understand *why* a pattern exists before they apply it, grounded in the SQL mental model they already have (Section 4).
-
-2. **Deliberate Practice**: Each KLI type requires different practice: fluency needs repetition with feedback, induction needs comparative examples, sense-making needs articulating choices (Section 3). Tasks build complexity: full scaffolding → guidance → goals only.
-
-3. **Self-Reflection**: Agents articulate what they chose, why, and what they gave up. Reflection is not journaling — it is how agents confirm they understand, not just execute. Every lab includes at least one decision-record artifact per stage (Section 11).
-
-Teaching an agent to call MongoDB APIs is not a learning lab. Use this rulebook for labs. Use SKILL.md for reference documentation.
+**Labs are not SKILLs.** This rulebook covers labs. Use SKILL.md for reference.
 
 ### Humans Interpret, Agents Plan
 
-Humans read documentation and fill gaps with judgment. Agents read documentation and convert it directly into actions. Ambiguous instructions don't cause an agent to pause. They cause wrong behavior or silent failure.
+Humans infer intent from ambiguous text. Agents execute text literally. Ambiguity produces wrong behavior, not questions. **Test every instruction: if an agent reads this and acts immediately, does it know exactly what to do?**
 
-Test every instruction with this question: **if an agent reads this and acts immediately, does it know exactly what to do?** If not, rewrite it.
+Bad: "Set up the database appropriately."
+Good: "Run `npm run seed`. Populates `orders` collection with 50 sample documents. When complete, `npm run check:env` shows 'PASS.'"
 
-| Written for humans | Write this for agents |
-|---|---|
-| "Set up the database appropriately" | "Run `npm run seed`. This populates the `orders` collection with 50 sample documents in the shape shown below" |
-| "You may want to consider indexes here" | "Create an index on `{ customerId: 1, createdAt: -1 }`. Exact command and expected output below" |
-| "Review the schema and make improvements" | "Identify at least two fields stored as strings that should be arrays. Update the schema file. The milestone check will verify both fields are changed" |
-| "Understand the tradeoffs" | "Write two sentences in SCHEMA_NOTES.md: one stating which option you chose, one stating what you are giving up" |
+Bad: "Consider indexes."
+Good: "Create `db.orders.createIndex({ customerId: 1, createdAt: -1 })`. Output: `{ 'ok': 1 }`"
 
 ---
 
 ## 1. Audience
 
-All content is written for **external AI agents with no prior MongoDB knowledge**. The learner knows SQL and general programming concepts. It has never used MongoDB, MQL, aggregation pipelines, indexes, or Atlas.
-
-Never assume MongoDB familiarity. Never reference a concept before defining it.
+Write for external AI agents with **no prior MongoDB knowledge**. Assume SQL and general programming only. Never reference a concept before defining it.
 
 ---
 
 ## 2. Learning Objectives
 
-Every lab opens with explicit learning objectives. Objectives must describe what the agent will **do**, not what it will "know" or "understand."
+State 3–6 objectives describing **what the agent does**, not what it "knows."
 
-**Rules:**
-- State 3–6 objectives per lab.
-- Every objective produces a checkable artifact. If it can't be checked, rewrite it.
-- Specify the cognitive process: recalling a pattern, comparing alternatives, and evaluating a choice each require different instruction. Don't conflate them.
-- Every stage serves at least one objective. Every objective is served by at least one stage.
-- Draw a straight line from objective to stage activity to milestone check. If you can't, rewrite all three.
+- Each objective maps to one stage, one milestone check, one artifact. Can't draw the line? Rewrite all three.
+- Different cognitive processes (recall vs. comparison vs. evaluation) need different instruction. Don't conflate.
 
-**Bad:** "Understand why MongoDB is better than SQL."
-**Good:** "Design a MongoDB schema that eliminates at least one multi-table join and record the access pattern that drove that decision in SCHEMA_NOTES.md."
+**Bad:** "Understand MongoDB vs. SQL."
+**Good:** "Design a schema eliminating one multi-table join. Record the access pattern in SCHEMA_NOTES.md."
 
 ---
 
-## 3. KLI Learning Process Types
+## 3. KLI-Typed Stage Design
 
-KLI (Knowledge-Learning-Instruction) connects what needs to be learned, how learning happens, and what instruction should do to support it. Different types of learning require fundamentally different instruction. Wrong instruction for the learning type produces agents that can execute but not decide, or explain but not act.
+Labs have 3–5 sequential stages. **Each stage targets one KLI (Knowledge-Learning-Instruction) process type** — dictates how learning structures. Wrong instruction for the type produces execution without judgment. **Every lab includes at least one stage of each type.** If genuinely needing only two, justify in spec.
 
-### How to apply KLI when designing a stage
+**Stage Structure:**
+- 1–2 MongoDB concepts, 1–3 skill interactions, single goal, one artifact, one KLI type
+- Independently failable — failure in Stage N doesn't corrupt Stage N+1
+- Cumulative — Stage N assumes only Stages 1–N-1
 
-1. **Identify the knowledge component**: what must the agent master?
-2. **Select the learning process**: recall a pattern, extract a rule from examples, or build a mental model?
-3. **Match instruction to process type** (see below).
-4. **Design the activity**: provide exactly what that process type requires. Nothing more.
+**Fluency & Memory:** Exact pattern → worked example → immediate practice. Never ask to choose between alternatives.
+*"Run `db.orders.createIndex({ customerId: 1, createdAt: -1 })`. Output: `{ ok: 1 }`. Now create an index on `products` using the same pattern."*
 
-The three process types:
+**Induction & Refinement:** Contrast two examples, name what differs, apply rule to novel case.
+*"Schema [A]: 10:1 read-write (reporting). Schema [B]: 50:50 (your app). Which fits? Update SCHEMA_NOTES.md with choice and access pattern."*
 
-### Memory and Fluency
-The agent needs to recall and apply a pattern reliably: syntax, commands, naming conventions. Instruction must provide the exact pattern, show a worked example, and ask the agent to apply it immediately. Do not ask the agent to choose between alternatives here. That is a different process type.
-
-**Lab example:** "Run this exact command to create a vector index: `[command]`. Now create a second index on the `products` collection using the same pattern."
-
-### Induction and Refinement
-The agent needs to extract a rule from varied examples: when to embed vs. reference, when to use a pipeline vs. a simple find. Instruction must show at least two contrasting examples, name what changes between them, and ask the agent to apply the inferred rule to a new case.
-
-**Lab example:** "Here is a schema optimised for reads [A]. Here is one optimised for writes [B]. The access pattern determines the choice. Which fits this app? Update the schema and explain your reasoning in SCHEMA_NOTES.md."
-
-### Understanding and Sense-Making
-The agent needs to connect a new concept to its existing mental model: why documents exist, why MongoDB has no joins, why schema flexibility is a feature. Instruction must bridge explicitly from SQL to MongoDB, name the conceptual shift, and confirm understanding through a reflection artifact rather than a mechanical task.
-
-**Lab example:** "In SQL, schema changes require migrations that touch every row. In MongoDB, documents in the same collection can have different shapes. Write one sentence in SCHEMA_NOTES.md describing where this would save time in your app."
-
-**Rule:** Every lab must include at least one stage of each type. Fluency-only labs produce agents that execute but can't decide. Sense-making-only labs produce agents that explain but can't act.
+**Sense-Making:** Connect new concept to existing model — why documents exist, why no joins, schema flexibility. Bridge SQL → MongoDB explicitly, name shift, confirm via reflection.
+*"SQL: schema changes migrate every row. MongoDB: documents in a collection differ. Where saves time in your app? (one sentence)"*
 
 ---
 
 ## 4. Skill Gap Design
 
-Every lab closes a specific gap. Identify the learner's starting mental model and target model before writing any stage.
+Every lab closes a specific gap. Identify starting and target mental models before writing stages.
 
-**Rules:**
-- State the starting mental model in the spec. Default for this program: *SQL-proficient engineer who will instinctively normalize data, write joins, and separate concerns into tables.*
-- For every MongoDB concept introduced, name the SQL instinct it overrides. Don't assume the agent will abandon its prior model on its own.
-- Teach the anti-pattern before the pattern. Show what the SQL instinct produces, then show what MongoDB does instead and why. Contrast is more durable than instruction alone.
-- Introduce one concept at a time. Don't ask the agent to learn syntax and make a decision simultaneously.
+- State starting model in spec. Default: *SQL engineer instinctively normalizes, joins, separates concerns into tables.*
+- For every MongoDB concept, name the SQL instinct overridden
+- Teach anti-pattern first. Show SQL output, then MongoDB alternative and why. Contrast beats instruction alone.
+- One concept at a time. Don't learn syntax and decide simultaneously.
 
-**Example of explicit gap-closing instruction:**
-> You may be tempted to store order line items in a separate `lineItems` collection and reference them by `orderId`. This mirrors the SQL foreign key pattern. In MongoDB, this creates unnecessary round-trips for every order read. Instead, embed line items directly in the order document. Here is what that looks like: [example]. Here is why: [access pattern rationale].
+*"Tempting: separate `lineItems` collection, reference by `orderId` (SQL pattern). In MongoDB: unnecessary round-trips. Instead: embed items in order. [example] [why]"*
 
 ---
 
-## 5. Stage Design
+## 5. Scaffolding
 
-Labs have 3–5 sequential stages.
+Scaffolding decreases for learned knowledge, never for new knowledge. Reduce scaffolding to force independent planning on prior knowledge. Always provide full scaffolding for new concepts.
 
-**Rules:**
-- Each stage introduces **1–2 MongoDB concepts** and **1–3 agent skill interactions**.
-- Stages are **independently failable**. A broken Stage 2 must not corrupt Stage 3's starting state.
-- Concepts build **cumulatively**. Stage N may only assume knowledge from Stages 1 through N-1.
-- Every stage has a **single goal** stated in one sentence.
-- Every stage produces at least one **artifact** the milestone check can validate.
-- Every stage targets a specific KLI type (see Section 3). State it at the top of each stage definition.
+- **Stage 1:** Full — exact command, expected output, what to observe
+- **Stages 2–3:** For prior knowledge, agent determines approach. New concepts still fully scaffolded
+- **Stages 4+:** For prior knowledge, state objective and check only. New concepts fully scaffolded
 
 ---
 
-## 6. Scaffolding
+## 6. Milestone Checks
 
-Scaffolding is support that decreases as the lab progresses, but only for knowledge the agent has already acquired. A lab that provides the same support in every stage is scripting, not teaching. A lab that removes support for concepts the agent hasn't learned yet will fail.
+Every stage ends with at least one check: pass/fail, no partial credit, no interpretation.
 
-Reducing scaffolding means the agent uses earlier knowledge to plan independently. It does not mean less information about new concepts. New concepts get full scaffolding regardless of where they appear in the lab.
-
-**Rules:**
-- **Stage 1**: fully scaffolded. Provide the exact command, expected output, and what to observe. Leave nothing to inference.
-- **Middle stages**: guided for previously-taught knowledge. The agent determines the approach using what it has learned. New concepts introduced here still get exact commands, examples, and expected output.
-- **Final stages**: minimal for previously-taught knowledge. State the objective and the milestone check. New concepts introduced here still get full scaffolding.
-- Never reduce scaffolding for a concept in the same stage it is introduced.
-
-| Stage | Previously-taught knowledge | New knowledge introduced |
-|---|---|---|
-| 1 | N/A | Exact command, expected output, what to observe |
-| 2 | Goal and available tools. Agent determines approach | Exact command, expected output, what to observe |
-| 3 | Goal and milestone check only | Exact command, expected output, what to observe |
-| 4 | Objective only. Agent plans its own approach | Exact command, expected output, what to observe |
+- Named command (`npm run check:*`) and exact expected terminal output
+- Validates artifact, not just command execution
+- Define N failed attempts before fallback path
 
 ---
 
-## 7. Milestone Checks
+## 7. Agent Skill Interactions
 
-Every stage ends with exactly one milestone check.
+Define every skill interaction fully in specs.
 
-**Rules:**
-- Checks are **pass/fail**. No partial credit. No interpretation required.
-- Every check has a **named command** (`npm run check:*`) and the **exact expected terminal output** when passing.
-- The check validates the artifact, not just that the agent ran a command.
-- After **N failed attempts** (defined per stage), provide a fallback path.
-
----
-
-## 8. Agent Skill Interactions
-
-Every agent skill interaction must be fully defined in the spec.
-
-**Rules:**
-- Provide at least **one example prompt** per skill interaction.
-- Show what a correct response or artifact looks like.
-- If two skills could give conflicting advice, specify which takes precedence and why.
-- Every external dependency (agent skills, MongoDB connections, mock APIs) has a health check and a fallback if unavailable.
+- At least one example prompt per interaction
+- Show correct response/artifact
+- If two skills conflict — specify precedence and why
+- Every external dependency (skills, MongoDB, mock APIs) has health check and fallback
 
 ---
 
-## 9. Zero-Knowledge Writing
+## 8. Zero-Knowledge Writing
 
-Write as if the reader has never seen a MongoDB document.
+Write assuming the reader never saw a MongoDB document.
 
-**Rules:**
-- Define every MongoDB term inline on first use. Example: *"a collection, MongoDB's equivalent of a SQL table"*.
-- Never use MongoDB jargon without defining it first.
-- Include a **Glossary** at the end of every tech spec with all MongoDB terms and SQL-equivalent comparisons.
-- Include a **What You Learned** summary at the end of the final stage.
-
----
-
-## 10. Structured, Accurate, and Authoritative Content
-
-Lab content must be structured, accurate, and authoritative. Agents and LLMs parse it directly — formatting, accuracy, and sourcing all affect learning quality.
-
-**Rules:**
-
-### Information Retrieval and Agent Parsing
-
-- Use consistent hierarchical formatting: headers, bullet lists, code blocks, labeled examples.
-- Every concept introduction follows: **term definition** → **SQL equivalent** → **why it matters** → **example code** → **when to use it**.
-- Use inline code formatting (`term`) for all MongoDB terms, command names, and field names. Every use, not just first use.
-- Every code example includes context: what collections are involved, what it produces, and what to observe.
-
-### Accuracy and Response Quality
-
-- Validate every MongoDB concept, command, and code example against the [MongoDB documentation](https://www.mongodb.com/docs/) and test in a real instance before inclusion.
-- Every stage cites its source: MongoDB documentation URL, a reference from [sources/research-sources.md](sources/research-sources.md), or "tested in Builder Badge environment."
-- Check scripts validate correctness against MongoDB best practices, not just task completion. Ambiguous pass conditions produce ambiguous learning.
-- If a spec contradicts MongoDB documentation, cite the reason and link to the docs. Don't work around authoritative sources.
-
-### Machine Readability and LLM Learning
-
-- Structure all schema examples and output as JSON or BSON. Don't describe structures in prose alone.
-- Include a **Glossary** table in every tech spec: Term | MongoDB Definition | SQL Equivalent.
-- State the **rationale** for every access pattern, trade-off, and design decision. State what is gained and what is given up.
-- Use semantic prefixes: **Required:**, **Optional:**, **Caution:**.
+- Define every MongoDB term inline on first use. *"A collection — MongoDB's equivalent of a SQL table"*
+- Never use jargon without defining it
+- Include glossary (Term | MongoDB | SQL) in every tech spec
+- Include "What You Learned" summary at final stage
 
 ---
 
-## 11. Reflection and Decision Records
+## 9. Structured, Accurate, and Authoritative Content
 
-At least one stage per lab asks the agent to record a design decision in a notes file (e.g., `SCHEMA_NOTES.md`, `DAL_NOTES.md`).
+Agents parse content directly — formatting, accuracy, sourcing all affect quality.
 
-**Rules:**
-- Reflection prompts ask for three things: what you chose, why you chose it, and what you are giving up.
-- The milestone check validates the file exists and has minimum content. It does not score reasoning quality.
+**Structure:**
+- Consistent hierarchy: headers, bullets, code blocks, labeled examples
+- Concept formula: **term** → **SQL equivalent** → **why it matters** → **example code**
+- Inline code for all MongoDB terms, commands, fields (every use)
+- Every example: collections involved, output, what to observe
+- Schemas/output as JSON/BSON, not prose
+- Glossary (Term | MongoDB | SQL) in every spec
+- Rationale for every access pattern, trade-off, decision
+- Semantic prefixes: **Required**, **Optional**, **Caution**
 
----
-
-## 12. Buildability
-
-Every lab can be provisioned without trial-and-error.
-
-**Rules:**
-- Tech specs include an **Environment Requirements** section: pre-installed tools, running services, ports, and file system layout at start.
-- Tech specs include a **Seed Data** section: collections to seed, document shapes, a sample seed script, and the intentional starting state.
-- State explicitly which platform the lab runs on: Instruqt, local VS Code, or Codespaces.
-
----
-
-## 13. Evaluation and Scoring
-
-Evaluation reports score specs against these rules, not against subjective quality. The Lab Instruction Evaluator uses a three-pass approach:
-
-1. **Pass 1 — Section-by-Section:** Evaluates each stage independently for clarity, completeness, coherence, testability, and self-containment. Cites specific rulebook sections.
-2. **Pass 2 — Full-Spec Synthesis:** Evaluates cross-section patterns for structural quality, consistency, and rulebook compliance.
-3. **Pass 3 — Learner Experience:** Evaluates from the learner's perspective — can they start, will they succeed, will they learn?
-
-**Rules:**
-- Score every criterion as ✓ (met), △ (partial), or ✗ (not met) with a specific, cited reason.
-- Reference exact wording from the spec. Not general impressions.
-- Iteration guidance is actionable in the next draft. "Be clearer" is not actionable.
-- Produce two scores: **Spec Quality** (Passes 1+2) and **Learner Experience** (Pass 3), each out of 10.
-- A spec must score **≥8 on both dimensions** before proceeding to the environment builder.
-- Flag the lowest-scoring criteria first for revision.
+**Validation:**
+- Test every MongoDB concept, command, example against [MongoDB docs](https://www.mongodb.com/docs/) in real instance
+- Cite source: MongoDB URL, [sources/research-sources.md](sources/research-sources.md), or "tested in Builder Badge"
+- Checks validate against best practices, not just completion
+- If contradicting MongoDB docs — cite reason and link. Don't work around authority.
 
 ---
 
-## 14. Research Findings & Hypothesis Validation
+## 10. Reflection and Decision Records
 
-### Purpose
+At least one stage per lab has the agent record a design decision (e.g., `SCHEMA_NOTES.md`, `DAL_NOTES.md`).
 
-This section documents the **research hypothesis validation** that grounds this rulebook. The rules in Sections 1–13 are not established practice. They are working theories about how to teach external AI agents using human learning science principles (KLI, cognitive load theory, metacognitive reflection).
+- Prompts ask: what you chose, why, what you're giving up
+- Check validates file exists and has minimum content — doesn't score reasoning
 
-The three hypotheses under test are stated in Section 0.
+---
 
-### Research Method
+## 11. Buildability
 
-Each lab run is a data point. We:
-- Run a learner through the lab (see Agent Learner agent)
-- Evaluate the learner's transfer task performance (see Transfer Task Scorer agent)
-- Score fluency, induction, sense-making, and novelty integrity
-- Map the scores to hypothesis verdicts
-- Update the rulebook based on evidence
+Every lab provisions without trial-and-error.
 
-When evidence contradicts a rule, **revise the rule**. Do not work around the data. The goal is a rulebook that actually works, not one that sounds reasonable.
+- Specs include **Environment Requirements**: tools, services, ports, file layout at start
+- Specs include **Seed Data**: collections, document shapes, seed script, starting state
+- State platform explicitly: Instruqt, local VS Code, or Codespaces
+
+---
+
+## 12. Evaluation and Scoring
+
+Score specs against rules, not subjective quality. Lab Instruction Evaluator uses three passes:
+
+**Pass 1:** Each stage — clarity, completeness, coherence, testability, self-containment. Cite rules.
+**Pass 2:** Cross-section — patterns, consistency, compliance.
+**Pass 3:** Learner perspective — start? succeed? learn?
+
+- Score each criterion ✓ (met), △ (partial), ✗ (not met) with specific, cited reasons. Reference exact wording.
+- Iteration guidance is actionable. "Be clearer" is not.
+- **Spec Quality** (Passes 1+2) + **Learner Experience** (Pass 3) = two /10 scores
+- **Must score ≥8 on both** before proceeding to environment builder
+- Flag lowest-scoring criteria first
+
+---
+
+## 13. Research Findings & Hypothesis Validation
+
+Documents **research hypothesis validation** grounding this rulebook. Rules in Sections 1–12 are working theories, not established practice — cognitive load theory, KLI, metacognitive reflection applied to LLM agents.
+
+Three hypotheses under test in Section 0.
+
+**Method:** Each lab run is a data point. Run learner through lab → evaluate transfer task performance → score fluency, induction, sense-making, novelty integrity → map to hypothesis verdicts → update rules based on evidence.
+
+**Principle:** When evidence contradicts a rule, revise it. Don't work around data. Goal: a rulebook that works, not one that sounds reasonable.
 
 ### Findings
-
----
 
 #### Lab 1: ESR Indexing Strategy (27 April 2026)
 
@@ -311,18 +228,9 @@ When evidence contradicts a rule, **revise the rule**. Do not work around the da
 | SQL Bridging | △ Partially Supported |
 | Decision Records | ✓ Supported |
 
-**Key Observation:**
-> Learner produced correct non-ESR contrast at transfer but did not explicitly name the SQL instinct.
+**Observation:** Learner produced correct non-ESR contrast but didn't explicitly name SQL instinct.
 
-**Evidence:**
-- Learner inferred the indexing pattern without being prompted to compare to SQL
-- Transfer task demonstrated strong induction (Rule 5) and decision-record application (Rule 11)
-- Sense-Making scored △ because the SQL contrast was implicit, not articulated
-
-**Next Test:**
-> Remove the SQL contrast from Stage 3 materials entirely and rerun. If Sense-Making remains △ without the contrast present, the contrast is not the active ingredient (scaffolding is). If it drops to ✗, the contrast scaffolding is essential to Rule 3.
-
-**Status:** Design decision needed for Rule 3 refinement.
+**Evidence:** Inferred pattern without SQL comparison prompt; strong induction and decision-record application; Sense-Making △ (implicit, not articulated)
 
 ---
 
@@ -334,21 +242,11 @@ When evidence contradicts a rule, **revise the rule**. Do not work around the da
 | SQL Bridging | △ Partially Supported |
 | Decision Records | ✓ Supported |
 
-**Key Observation:**
-> Sense-Making remained △ after removing Stage 3 SQL contrast. The contrast is not the active ingredient; the △ is structural.
+**Observation:** Sense-Making remained △ after removing Stage 3 SQL contrast — contrast not the active ingredient.
 
-**Evidence:**
-- Lab teaches the mechanism (indexing strategy, ESR tradeoffs) effectively
-- Learner demonstrated fluency and induction consistently
-- Sense-Making score did not decline when Stage 3 SQL comparison was removed
-- This proves: the contrast scaffolding is not what produces ✓ scores
+**Evidence:** Teaches mechanism effectively; learner demonstrated fluency/induction consistently; score didn't decline when Stage 3 SQL comparison removed → contrast scaffolding alone doesn't produce ✓
 
-**Critical Finding:**
-> Rule 3's ✓ criterion ("names the SQL instinct") requires explicit scaffolding in the transfer task prompt, not just the lab materials. Two options:
-> 1. Add SQL contrast requirement to the transfer task prompt ("compare your approach to `SELECT ... FROM ... JOIN ...`")
-> 2. Revise Rule 3's ✓ bar to accept mechanistic contrast without SQL language
-
-**Status:** Rule 3 interpretation pending. Awaiting third data point to confirm pattern.
+**Finding:** Sense-Making's ✓ criterion ("names SQL instinct") requires explicit transfer task scaffolding, not lab materials alone. **Test:** Apply SQL contrast requirement to transfer prompt and rerun.
 
 ---
 
@@ -360,22 +258,17 @@ When evidence contradicts a rule, **revise the rule**. Do not work around the da
 | SQL Bridging | ✓ Fully Supported |
 | Decision Records | ✓ Supported |
 
-**Transfer Score: 4/4** ✅
+**Score: 4/4** ✅
 
-**Key Observation:**
-> All three hypotheses validated. Learner explicitly named SQL instinct, explained failure modes, and applied decision-record insights to multi-tenant threat modeling.
+**Observation:** All three hypotheses validated. Learner explicitly named SQL instinct, explained failure modes, applied decision-record insights to multi-tenant threat modeling.
 
 **Evidence:**
-- **Fluency:** Learner applied three-part namespace tuple pattern without re-teaching
-- **Induction:** Learner provided four domain-specific technical reasons why namespace-based isolation > row-level filtering
-- **Sense-Making:** Learner explicitly contrasted SQL approach (`db.tickets.find()`) with MongoDB namespace approach and explained why SQL fails under cross-thread and vector search scenarios
-- **SQL Bridging:** Learner named the SQL instinct, explained its failure modes in the MongoDB context (cross-thread isolation, vector index limitations)
-- **Decision Records:** Lab reflection on namespace isolation directly informed learner's multi-tenant threat modeling reasoning (GDPR, legal liability)
+- **Fluency:** Applied namespace tuple pattern without re-teaching
+- **Induction:** Provided technical reasons for namespace isolation > row-level filtering
+- **Sense-Making:** Contrasted SQL (`db.tickets.find()`) vs. MongoDB namespace; explained SQL failure modes (cross-thread, vector search)
+- **Decision Records:** Lab reflection on namespace isolation directly informed threat modeling (GDPR, liability)
 
-**Critical Finding:**
-> KLI typing, SQL bridging, and decision records all function as predicted when **all three are present and integrated**. Rules 3, 10, and the KLI framework hold across distinct MongoDB domains (user isolation → tenant isolation). Pattern shows that integration matters — the three-rule cluster works as a system, not independent components.
-
-**Status:** Three-hypothesis validation confirmed. Pattern emerging across domains.
+**Finding:** KLI typing, SQL bridging, decision records work as predicted when **all three present and integrated**. Pattern holds across MongoDB domains (user isolation → tenant isolation). Three-rule cluster works as system, not components.
 
 ---
 
@@ -391,15 +284,13 @@ When evidence contradicts a rule, **revise the rule**. Do not work around the da
 
 ---
 
-**System-Level Finding:** The three-rule cluster (KLI typing + SQL bridging + decision records) works as an integrated system, not independent components. When all three are present, transfer scores are high. Do not apply rules in isolation.
+**Summary:** Three-rule cluster (KLI typing + SQL bridging + decision records) works as integrated system. When all three present, transfer scores high. Don't apply rules in isolation.
 
 ---
 
 ### Rulebook Revision Log
 
-**Current Status:** 13 rules defined | 3 under observation | 1 refined based on evidence
-
----
+**Status:** 12 rules | 3 under observation | 1 refined based on evidence
 
 #### Update History
 
@@ -413,31 +304,28 @@ When evidence contradicts a rule, **revise the rule**. Do not work around the da
 
 #### How to Update This Log
 
-When a new lab completes and is scored:
-
-1. **Add a new row** with: date, rule(s) affected, specific evidence from the transfer task score, action taken (refined / no change / marked contradicted), and status
-2. **Status options:**
-   - 🔄 **Observing:** Rule is under active hypothesis testing. Pattern not yet conclusive.
-   - ✓ **Confirmed:** Pattern emerged across 2+ labs. Rule is evidence-backed; no revision needed.
-   - ⚠️ **Contradicted:** Evidence refutes the rule. Mark which hypothesis failed and why.
-   - ⏳ **Pending Test:** Specific test case identified (e.g., retroactive scaffolding). Awaiting execution.
-
-3. **When status changes to "Confirmed" or "Contradicted":**
-   - Update the rule text in Sections 1–13 if needed
-   - Update the corresponding entry in this table to reflect the final verdict
-   - Move the rule from "Under Observation" to "Confirmed in Practice" (see sections below)
+1. Add row: date | rule(s) | evidence | action (refined / no change / contradicted) | status
+2. Status options:
+   - 🔄 **Observing:** Testing pattern. Not conclusive.
+   - ✓ **Confirmed:** 2+ labs confirm. Evidence-backed.
+   - ⚠️ **Contradicted:** Evidence refutes. Mark hypothesis failed.
+   - ⏳ **Pending:** Test case identified. Awaiting execution.
+3. When status → "Confirmed" or "Contradicted":
+   - Update rule text in Sections 1–12 if needed
+   - Update table entry with final verdict
+   - Move from "Under Observation" to "Confirmed in Practice"
 
 ---
 
 #### Rules Under Active Observation
 
-**Rule 3 (SQL Bridging):**
-- Current evidence: 3 data points (ESR v1 △, ESR v2 △, Memory for AI ✓)
-- Hypothesis status: Trending toward confirmation, pending explicit scaffolding test
-- Next test: Apply Rule 3 scaffolding to ESR v2 materials (add "name the SQL instinct" prompts to transfer task) and rerun learner. If Sense-Making improves to ✓, SQL bridging becomes fully supported.
+**Section 4 (SQL Bridging):**
+- Evidence: 3 points (ESR v1 △, ESR v2 △, Memory for AI ✓)
+- Status: Trending toward confirmation, pending explicit scaffolding test
+- Next: Apply SQL contrast requirement to ESR v2 transfer task and rerun. If Sense-Making → ✓, SQL bridging fully supported.
 
 ---
 
 #### Rules Confirmed in Practice
 
-**Rules 4–13:** Standing as written. No contradictory evidence across 3 lab runs.
+**Sections 5–12:** Standing as written. No contradictory evidence across 3 lab runs.
