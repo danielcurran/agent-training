@@ -17,11 +17,6 @@ The rules in this document apply human learning science — cognitive load theor
 
 The hypothesis: Structured tasks requiring agents to apply prior knowledge, compare alternatives, and explain reasoning improve transfer. This mirrors cognitive load theory in humans — spaced retrieval, deliberate practice, metacognitive reflection build durable mental models. The mechanism is the same: structured context constrains attention. Agents can't parse everything, so constraint forces them to apply, contrast, and articulate. This is how in-context learning works. If true, then labs following these rules should produce agents that decide, not just execute.
 
-**What is not assumed:**
-- LLMs form persistent schemas
-- Scaffolding reduction mirrors memory consolidation
-- Reflection artifacts produce genuine metacognition rather than plausible text
-
 **What is being tested:**
 - Whether KLI-typed instruction produces agents that can *decide*, not just *execute* (Section 3)
 - Whether explicit SQL-to-MongoDB bridging reduces failure rates more than structural clarity alone (Section 4)
@@ -52,7 +47,7 @@ Labs build conceptual understanding through concept progression, deliberate prac
 Humans read ambiguous text and ask clarifying questions. Agents read ambiguous text and do the wrong thing without pausing. Ambiguity causes silent failure, not questions. **Test every instruction: if an agent reads this and acts immediately, does it know exactly what to do? If not, rewrite.**
 
 Bad: "Set up the database appropriately."
-Good: "Run `npm run seed`. Populates `orders` collection with 50 sample documents. When complete, `npm run check:env` shows 'PASS.'"
+Good: "Run `npm run seed`. This populates `orders` collection with 50 sample documents. When complete, `npm run check:env` shows 'PASS.'"
 
 Bad: "Consider indexes."
 Good: "Create `db.orders.createIndex({ customerId: 1, createdAt: -1 })`. Output: `{ 'ok': 1 }`"
@@ -61,7 +56,7 @@ Good: "Create `db.orders.createIndex({ customerId: 1, createdAt: -1 })`. Output:
 
 ## 1. Audience
 
-Write for external AI agents with **no prior MongoDB knowledge** but **SQL fluency**. This is critical: the learner arrives with SQL mental models, and those models will interfere with MongoDB learning. Assume SQL and general programming only. Never reference a concept before defining it.
+Write for external AI agents with **no prior MongoDB knowledge**. Assume SQL and general programming only. Never reference a concept before defining it.
 
 ---
 
