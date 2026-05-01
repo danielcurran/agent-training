@@ -30,7 +30,7 @@ standards/           → Instructional design rulebook and research sources
 | [Lab Instruction Evaluator](agents/lab-instruction-evaluator.md) | Evaluate lab specs for spec quality and learner experience | `/evaluate-lab-instructions` |
 | [Lab Environment Builder](agents/lab-environment-builder.md) | Generate skeleton app and check scripts from a tech spec | `/build-lab-environment` |
 | [Agent Learner](agents/learner.md) | Complete a lab as an AI learner and produce a learning report | `/run-learner-agent` |
-| [Transfer Task Scorer](agents/transfer-task-scorer.md) | Score learner's transfer task; produce KLI hypothesis verdicts and Section 14 finding | `/score-transfer-task` |
+| [Transfer Task Scorer](agents/transfer-task-scorer.md) | Score learner's transfer task; produce KLI hypothesis verdicts and hypothesis-validation finding | `/score-transfer-task` |
 | [RAG Chunker](agents/rag-chunker.md) | Convert validated lab content into retrieval-ready chunks for LLMs | `/chunk-lab-content` |
 | [RAG Chunk Evaluator](agents/rag-chunk-evaluator.md) | Score chunks for standalone coherence and retrieval quality | `/evaluate-lab-chunks` |
 

@@ -45,7 +45,7 @@ If the user does not answer, make reasonable assumptions and document them in th
 
 Before writing the outline, state:
 - The core MongoDB concepts to introduce
-- The learner's starting point and ending capability (see Rulebook Section 4)
+- The learner's starting point and ending capability (see Rule 4)
 - The application domain and scenario
 - The agent skills available
 - The lab environment
@@ -63,7 +63,7 @@ Follow this structure exactly:
 * [Objective 1 — specific, measurable]
 * [Objective 2]
 * [Objective 3]
-(3-6 objectives total — see Rulebook Section 2)
+(3-6 objectives total — see Rule 2)
 
 ## Narrative and Environment
 
@@ -78,10 +78,10 @@ Follow this structure exactly:
 
 1. ## [Stage 1 Title]
 
-   **KLI type:** [Memory and Fluency / Induction and Refinement — see Rulebook Section 3]
+   **KLI type:** [Memory and Fluency / Induction and Refinement — see Rule 3]
    **Goal:** [One sentence describing the concrete outcome of this stage.]
 
-   * [Sense-making framing if this stage overrides a SQL instinct — see Rulebook Section 4]
+   * [Sense-making framing if this stage overrides a SQL instinct — see Rule 4]
    * [Activity or exploration task]
    * [Agent skill interaction — which skill, what to ask, what the learner decides]
    * Learner tasks:
@@ -95,7 +95,7 @@ Follow this structure exactly:
 ...
 ```
 
-Stage design rules are defined in Rulebook Sections 2, 3, 4, 5, and 6. Apply them all. Key requirements:
+Stage design rules are defined in Rules 2, 3, 4, and 5. Apply them all. Key requirements:
 - 3-5 stages total
 - Each stage states its KLI type
 - Scaffolding reduces for previously-taught knowledge only — new concepts in any stage get full scaffolding
@@ -118,7 +118,7 @@ Next step: attach this file and run /convert-lab-outline to generate the full te
 ## Pre-Writing Analysis
 **Core concepts:** [list]
 **Learner starting point:** [description]
-**Skill gap being closed:** [description — see Rulebook Section 4]
+**Skill gap being closed:** [description — see Rule 4]
 **Application domain:** [description]
 **Available agent skills:** [list]
 **Environment:** [description]
@@ -136,10 +136,10 @@ Next step: attach this file and run /convert-lab-outline to generate the full te
 
 ## Success Criteria
 
-- Learning objectives are specific and measurable (Rulebook Section 2)
-- Every stage states its KLI type and includes sense-making framing where needed (Rulebook Section 3)
-- The starting mental model and skill gap are explicitly stated (Rulebook Section 4)
-- Scaffolding is appropriate for each stage — full for new knowledge, reduced for prior knowledge (Rulebook Section 6)
-- Every stage ends with a milestone check described in plain terms (Rulebook Section 7)
-- At least one stage captures a written reflection or design decision (Rulebook Section 10)
+- Learning objectives are specific and measurable (Rule 2)
+- Every stage states its KLI type and includes sense-making framing where needed (Rule 3)
+- The starting mental model and skill gap are explicitly stated (Rule 4)
+- Scaffolding is appropriate for each stage — full for new knowledge, reduced for prior knowledge (Rule 5)
+- Every stage ends with a milestone check described in plain terms (Rule 6)
+- At least one stage captures a written reflection or design decision (Rule 10)
 - The outline is complete enough that `/convert-lab-outline` can produce a full spec without asking clarifying questions

@@ -2,9 +2,9 @@
 
 ## Foundation
 
-Read the [Instructional Design Rulebook](../standards/instructional-design-rulebook.md) before scoring — specifically the Design Hypothesis in Section 0. See [hypothesis-validation.md](../standards/hypothesis-validation.md) for the confirmed hypotheses and per-lab findings. See [sources/research-sources.md](../standards/sources/research-sources.md) for the learning science behind these rules.
+Read the [Instructional Design Rulebook](../standards/instructional-design-rulebook.md) before scoring — specifically the Design Hypothesis in the Preamble. See [hypothesis-validation.md](../standards/hypothesis-validation.md) for the confirmed hypotheses and per-lab findings. See [sources/research-sources.md](../standards/sources/research-sources.md) for the learning science behind these rules.
 
-**This agent's primary purpose is to evaluate the rulebook, not the learner.** The learner's transfer task response is the data. The rulebook's hypotheses are what's on trial. Every score you produce either strengthens or weakens the case for a rule. When evidence contradicts a rule, that rule should be revised in Section 14 — not preserved because it seemed reasonable when written.
+**This agent's primary purpose is to evaluate the rulebook, not the learner.** The learner's transfer task response is the data. The rulebook's hypotheses are what's on trial. Every score you produce either strengthens or weakens the case for a rule. When evidence contradicts a rule, revise it in [hypothesis-validation.md](../standards/hypothesis-validation.md) — not preserved because it seemed reasonable when written.
 
 Treat every run as a data point in an ongoing experiment. A single ✗ is not a verdict. A pattern of ✗ across multiple labs is.
 
@@ -81,7 +81,7 @@ Did the learner rely only on what the lab taught?
 
 ### 3. Deliver Hypothesis Verdicts
 
-Map the scores to the three hypotheses from Rulebook Section 0:
+Map the scores to the three hypotheses from the Rulebook Preamble:
 
 | Hypothesis | Criteria that test it | Verdict logic |
 |---|---|---|

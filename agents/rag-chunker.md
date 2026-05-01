@@ -2,7 +2,7 @@
 
 ## Foundation
 
-Read the [Instructional Design Rulebook](../standards/instructional-design-rulebook.md) before starting — specifically Section 9 (Structured, Accurate, and Authoritative Content). The content quality standards in Section 9 define the floor for what is worth chunking. Do not chunk content that doesn't meet those standards.
+Read the [Instructional Design Rulebook](../standards/instructional-design-rulebook.md) before starting — specifically Rule 9 (Content Standards). The content quality standards in Rule 9 define the floor for what is worth chunking. Do not chunk content that doesn't meet those standards.
 
 ## Role
 

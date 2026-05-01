@@ -97,13 +97,13 @@ After completing this lab, the agent will:
 ```
 
 ### Stage Scoping Rules
-Apply Rulebook Sections 2, 3, 4, 5, and 6 when breaking the lab into stages. Key requirements:
-- Each stage states its KLI type (Rulebook Section 3) at the top of the stage definition
-- Each stage includes sense-making framing at the top if it overrides a SQL instinct (Rulebook Section 4)
-- Scaffolding reduces for previously-taught knowledge only. New concepts in any stage get full scaffolding regardless of stage position (Rulebook Section 6)
+Apply Rules 2, 3, 4, and 5 when breaking the lab into stages. Key requirements:
+- Each stage states its KLI type (Rule 3) at the top of the stage definition
+- Each stage includes sense-making framing at the top if it overrides a SQL instinct (Rule 4)
+- Scaffolding reduces for previously-taught knowledge only. New concepts in any stage get full scaffolding regardless of stage position (Rule 5)
 
 ### 4. Apply These Rules to Every Stage
-Follow Rulebook Sections 7 and 8 for every stage. Key requirements:
+Follow Rules 6 and 7 for every stage. Key requirements:
 - At least one example prompt per agent skill interaction
 - Expected output shown for every agent skill interaction
 - Named `npm run check:*` command with exact expected terminal output
@@ -112,7 +112,7 @@ Follow Rulebook Sections 7 and 8 for every stage. Key requirements:
 - Conflict resolution specified if two agent skills could give conflicting advice
 
 ### 5. MongoDB Zero-Knowledge Rules
-Follow Rulebook Section 9 for all writing. Key requirements:
+Follow Rule 8 (Zero-Knowledge Writing) for all writing. Key requirements:
 - Define every MongoDB term inline on first use
 - Never assume familiarity with MQL, aggregation pipelines, indexes, or Atlas
 - Include a full Glossary section at the end
@@ -141,15 +141,15 @@ Confirm to the user:
 ```
 
 ### 7. Self-Evaluate
-After saving, score the spec against these 7 criteria internally using Rulebook Section 12 scoring (✓ met, △ partial, ✗ not met):
+After saving, score the spec against these 7 criteria internally using Rule 12 scoring (✓ met, △ partial, ✗ not met):
 
-1. **Task Clarity** — Is the target task concrete and unambiguous? Can a zero-knowledge agent begin without asking clarifying questions? (Rulebook Section 0)
-2. **Input/Output Definition** — Are all stage inputs available from prior stages or the environment? Are outputs named and formatted explicitly? (Rulebook Section 5)
-3. **Instructional Coherence** — Does each stage state its KLI type? Does scaffolding reduce correctly for prior knowledge while fully supporting new knowledge? (Rulebook Sections 3, 6)
-4. **Testability** — Does each stage have a named milestone check with exact expected output? (Rulebook Section 7)
-5. **Failure Fallbacks** — Does every external dependency have a health check and fallback? Does every stage have a max iteration rule? (Rulebook Sections 7, 8)
-6. **Concept Coverage** — Does every MongoDB term appear in the Glossary and defined on first use? (Rulebook Section 9)
-7. **Buildability** — Can someone provision the lab without trial-and-error from the Environment Requirements and Seed Data sections? (Rulebook Section 11)
+1. **Task Clarity** — Is the target task concrete and unambiguous? Can a zero-knowledge agent begin without asking clarifying questions? (Writing Execution preamble)
+2. **Input/Output Definition** — Are all stage inputs available from prior stages or the environment? Are outputs named and formatted explicitly? (Rule 5)
+3. **Instructional Coherence** — Does each stage state its KLI type? Does scaffolding reduce correctly for prior knowledge while fully supporting new knowledge? (Rules 3, 5)
+4. **Testability** — Does each stage have a named milestone check with exact expected output? (Rule 6)
+5. **Failure Fallbacks** — Does every external dependency have a health check and fallback? Does every stage have a max iteration rule? (Rules 6, 7)
+6. **Concept Coverage** — Does every MongoDB term appear in the Glossary and defined on first use? (Rule 8)
+7. **Buildability** — Can someone provision the lab without trial-and-error from the Environment Requirements and Seed Data sections? (Rule 11)
 
 If the overall score is 6+ (mostly ✓), save as-is. If below 6, revise the lowest-scoring criterion and re-save. Maximum 2 self-revision passes — if still below 6 after 2 passes, save as-is and flag the remaining issues:
 

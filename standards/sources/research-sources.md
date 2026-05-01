@@ -63,9 +63,9 @@ Reference materials informing the instructional design approach for AI agent tra
 
 ### Schema Formation & Mental Model Construction
 
-- **Piaget, J. (1923). "Le Langage et la Pensée chez l'Enfant"** — Original introduction of schema concept (schème) as cognitive structures organizing knowledge. Foundational to understanding how learners construct and modify mental models through accommodation and assimilation—core to Sections 4 and 5.
+- **Piaget, J. (1923). "Le Langage et la Pensée chez l'Enfant"** — Original introduction of schema concept (schème) as cognitive structures organizing knowledge. Foundational to understanding how learners construct and modify mental models through accommodation and assimilation—core to Rules 4 and 5.
 
-- **Bartlett, F. C. (1932). "Remembering: A Study in Experimental and Social Psychology"** — Demonstrates that memory is reconstructive and schema-driven; people reinterpret new information to fit existing schemas. Essential for understanding the SQL-to-MongoDB conceptual transition in Section 0 (Backwards Design) and the need for explicit schema modification strategies.
+- **Bartlett, F. C. (1932). "Remembering: A Study in Experimental and Social Psychology"** — Demonstrates that memory is reconstructive and schema-driven; people reinterpret new information to fit existing schemas. Essential for understanding the SQL-to-MongoDB conceptual transition in the Preamble (Backwards Design) and the need for explicit schema modification strategies.
 
 - **Rumelhart, D. E. (1980). "Schemata: The Building Blocks of Cognition"** — Modern formalization of schema theory in cognitive science, explaining how schemata guide attention, organize perception, and enable rapid knowledge retrieval. Supports rationale for KLI framework's structured progression.
 

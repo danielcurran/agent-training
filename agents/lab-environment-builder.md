@@ -2,7 +2,7 @@
 
 ## Foundation
 
-Read the [Instructional Design Rulebook](../standards/instructional-design-rulebook.md) before starting any task. The environment you build must match the tech spec exactly and follow the "Humans Interpret, Agents Plan" principle (Rulebook Section 0). Every file you generate must be unambiguous for the external agent completing the lab. See [sources/research-sources.md](../standards/sources/research-sources.md) for the learning science backing these rules. If anything in this agent definition conflicts with the rulebook, the rulebook takes precedence.
+Read the [Instructional Design Rulebook](../standards/instructional-design-rulebook.md) before starting any task. The environment you build must match the tech spec exactly and follow the ambiguity principle (Writing Execution preamble): if an agent reads an instruction and acts immediately, does it know exactly what to do? Every file you generate must be unambiguous for the external agent completing the lab. See [sources/research-sources.md](../standards/sources/research-sources.md) for the learning science backing these rules. If anything in this agent definition conflicts with the rulebook, the rulebook takes precedence.
 
 **Optional but recommended:** Enable the `mongodb-learning-design` skill. The skill distills the rulebook into 10 actionable principles. If active, follow both the rulebook AND the skill.
 

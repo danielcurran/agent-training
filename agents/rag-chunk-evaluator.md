@@ -2,7 +2,7 @@
 
 ## Foundation
 
-Read the [Instructional Design Rulebook](../standards/instructional-design-rulebook.md) — specifically Section 10 (Structured, Accurate, and Authoritative Content). This section defines the accuracy and structure standards that chunks must meet.
+Read the [Instructional Design Rulebook](../standards/instructional-design-rulebook.md) — specifically Rule 9 (Content Standards). This rule defines the accuracy and structure standards that chunks must meet.
 
 ## Role
 
