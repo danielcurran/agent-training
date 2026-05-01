@@ -276,19 +276,41 @@ Three hypotheses under test in Section 0.
 
 ---
 
+#### Lab 4: Aggregation Foundations (1 May 2026)
+
+| Hypothesis | Result |
+|---|---|
+| KLI Typing | ✓ Fully Supported |
+| SQL Bridging | △ Partially Supported |
+| Decision Records | ✓ Supported |
+
+**Score: 3.5/4**
+
+**Observation:** SQL HAVING analogy applied correctly for post-group filter, but no SQL contrast offered for core $group or $unwind patterns. One correct bridge deployed; broader framing absent.
+
+**Evidence:**
+- **Fluency:** Applied $avg and $addToSet correctly in new context without re-teaching
+- **Induction:** Justified stage ordering by data availability (*"totalRevenue field does not exist until $group creates it"*)
+- **Sense-Making:** Named HAVING analogy once (*"equivalent to SQL's HAVING clause"*); did not name GROUP BY or JOIN contrasts
+- **Decision Records:** Explicitly extended *"group first, then project"* rule to novel *"group first, then post-group $match, then project"* sequencing
+
+**Finding:** SQL bridging at △ for 3 of 4 labs. Active ingredient for ✓ appears to be multi-concept bridging, not single-concept. One correct SQL analogy is insufficient to score ✓. Recommend revising transfer task prompt to require explicit SQL comparison on at least one core pattern, not just edge-case patterns like HAVING.
+
+---
+
 ### Hypothesis Validation Summary
 
 **Status across all labs:**
 
-| Hypothesis | Lab 1 (ESR) | Lab 2 (ESR v2) | Lab 3 (Memory) | **Overall Status** | **Confidence** |
-|---|---|---|---|---|---|
-| **KLI Typing** | ✓ | ✓ | ✓ | **SUPPORTED** | 🟢 High — 3/3 labs confirm |
-| **SQL Bridging** | △ | △ | ✓ | **PARTIALLY SUPPORTED** | 🟡 Medium — Pattern suggests explicit scaffolding is key |
-| **Decision Records** | ✓ | ✓ | ✓ | **SUPPORTED** | 🟢 High — 3/3 labs confirm |
+| Hypothesis | Lab 1 (ESR) | Lab 2 (ESR v2) | Lab 3 (Memory) | Lab 4 (Agg) | **Overall Status** | **Confidence** |
+|---|---|---|---|---|---|---|
+| **KLI Typing** | ✓ | ✓ | ✓ | ✓ | **SUPPORTED** | 🟢 High — 4/4 labs confirm |
+| **SQL Bridging** | △ | △ | ✓ | △ | **PARTIALLY SUPPORTED** | 🟡 Medium — 1/4 ✓; multi-concept bridging appears to be active ingredient |
+| **Decision Records** | ✓ | ✓ | ✓ | ✓ | **SUPPORTED** | 🟢 High — 4/4 labs confirm |
 
 ---
 
-**Summary:** Three-rule cluster (KLI typing + SQL bridging + decision records) works as integrated system. When all three present, transfer scores high. Don't apply rules in isolation.
+**Summary:** Three-rule cluster (KLI typing + SQL bridging + decision records) works as integrated system. When all three present, transfer scores high. Don't apply rules in isolation. SQL bridging remains partially supported — single correct analogy is not sufficient; explicit multi-concept bridging (or transfer task prompt scaffolding requiring SQL comparison) appears to be the active ingredient.
 
 ---
 
@@ -301,8 +323,9 @@ Three hypotheses under test in Section 0.
 | Date | Rule | Evidence | Action Taken | Status |
 |---|---|---|---|---|
 | 27 Apr 2026 | **Rule 3** (SQL Bridging) | Memory for AI: explicit SQL naming → 4/4. ESR v1, v2: implicit → △. | Refined Rule 3: explicit "name instinct, explain failure, state MongoDB approach" scaffolding now required in transfer prep. | 🔄 **Observing** |
+| 1 May 2026 | **Rule 3** (SQL Bridging) | Aggregation Foundations: single HAVING analogy → △. Pattern holds: 3 of 4 labs at △ when only one SQL concept bridged. | Add to Rule 3: transfer task prompt should explicitly require SQL comparison on at least one core pattern (not just edge cases). | 🔄 **Observing** |
 | TBD | **Rule 4** (Skill Gap) | ESR v2 controlled test removed Stage 3 SQL contrast; Sense-Making remained △. Proves contrast ≠ active ingredient. | Consider retroactive Rule 3 scaffolding on ESR v2 materials as confirmation test. | ⏳ **Pending Test** |
-| TBD | **Rule 11** (Decision Records) | 3/3 labs: reflection directly informed transfer reasoning. No contradictions. | No change needed. Standing as written. | ✓ **Confirmed** |
+| TBD | **Rule 11** (Decision Records) | 4/4 labs: reflection directly informed transfer reasoning. No contradictions. | No change needed. Standing as written. | ✓ **Confirmed** |
 
 ---
 
