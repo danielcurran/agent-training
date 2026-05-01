@@ -43,15 +43,15 @@ Rules for outlines, specs, and evaluations. All agents follow these. See [agents
 
 ### Design Hypothesis
 
-These rules apply human learning science — cognitive load theory, KLI process types, spaced retrieval, metacognitive reflection — to LLM-based agent instruction.
+These rules apply human learning science — cognitive load theory, [KLI](#glossary-kli) process types, spaced retrieval, metacognitive reflection — to LLM-based agent instruction.
 
-The hypothesis: structured tasks that force agents to apply, compare, and explain improve transfer. Constraint focuses attention. Labs following these rules produce agents that decide, not just execute.
+The hypothesis: structured tasks that force agents to apply, compare, and explain improve [transfer](#glossary-transfer). Constraint focuses attention. Labs following these rules produce agents that decide, not just execute.
 
 Three testable claims:
 
-1. **[CORE] KLI typing** — One KLI process type per stage produces agents that decide, not just execute. (Rule 3)
-2. **[CORE] SQL bridging** — Naming and contrasting SQL instincts reduces failure on novel MongoDB problems. (Rules 3, 4)
-3. **[CORE] Decision records** — Articulating design decisions improves transfer to tasks not covered in the lab. (Rule 10)
+1. **[CORE] [KLI typing](#glossary-kli)** — One [KLI](#glossary-kli) process type per stage produces agents that decide, not just execute. (Rule 3)
+2. **[CORE] [SQL bridging](#glossary-sql-bridging)** — Naming and contrasting SQL instincts reduces failure on novel MongoDB problems. (Rules 3, 4)
+3. **[CORE] [Decision records](#glossary-decision-record)** — Articulating design decisions improves [transfer](#glossary-transfer) to tasks not covered in the lab. (Rule 10)
 
 All three confirmed across five lab runs. See [hypothesis-validation.md](hypothesis-validation.md) for per-lab evidence and the revision log. When new evidence contradicts a rule, update that file and revise the rule here.
 
@@ -93,43 +93,43 @@ State 3–6 objectives describing **what the agent does**, not what it "knows."
 
 ### 3. KLI-Typed Stage Design
 
-> **Principle: [CORE] KLI typing** — One KLI process type per stage. Wrong type produces execution without judgment.
+> **Principle: [CORE] [KLI typing](#glossary-kli)** — One [KLI](#glossary-kli) process type per stage. Wrong type produces execution without judgment.
 
-Labs have 3–5 sequential stages. **Each stage targets one KLI process type.** Every lab includes at least one of each type. If you need only two, justify it in the spec.
+Labs have 3–5 sequential stages. **Each stage targets one [KLI](#glossary-kli) process type.** Every lab includes at least one of each type. If you need only two, justify it in the spec.
 
-Fluency needs repetition with feedback. Induction needs comparative examples. Sense-making needs explicit bridging from the learner's prior mental model. Don't mix types within a stage.
+[Fluency](#glossary-fluency) needs repetition with feedback. [Induction](#glossary-induction) needs comparative examples. [Sense-making](#glossary-sense-making) needs explicit bridging from the learner's prior mental model. Don't mix types within a stage.
 
 #### Stage Structure
 
-- 1–2 MongoDB concepts, 1–3 skill interactions, a single goal, one artifact, one KLI type
+- 1–2 MongoDB concepts, 1–3 [skill interactions](#glossary-skill-interaction), a single goal, one artifact, one [KLI](#glossary-kli) type
 - Independent failure — a failure in Stage N doesn't corrupt Stage N+1
 - Cumulative dependency — Stage N assumes only Stages 1–N-1
 
-#### Fluency
+#### [Fluency](#glossary-fluency)
 
-Drill one pattern until the agent applies it reliably. Give the exact pattern, a worked example, then immediate practice. Never ask the agent to choose between alternatives — that's induction.
+Drill one pattern until the agent applies it reliably. Give the exact pattern, a worked example, then immediate practice. Never ask the agent to choose between alternatives — that's [induction](#glossary-induction).
 
 > **Example:** "Run `db.orders.createIndex({ customerId: 1, createdAt: -1 })`. Output: `{ ok: 1 }`. Now create an index on `products` using the same pattern."
 
-#### Induction
+#### [Induction](#glossary-induction)
 
 Present at least two contrasting examples. Name the difference. Ask the agent to apply the inferred rule to a novel case. Don't explain the rule — let the contrast reveal it.
 
 > **Example:** "Schema [A]: 10:1 read-write (reporting). Schema [B]: 50:50 (your app). Which fits? Update SCHEMA_NOTES.md with choice and access pattern."
 
-#### Sense-Making
+#### [Sense-Making](#glossary-sense-making)
 
 Bridge from the agent's existing mental model to the new concept. Name the SQL instinct being overridden and show why it fails here. The agent must articulate what's different, not just execute differently.
 
-> **Caution:** Teaching the SQL contrast in stage content is not sufficient. Reflection prompts and transfer tasks must also surface it directly — learners will not name the contrast unprompted.
+> **Caution:** Teaching the SQL contrast in stage content is not sufficient. Reflection prompts and [transfer](#glossary-transfer) tasks must also surface it directly — learners will not name the contrast unprompted.
 
 > **Example:** "SQL: schema changes migrate every row. MongoDB: documents in a collection differ. Where does this save time in your app? (one sentence)"
 
-Every sense-making or induction stage should produce a decision record. See [Rule 10](#10-reflection-and-decision-records).
+Every [sense-making](#glossary-sense-making) or [induction](#glossary-induction) stage should produce a [decision record](#glossary-decision-record). See [Rule 10](#10-reflection-and-decision-records).
 
 ### 4. Skill Gap Design
 
-> **Principle: [CORE] SQL bridging** — Name the SQL instinct being overridden for every concept. Contrast is more durable than instruction alone.
+> **Principle: [CORE] [SQL bridging](#glossary-sql-bridging)** — Name the SQL instinct being overridden for every concept. Contrast is more durable than instruction alone.
 
 Every lab closes a specific gap. Identify starting and target mental models before writing stages. The default learner normalizes instinctively, joins across tables, and separates concerns. MongoDB requires undoing those instincts — not explaining why they're wrong in general, but showing what they produce in *this* context and why MongoDB's approach is better.
 
@@ -152,17 +152,17 @@ Ambiguity causes silent failure in agents. Every instruction must be unambiguous
 **Bad:** "Consider indexes."
 **Good:** "Create `db.orders.createIndex({ customerId: 1, createdAt: -1 })`. Output: `{ 'ok': 1 }`"
 
-### 5. Scaffolding
+### 5. [Scaffolding](#glossary-scaffold)
 
 Decrease support as knowledge becomes established. Never decrease support for new concepts.
 
 - **Stage 1:** Full — exact command, expected output, what to observe
-- **Stages 2–3:** Prior knowledge — agent determines approach. New concepts still fully scaffolded.
-- **Stages 4+:** Prior knowledge — state objective and check only. New concepts fully scaffolded.
+- **Stages 2–3:** Prior knowledge — agent determines approach. New concepts still fully [scaffolded](#glossary-scaffold).
+- **Stages 4+:** Prior knowledge — state objective and check only. New concepts fully [scaffolded](#glossary-scaffold).
 
-The agent has limited working memory. Withdraw support for established material so the agent applies it independently. New material will fail without full scaffolding, regardless of stage.
+The agent has limited working memory. Withdraw support for established material so the agent applies it independently. New material will fail without full [scaffolding](#glossary-scaffold), regardless of stage.
 
-### 6. Milestone Checks
+### 6. [Milestone Checks](#glossary-milestone-check)
 
 Every stage ends with at least one check: **pass/fail, no partial credit, no interpretation.** If a check can't definitively verify the artifact, redesign it.
 
@@ -170,16 +170,16 @@ Every stage ends with at least one check: **pass/fail, no partial credit, no int
 - Validates artifact, not just command execution
 - Define N failed attempts before fallback path
 
-### 7. Agent Skill Interactions
+### 7. Agent [Skill Interactions](#glossary-skill-interaction)
 
-Define every skill interaction fully in specs. External dependencies must never cause silent failure.
+Define every [skill interaction](#glossary-skill-interaction) fully in specs. External dependencies must never cause silent failure.
 
 - At least one example prompt per interaction
 - Show correct response/artifact
 - If two skills conflict — specify precedence and why
 - Every external dependency (skills, MongoDB, mock APIs) has health check and fallback
 
-### 8. Zero-Knowledge Writing
+### 8. [Zero-Knowledge Writing](#glossary-zero-knowledge-writing)
 
 Write assuming the reader never saw a MongoDB document. The learner's prior experience is SQL; MongoDB terms need anchoring.
 
@@ -215,9 +215,9 @@ Agents parse content directly — they don't infer structure from prose.
 
 ## Deliverable Requirements
 
-### 10. Reflection and Decision Records
+### 10. Reflection and [Decision Records](#glossary-decision-record)
 
-> **Principle: [CORE] Decision records** — Agents articulate design decisions. Transfer tasks evaluate these artifacts.
+> **Principle: [CORE] [Decision records](#glossary-decision-record)** — Agents articulate design decisions. [Transfer](#glossary-transfer) tasks evaluate these artifacts.
 
 At least one stage per lab has the agent record a design decision (e.g., `SCHEMA_NOTES.md`, `DAL_NOTES.md`).
 
@@ -266,14 +266,14 @@ Simulate the agent's experience end-to-end. Can they start? Succeed? Learn?
 
 | Term | Definition | Rule |
 |---|---|---|
-| **KLI** | Knowledge-Learning-Instruction framework. Categorizes learning tasks by cognitive process type. | 3 |
-| **Fluency** | KLI type: drill one pattern until reliable. Repetition with feedback. | 3 |
-| **Induction** | KLI type: infer a rule from contrasting examples. At least two cases. | 3 |
-| **Sense-making** | KLI type: bridge from existing mental model to new concept. Name what changes. | 3 |
-| **Scaffold** | Structured support (commands, expected output, hints) during learning. Withdrawn as competence grows. | 5 |
-| **Skill interaction** | Any point where the agent invokes an external tool, API, or dependency during the lab. | 7 |
-| **Decision record** | Artifact where the agent states what it chose, why, and what it traded off. | 10 |
-| **SQL bridging** | Teaching technique: name the SQL instinct, show what it produces here, contrast with MongoDB. | 4 |
-| **Milestone check** | Pass/fail verification at end of stage. Named command, exact expected output. | 6 |
-| **Transfer** | Ability to apply learned concepts to problems not covered in the lab. | Preamble |
-| **Zero-knowledge writing** | Writing that assumes no prior MongoDB experience. Every term defined inline on first use. | 8 |
+| <a id="glossary-kli">**KLI**</a> | Knowledge-Learning-Instruction framework. Categorizes learning tasks by cognitive process type. | 3 |
+| <a id="glossary-fluency">**Fluency**</a> | KLI type: drill one pattern until reliable. Repetition with feedback. | 3 |
+| <a id="glossary-induction">**Induction**</a> | KLI type: infer a rule from contrasting examples. At least two cases. | 3 |
+| <a id="glossary-sense-making">**Sense-making**</a> | KLI type: bridge from existing mental model to new concept. Name what changes. | 3 |
+| <a id="glossary-scaffold">**Scaffold**</a> | Structured support (commands, expected output, hints) during learning. Withdrawn as competence grows. | 5 |
+| <a id="glossary-skill-interaction">**Skill interaction**</a> | Any point where the agent invokes an external tool, API, or dependency during the lab. | 7 |
+| <a id="glossary-decision-record">**Decision record**</a> | Artifact where the agent states what it chose, why, and what it traded off. | 10 |
+| <a id="glossary-sql-bridging">**SQL bridging**</a> | Teaching technique: name the SQL instinct, show what it produces here, contrast with MongoDB. | 4 |
+| <a id="glossary-milestone-check">**Milestone check**</a> | Pass/fail verification at end of stage. Named command, exact expected output. | 6 |
+| <a id="glossary-transfer">**Transfer**</a> | Ability to apply learned concepts to problems not covered in the lab. | Preamble |
+| <a id="glossary-zero-knowledge-writing">**Zero-knowledge writing**</a> | Writing that assumes no prior MongoDB experience. Every term defined inline on first use. | 8 |
