@@ -9,17 +9,28 @@ Reference materials informing the instructional design approach for AI agent tra
 - [Context Engineering — Weaviate](https://weaviate.io/blog/context-engineering)
 - [AutoContext: Instance-Level Context Learning](https://arxiv.org/html/2510.02369)
 - [Experience Compression Spectrum: Unifying Memory, Skills, and Rules in LLM Agents — arXiv](https://arxiv.org/html/2604.15877)
+- **Exploring the Relationship Between In-Context Learning and Instruction Tuning** (Duan et al., ACL 2024 Findings) — Demonstrates ICL and IT converge in LLM hidden states despite surface differences
+- **In-Context Learning in Large Language Models: Mechanisms, Capabilities, and Implications** (Basiouni et al., IEEE Access 2025) — Survey on ICL mechanisms with cognitive parallels to connectionist models
+- **Misconfidence-Based Demonstration Selection for LLM In-Context Learning** (Xu & Zhang, arXiv 2401.06301) — Strategic selection to reduce LLM performance discrepancy; introduces In-Context Reflection (ICR) framework
+- **Large Language Model (LLM)-Enabled In-Context Learning for Wireless Network Optimization** (Zhou et al., arXiv 2408.00214) — Domain-specific ICL effectiveness in unfamiliar technical spaces
+- **From Context to Skills: Can Language Models Learn from Context Skillfully?** (Si et al., arXiv 2604.27660) — Direct evaluation of context-to-skill transfer and generalization
 
 ## Grounding LLMs in Unfamiliar Domains
 
 - [A Researcher's Guide to LLM Grounding — Neptune.ai](https://neptune.ai/blog/llm-grounding)
 - [Grounding and Evaluation for Large Language Models — Survey](https://arxiv.org/html/2407.12858v1)
+- **Grounding Multimodal Large Language Models in Actions** (Szot et al., NeurIPS 2024) — Grounding MLLMs via affordance prediction; multi-modal re-parameterization for embodied agents
+- **When Large Language Model Agents Meet 6G Networks: Perception, Grounding, and Alignment** (Xu et al., IEEE Wireless Communications 2024) — Perception-grounding-alignment pipeline for networked agents
+- **Self-Driven Grounding: Large Language Model Agents with Automatical Language-Aligned Skill Learning** (Peng et al., arXiv 2309.01352) — Autonomous grounding through language-aligned skill discovery in environmental interaction
 
 ## Documentation Structure for AI Agents
 
 - [How to Write a Good Spec for AI Agents — Addy Osmani](https://addyosmani.com/blog/good-spec/)
 - [Writing Effective Tools for Agents — Anthropic Engineering](https://www.anthropic.com/engineering/writing-tools-for-agents)
 - [Documentation for Humans and AI Agents: Complete Guide — Document360](https://document360.com/blog/documentation-for-humans-and-ai-agents/)
+- **When Prompt Engineering Meets Software Engineering: CNL-P as Natural and Robust "APIs" for Human-AI Interaction** (Xing et al., arXiv 2508.06942) — Controlled Natural Language Prompt framework treating prompts as formal interface specifications
+- **Agentic AI Prompt Engineering: Advancing Generative AI Patterns Conceptually** (Schneider, 2025) — Structured analysis linking prompt design to agent characteristics and risk mitigation
+- **Can Developers Prompt? A Controlled Experiment for Code Documentation Generation** (Kruse et al., ICSE 2024) — Empirical validation that prompt quality directly impacts documentation coherence
 
 ## Instructional Design Frameworks for AI
 
@@ -27,6 +38,27 @@ Reference materials informing the instructional design approach for AI agent tra
 - [ISD-Agent-Bench: Benchmark for Instructional Design Agents](https://arxiv.org/html/2602.10620v1)
 - [Enabling Multi-Agent Systems as Learning Designers — KLI Framework](https://arxiv.org/html/2508.16659)
 - [A Scoping Review of Large Language Model-Based Pedagogical Agents — arXiv](https://arxiv.org/html/2604.12253)
+- **Instructional Agents: Reducing Teaching Faculty Workload through Multi-Agent Instructional Design** (Yao et al., EACL 2026) — Multi-agent collaborative approach; addresses evaluation of AI-generated instructional materials
+- **EduPlanner: LLM-Based Multi-Agent Systems for Customized and Intelligent Instructional Design** (Zhang et al., IEEE Transactions 2025) — Optimizer + analyst agents for iterative material improvement
+- **Enabling Multi-Agent Systems as Learning Designers: Applying Learning Sciences to AI Instructional Design** (Wang et al., arXiv 2508.16659) — ⭐ Explicitly grounds agent design in evidence-based learning science; highly aligned with KLI framework
+- **ReVisor: A Reflective Design Tool for Instructional Designers to Improve Teacher Training Materials via AI Discussions** (Kim et al., CHI 2026) — LLM-driven multi-agent reflective analysis for material quality evaluation
+- **Developing Instructional Design Agents to Support Novice and K-12 Design Education** (Schimpf et al., ASEE 2019, cited 2024+) — Framework for agent-mediated scaffolded learning experiences
+- **Generative AI Agent to Promote Teaching Reflection in a K-12 AI Course** (Cao et al., IEEE Transactions on Learning Technologies 2026) — Agent support for iterative reflective practice cycles; effects on teacher self-efficacy and design quality
+- **Rethinking Agentic Reinforcement Learning In Large Language Models** (Cui et al., arXiv 2604.27859) — Reconceptualizes RL assumptions for agentic LLM contexts
+
+## Agent Evaluation & Benchmarking (2024–2026)
+
+- **What Makes a Good Terminal-Agent Benchmark Task: A Guideline for Adversarial, Difficult, and Legible Evaluation Design** (Bercovich, arXiv 2604.28093) — Principles for rigorous agent evaluation: challenge legibility, difficulty calibration, adversarial robustness
+- **Collaborative Agent Reasoning Engineering (CARE): A Three-Party Design Methodology for Systematically Engineering AI Agents** (Ramachandran et al., arXiv 2604.28043) — Structured engineering: subject matter experts + developers + helper agents
+- **In-Context Prompting Obsoletes Agent Orchestration for Procedural Tasks** (Dennis et al., arXiv 2604.27891) — Empirical finding on in-context prompting vs. multi-agent orchestration trade-offs; architectural implications
+- **KellyBench: A Benchmark for Long-Horizon Sequential Decision Making** (Grady et al., arXiv 2604.27865) — Evaluation framework for sustained performance across extended task horizons
+
+## Memory, Context & Long-Horizon Reasoning (2024–2026)
+
+- **Contextual Agentic Memory is a Memo, Not True Memory** (Xu et al., arXiv 2604.27707) — Critical distinction: contextual memory (ephemeral) ≠ persistent memory; implications for agent system design
+- **From Unstructured Recall to Schema-Grounded Memory: Reliable AI Memory via Iterative, Schema-Aware Extraction** (Petrov et al., arXiv 2604.27906) — Schema-based memory extraction for reliability in long-horizon tasks
+- **Building Persona-Based Agents On Demand: Tailoring Multi-Agent Workflows to User Needs** (Arbore et al., arXiv 2604.27882) — Just-in-time agent specialization
+- **Skills-Coach: A Self-Evolving Skill Optimizer via Training-Free GRPO** (Tian et al., arXiv 2604.27488) — Skill evolution without parameter updates through practice-based optimization
 
 ## Few-Shot Learning & Tool Use
 
