@@ -9,9 +9,7 @@ use("online_bookstore");
 
 const matchStage = {
   $match: {
-    // TODO: Filter documents where date is between 2024-01-01 and 2024-12-31
-    // Use $gte (>=) and $lt (<) comparison operators on the date field.
-    // date: { ... }
+    date: { $gte: ISODate("2024-01-01"), $lt: ISODate("2025-01-01") }
   }
 };
 

@@ -20,11 +20,10 @@ const matchStage = {
 
 const lookupStage = {
   $lookup: {
-    // TODO: Join with the customers collection.
-    // from:         "customers"            ← the collection to join
-    // localField:   "customer_id"          ← field on the sales document
-    // foreignField: "_id"                  ← field on the customers document
-    // as:           "customer_details"     ← name for the joined array
+    from: "customers",
+    localField: "customer_id",
+    foreignField: "_id",
+    as: "customer_details"
   }
 };
 
@@ -41,16 +40,13 @@ const unwindStage = {
 
 const setStage = {
   $set: {
-    // TODO: Add a childrensBooks field containing only books from "Children's literature" genre.
-    // Use the $filter operator:
-    //   childrensBooks: {
-    //     $filter: {
-    //       input: "$books",          ← the array to filter
-    //       as:    "book",            ← local variable name for each element
-    //       cond:  { $eq: ["$$book.genre", "Children's literature"] }
-    //                                 ← condition using MQL $eq, NOT JavaScript ===
-    //     }
-    //   }
+    childrensBooks: {
+      $filter: {
+        input: "$books",
+        as: "book",
+        cond: { $eq: ["$$book.genre", "Children's literature"] }
+      }
+    }
   }
 };
 
@@ -63,11 +59,10 @@ const matchChildrensStage = {
 
 const projectStage = {
   $project: {
-    // TODO: Reshape the output.
-    // customerName: { $concat: ["$customer_details.first_name", " ", "$customer_details.last_name"] }
-    // email:        "$customer_details.email"
-    // childrensBooks: 1
-    // _id: 0
+    customerName: { $concat: ["$customer_details.first_name", " ", "$customer_details.last_name"] },
+    email: "$customer_details.email",
+    childrensBooks: 1,
+    _id: 0
   }
 };
 

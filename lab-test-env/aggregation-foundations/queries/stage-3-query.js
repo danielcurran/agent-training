@@ -16,16 +16,14 @@ const matchStage = {
 
 const groupStage = {
   $group: {
-    // TODO: Group by book_id and calculate average rating.
-    // _id:           the field to group by — use "$book_id"
-    // averageRating: accumulate using $avg on "$rating"
+    _id: "$book_id",
+    averageRating: { $avg: "$rating" }
   }
 };
 
 const sortStage = {
   $sort: {
-    // TODO: Sort by averageRating in descending order (highest first).
-    // Use -1 for descending.
+    averageRating: -1
   }
 };
 

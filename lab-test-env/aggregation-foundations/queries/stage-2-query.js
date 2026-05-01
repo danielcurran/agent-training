@@ -19,19 +19,16 @@ const unwindStage = {
 
 const groupStage = {
   $group: {
-    // TODO: Group by genre and sum revenue.
-    // After $unwind, each document has a single books object (not an array).
-    // _id:          the field to group by — use "$books.genre"
-    // totalRevenue: accumulate using $sum on "$books.price"
+    _id: "$books.genre",
+    totalRevenue: { $sum: "$books.price" }
   }
 };
 
 const projectStage = {
   $project: {
-    // TODO: Rename _id to genre and keep totalRevenue.
-    // genre:        "$_id"
-    // totalRevenue: 1
-    // _id:          0   ← hides the original _id field
+    genre: "$_id",
+    totalRevenue: 1,
+    _id: 0
   }
 };
 
