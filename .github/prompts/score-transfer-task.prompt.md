@@ -1,6 +1,6 @@
 ---
 mode: agent
-description: Score a learner agent's transfer task response against the three KLI hypotheses and produce a finding for Rulebook Section 14
+description: Score a learner agent's transfer task response against the three KLI hypotheses and produce a finding for standards/hypothesis-validation.md
 ---
 
 [agents/transfer-task-scorer.md](../../agents/transfer-task-scorer.md)

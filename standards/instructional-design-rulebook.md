@@ -1,8 +1,5 @@
 # Instructional Design Rulebook
 
-> **⚠️ Work in Progress — Not Final**
-> Rules are working hypotheses validated through lab runs. Expect revisions. Don't treat any rule as settled until confirmed in Section 13.
-
 All agents in this repo (Lab Outline Designer, Lab Outline Converter, Lab Instruction Evaluator, Lab Environment Builder, Agent Learner) must follow these rules for outlines, specs, evaluations.
 
 See [sources/research-sources.md](sources/research-sources.md) for research.
@@ -17,12 +14,7 @@ The rules in this document apply human learning science — cognitive load theor
 
 The hypothesis: Structured tasks requiring agents to apply prior knowledge, compare alternatives, and explain reasoning improve transfer. This mirrors cognitive load theory in humans — spaced retrieval, deliberate practice, metacognitive reflection build durable mental models. The mechanism is the same: structured context constrains attention. Agents can't parse everything, so constraint forces them to apply, contrast, and articulate. This is how in-context learning works. If true, then labs following these rules should produce agents that decide, not just execute.
 
-**What is being tested:**
-- Whether KLI-typed instruction produces agents that can *decide*, not just *execute* (Section 3)
-- Whether explicit SQL-to-MongoDB bridging reduces failure rates more than structural clarity alone (Section 4)
-- Whether decision-record artifacts improve performance on novel tasks not covered in the lab (Section 10)
-
-When evidence from lab runs confirms or contradicts a rule, update it in Section 14 and note the finding. Don't preserve rules that the data refutes.
+All three foundational hypotheses (KLI typing, SQL bridging, decision records) have been confirmed across five lab runs. See [hypothesis-validation.md](hypothesis-validation.md) for full findings, per-lab evidence, and the revision log. When evidence from a new lab contradicts a rule, update hypothesis-validation.md and revise the affected rule.
 
 ---
 
@@ -87,10 +79,8 @@ Labs have 3–5 sequential stages. **Each stage targets one KLI (Knowledge-Learn
 **Induction & Refinement:** Agent extracts a rule from contrasting examples (when to embed vs. reference, pipeline vs. find). Comparison forces the agent to identify what changed and generalize the principle. Requires at least two examples, names the difference, asks agent to apply rule to novel case.
 *"Schema [A]: 10:1 read-write (reporting). Schema [B]: 50:50 (your app). Which fits? Update SCHEMA_NOTES.md with choice and access pattern."*
 
-**Sense-Making:** Agent connects new concept to existing mental model — why documents exist, why no joins, why schema flexibility matters. This is conceptual change, not skill acquisition. Requires explicit bridge from SQL to MongoDB, naming the shift, confirming via reflection. The agent must articulate what's different, not just execute differently.
+**Sense-Making:** Agent connects new concept to existing mental model — why documents exist, why no joins, why schema flexibility matters. This is conceptual change, not skill acquisition. Use SQL-bridging concepts where appropriate — name the SQL instinct being overridden and show why it fails in this context. The agent must articulate what's different, not just execute differently. **Note:** Stage content teaching the SQL contrast is not sufficient on its own — reflection prompts and transfer tasks must also surface it directly, or learners will not name the contrast unprompted.
 *"SQL: schema changes migrate every row. MongoDB: documents in a collection differ. Where saves time in your app? (one sentence)"*
-
-**Transfer task requirement (confirmed ESR v3, May 2026):** When testing SQL bridging, the transfer task prompt must include an explicit SQL-instinct naming step. Learners will not name the SQL contrast unprompted even when the lab taught it. A four-step scaffold is sufficient: (1) name the SQL instinct, (2) name the MongoDB failure mode it produces, (3) state the solution, (4) predict execution plan output. Correct SQL contrast in stage content alone is insufficient to elicit ✓ Sense-Making.
 
 ---
 
@@ -209,175 +199,10 @@ Score specs against rules, not subjective quality. Lab Instruction Evaluator use
 
 ---
 
-## 13. Research Findings & Hypothesis Validation
+## 13. Research Findings
 
-Documents **research hypothesis validation** grounding this rulebook. Rules in Sections 1–12 are working theories, not established practice — cognitive load theory, KLI, metacognitive reflection applied to LLM agents.
+All three foundational hypotheses have been confirmed across five lab runs. Full per-lab findings, the hypothesis validation summary, and the revision log live in [standards/hypothesis-validation.md](hypothesis-validation.md).
 
-Three hypotheses under test in Section 0.
+**Key finding:** The three-rule cluster — KLI typing, SQL bridging, decision records — works as an integrated system. SQL bridging's active ingredient is that reflection prompts and transfer tasks must explicitly surface the SQL contrast; stage content teaching the contrast is necessary but not sufficient.
 
-**Method:** Each lab run is a data point.
-1. Run learner through lab
-2. Evaluate transfer task performance
-3. Score fluency, induction, sense-making, novelty integrity
-4. Map to hypothesis verdicts
-5. Update rules based on evidence
 
-**Principle:** When evidence contradicts a rule, revise it. Don't work around data. Goal: a rulebook that works, not one that sounds reasonable.
-
-### Findings
-
-#### Lab 1: ESR Indexing Strategy (27 April 2026)
-
-| Hypothesis | Result |
-|---|---|
-| KLI Typing | ✓ Fully Supported |
-| SQL Bridging | △ Partially Supported |
-| Decision Records | ✓ Supported |
-
-**Observation:** Learner produced correct non-ESR contrast but didn't explicitly name SQL instinct.
-
-**Evidence:** Inferred pattern without SQL comparison prompt; strong induction and decision-record application; Sense-Making △ (implicit, not articulated)
-
----
-
-#### Lab 2: ESR Indexing Strategy v2 — Controlled Test (27 April 2026)
-
-| Hypothesis | Result |
-|---|---|
-| KLI Typing | ✓ Fully Supported |
-| SQL Bridging | △ Partially Supported |
-| Decision Records | ✓ Supported |
-
-**Observation:** Sense-Making remained △ after removing Stage 3 SQL contrast — contrast not the active ingredient.
-
-**Evidence:** Teaches mechanism effectively; learner demonstrated fluency/induction consistently; score didn't decline when Stage 3 SQL comparison removed → contrast scaffolding alone doesn't produce ✓
-
-**Finding:** Sense-Making's ✓ criterion ("names SQL instinct") requires explicit transfer task scaffolding, not lab materials alone. **Test:** Apply SQL contrast requirement to transfer prompt and rerun.
-
----
-
-#### Lab 3: Memory for AI Applications (27 April 2026)
-
-| Hypothesis | Result |
-|---|---|
-| KLI Typing | ✓ Fully Supported |
-| SQL Bridging | ✓ Fully Supported |
-| Decision Records | ✓ Supported |
-
-**Score: 4/4** ✅
-
-**Observation:** All three hypotheses validated. Learner explicitly named SQL instinct, explained failure modes, applied decision-record insights to multi-tenant threat modeling.
-
-**Evidence:**
-- **Fluency:** Applied namespace tuple pattern without re-teaching
-- **Induction:** Provided technical reasons for namespace isolation > row-level filtering
-- **Sense-Making:** Contrasted SQL (`db.tickets.find()`) vs. MongoDB namespace; explained SQL failure modes (cross-thread, vector search)
-- **Decision Records:** Lab reflection on namespace isolation directly informed threat modeling (GDPR, liability)
-
-**Finding:** KLI typing, SQL bridging, decision records work as predicted when **all three present and integrated**. Pattern holds across MongoDB domains (user isolation → tenant isolation). Three-rule cluster works as system, not components.
-
----
-
-#### Lab 4: Aggregation Foundations (1 May 2026)
-
-| Hypothesis | Result |
-|---|---|
-| KLI Typing | ✓ Fully Supported |
-| SQL Bridging | △ Partially Supported |
-| Decision Records | ✓ Supported |
-
-**Score: 3.5/4**
-
-**Observation:** SQL HAVING analogy applied correctly for post-group filter, but no SQL contrast offered for core $group or $unwind patterns. One correct bridge deployed; broader framing absent.
-
-**Evidence:**
-- **Fluency:** Applied $avg and $addToSet correctly in new context without re-teaching
-- **Induction:** Justified stage ordering by data availability (*"totalRevenue field does not exist until $group creates it"*)
-- **Sense-Making:** Named HAVING analogy once (*"equivalent to SQL's HAVING clause"*); did not name GROUP BY or JOIN contrasts
-- **Decision Records:** Explicitly extended *"group first, then project"* rule to novel *"group first, then post-group $match, then project"* sequencing
-
-**Finding:** SQL bridging at △ for 3 of 4 labs. Active ingredient for ✓ appears to be multi-concept bridging, not single-concept. One correct SQL analogy is insufficient to score ✓. Recommend revising transfer task prompt to require explicit SQL comparison on at least one core pattern, not just edge-case patterns like HAVING.
-
----
-
-#### Lab 5: ESR Indexing Strategy v3 — Transfer Prompt Scaffolding Test (1 May 2026)
-
-| Hypothesis | Result |
-|---|
----|
-| KLI Typing | ✓ Fully Supported |
-| SQL Bridging | ✓ Fully Supported |
-| Decision Records | ✓ Supported |
-
-**Score: 3.5/4**
-
-**Observation:** Sense-Making moved △ → ✓ when transfer prompt explicitly required the learner to name the SQL instinct. Lab environment and stage content identical to v2. The only change: a four-step transfer task prompt requiring (1) name the SQL instinct, (2) name the MongoDB failure mode, (3) state the ESR solution, (4) predict explain output.
-
-**Evidence:**
-- **Fluency:** `db.appointments.createIndex({ doctorId: 1, urgency: -1, appointmentDate: 1 })` — correct, unprompted, new domain
-- **Induction:** *"E = doctorId — equality filter, goes first; S = urgency — sort field, goes second; R = appointmentDate — range filter, goes last"* — justified by hospital query roles, not lab analogy
-- **Sense-Making:** *"The SQL instinct here specifically is: put the most restrictive filter columns first, then sort columns last... introduces a SORT stage... range field precedes sort field in index, MongoDB cannot deliver sorted output from index traversal"* — all three required elements present: named SQL instinct, named failure mode, stated ESR alternative
-- **Novelty Integrity:** △ — learner constructed specific SQL wrong-answer examples beyond what the lab explicitly provided; clearly flagged; core transfer content lab-derived
-
-**Finding:** Transfer prompt scaffolding IS the active ingredient. ESR v1 (Stage 3 SQL contrast present): △. ESR v2 (Stage 3 SQL contrast removed): △. ESR v3 (transfer prompt scaffold added, lab identical to v2): ✓. The lab already taught the SQL contrast in Stage 1 Section 1.3; the four-step prompt structure directed attention to it. **SQL Bridging hypothesis: confirmed.** Active ingredient is transfer task prompt structure, not stage content.
-
----
-
-### Hypothesis Validation Summary
-
-**Status across all labs:**
-
-| Hypothesis | Lab 1 (ESR) | Lab 2 (ESR v2) | Lab 3 (Memory) | Lab 4 (Agg) | Lab 5 (ESR v3) | **Overall Status** | **Confidence** |
-|---|---|---|---|---|---|---|---|
-| **KLI Typing** | ✓ | ✓ | ✓ | ✓ | ✓ | **SUPPORTED** | 🟢 High — 5/5 labs confirm |
-| **SQL Bridging** | △ | △ | ✓ | △ | ✓ | **SUPPORTED** | 🟢 High — confirmed; active ingredient is explicit SQL-instinct prompt in transfer task |
-| **Decision Records** | ✓ | ✓ | ✓ | ✓ | ✓ | **SUPPORTED** | 🟢 High — 5/5 labs confirm |
-
----
-
-**Summary:** Three-rule cluster (KLI typing + SQL bridging + decision records) works as integrated system and all three hypotheses are now confirmed. SQL bridging's active ingredient identified: the transfer task prompt must explicitly require the learner to name the SQL instinct — lab stage content teaching the contrast is necessary but not sufficient to elicit it in transfer responses. The four-step scaffold (name instinct → name failure mode → state solution → predict output) is the mechanism.
-
----
-
-### Rulebook Revision Log
-
-**Status:** 12 rules | 0 under observation | all three hypotheses confirmed (1 May 2026)
-
-#### Update History
-
-| Date | Rule | Evidence | Action Taken | Status |
-|---|---|---|---|---|
-| 27 Apr 2026 | **Rule 3** (SQL Bridging) | Memory for AI: explicit SQL naming → 4/4. ESR v1, v2: implicit → △. | Refined Rule 3: explicit "name instinct, explain failure, state MongoDB approach" scaffolding now required in transfer prep. | ✓ **Confirmed** |
-| 1 May 2026 | **Rule 3** (SQL Bridging) | Aggregation Foundations: single HAVING analogy → △. Pattern holds: 3 of 4 labs at △ when only one SQL concept bridged. | Add to Rule 3: transfer task prompt should explicitly require SQL comparison on at least one core pattern (not just edge cases). | ✓ **Confirmed** |
-| 1 May 2026 | **Rule 3** (SQL Bridging) | ESR v3: four-step transfer prompt scaffold → Sense-Making ✓. Lab identical to v2 (which scored △). Transfer prompt structure confirmed as active ingredient. | Updated Section 3 Sense-Making rule to require explicit SQL-instinct naming step in transfer tasks. | ✓ **Confirmed** |
-| 27 Apr 2026 | **Rule 4** (Skill Gap) | ESR v2 controlled test removed Stage 3 SQL contrast; Sense-Making remained △. Proves contrast ≠ active ingredient. Confirmed by ESR v3: stage content irrelevant; prompt structure is the variable. | No rule change needed — finding is about transfer task design, not stage design. | ✓ **Confirmed** |
-| TBD | **Rule 11** (Decision Records) | 5/5 labs: reflection directly informed transfer reasoning. No contradictions. | No change needed. Standing as written. | ✓ **Confirmed** |
-
----
-
-#### How to Update This Log
-
-1. Add row: date | rule(s) | evidence | action (refined / no change / contradicted) | status
-2. Status options:
-   - 🔄 **Observing:** Testing pattern. Not conclusive.
-   - ✓ **Confirmed:** 2+ labs confirm. Evidence-backed.
-   - ⚠️ **Contradicted:** Evidence refutes. Mark hypothesis failed.
-   - ⏳ **Pending:** Test case identified. Awaiting execution.
-3. When status → "Confirmed" or "Contradicted":
-   - Update rule text in Sections 1–12 if needed
-   - Update table entry with final verdict
-   - Move from "Under Observation" to "Confirmed in Practice"
-
----
-
-#### Rules Under Active Observation
-
-None. All three hypotheses confirmed as of 1 May 2026.
-
----
-
-#### Rules Confirmed in Practice
-
-**Section 3 (Sense-Making / SQL Bridging):** Confirmed 1 May 2026 (ESR v3). Transfer task must include explicit SQL-instinct naming step. Lab stage content teaching the contrast is necessary but not sufficient.
-
-**Sections 5–12:** Standing as written. No contradictory evidence across 5 lab runs.

@@ -2,7 +2,7 @@
 
 ## Foundation
 
-Read the [Instructional Design Rulebook](../standards/instructional-design-rulebook.md) before scoring — specifically the Design Hypothesis in Section 0 and the three named hypotheses being tested. See [sources/research-sources.md](../standards/sources/research-sources.md) for the learning science behind these rules.
+Read the [Instructional Design Rulebook](../standards/instructional-design-rulebook.md) before scoring — specifically the Design Hypothesis in Section 0. See [hypothesis-validation.md](../standards/hypothesis-validation.md) for the confirmed hypotheses and per-lab findings. See [sources/research-sources.md](../standards/sources/research-sources.md) for the learning science behind these rules.
 
 **This agent's primary purpose is to evaluate the rulebook, not the learner.** The learner's transfer task response is the data. The rulebook's hypotheses are what's on trial. Every score you produce either strengthens or weakens the case for a rule. When evidence contradicts a rule, that rule should be revised in Section 14 — not preserved because it seemed reasonable when written.
 
@@ -91,11 +91,11 @@ Map the scores to the three hypotheses from Rulebook Section 0:
 
 If Novelty Integrity is ✗, mark all three hypotheses as **Insufficient evidence** — the response cannot be used as valid data.
 
-### 4. Generate Section 14 Finding
+### 4. Generate and Save Finding
 
 This is the primary deliverable. The score is evidence. This finding is what the evidence means for the rulebook.
 
-Write one sentence suitable for adding directly to Rulebook Section 14. It must:
+Write one sentence to add to [hypothesis-validation.md](../standards/hypothesis-validation.md). It must:
 - Name the lab
 - State which hypothesis was tested
 - State the verdict
@@ -109,6 +109,32 @@ Then write a second sentence stating what the rulebook should do with this findi
 
 **Example (partially supported):**
 *"Builder Badge (April 2026): KLI hypothesis partially supported — learner applied correct index pattern but did not name the SQL contrast in transfer domain. Rule 3 sense-making requirement should specify that bridging language must appear in transfer responses, not just in lab reflection artifacts."*
+
+Then append a new lab entry to the **Per-Lab Findings** section of `standards/hypothesis-validation.md` using the format of existing entries:
+
+```markdown
+### Lab N: [Lab Name] ([Date])
+
+| Hypothesis | Result |
+|---|---|
+| KLI Typing | [verdict] |
+| SQL Bridging | [verdict] |
+| Decision Records | [verdict] |
+
+**Score: [X/4]**
+
+**Observation:** [one sentence]
+
+**Evidence:**
+- **Fluency:** [quote or summary]
+- **Induction:** [quote or summary]
+- **Sense-Making:** [quote or summary]
+- **Decision Records:** [quote or summary]
+
+**Finding:** [one sentence actionable finding]
+```
+
+Also update the **Hypothesis Validation Summary** table in hypothesis-validation.md to add the new lab column.
 
 ### 5. Save the Report
 
@@ -134,7 +160,7 @@ hypothesis_3_decision_records: [Supported / Partially supported / Not supported 
 Confirm:
 ```
 Transfer task score saved to labs/reports/[lab-name]/[lab-name]-transfer-v[N].md
-Add this finding to Rulebook Section 14: [the one-sentence finding]
+Finding appended to standards/hypothesis-validation.md (Per-Lab Findings + Hypothesis Validation Summary updated)
 ```
 
 ---
@@ -171,7 +197,7 @@ Add this finding to Rulebook Section 14: [the one-sentence finding]
 | SQL bridging reduces failure rates beyond structural clarity | [verdict] | [one sentence] |
 | Decision-record artifacts improve novel task performance | [verdict] | [one sentence] |
 
-## Section 14 Finding
+## Finding
 [Two sentences: what the data shows, and what the rulebook should do with it]
 ```
 
