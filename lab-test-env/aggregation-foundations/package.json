@@ -1,0 +1,24 @@
+{
+  "name": "aggregation-foundations",
+  "version": "1.0.0",
+  "description": "Aggregation Foundations lab environment",
+  "main": "index.js",
+  "scripts": {
+    "seed": "node scripts/seed.js",
+    "seed:fresh": "node scripts/seed.js --drop",
+    "reset": "node scripts/reset.js",
+    "reset:dry": "node scripts/reset.js --dry-run",
+    "cleanup": "node scripts/cleanup.js",
+    "check:env": "node checks/index.js --env",
+    "check:stage-1": "node checks/index.js --stage=1",
+    "check:stage-2": "node checks/index.js --stage=2",
+    "check:stage-3": "node checks/index.js --stage=3",
+    "check:stage-4": "node checks/index.js --stage=4",
+    "check:reflection": "node checks/index.js --reflection",
+    "check:all": "node checks/index.js --all"
+  },
+  "dependencies": {
+    "mongodb": "^6.8.0",
+    "dotenv": "^16.0.0"
+  }
+}

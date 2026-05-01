@@ -4,7 +4,7 @@
 **Version:** 1.0  
 **Date:** 30 April 2026  
 **Target Audience:** Intermediate MongoDB developers (familiar with basic queries, moving to data transformation)  
-**Estimated Duration:** 90 minutes  
+**Estimated Duration:** 105 minutes  
 **Environment:** `lab-test-env/aggregation-foundations/` (Node.js 18+ + MongoDB 8.0.5)  
 
 ---
@@ -81,7 +81,7 @@ By completing this lab, learners will be able to:
 ```javascript
 {
   _id: ObjectId,
-  book_id: ObjectId,       // references books (or implicit)
+  book_id: ObjectId,       // identifier for the book being reviewed (no separate books collection)
   rating: Number,          // 1–5
   timestamp: ISODate,      // e.g., 2023-06-15T10:30:00Z
   reviewer: String
@@ -220,8 +220,8 @@ async function checkStage1(db) {
   const queryContent = fs.readFileSync(queryPath, "utf-8");
 
   // Check 1: $match stage exists and has date filters
-  if (!queryContent.includes("$gte") && !queryContent.includes("$lte")) {
-    return { pass: false, error: "$match stage missing date comparison operators" };
+  if (!queryContent.includes("$gte") || (!queryContent.includes("$lt") && !queryContent.includes("$lte"))) {
+    return { pass: false, error: "$match stage missing date comparison operators ($gte and $lt/$lte)" };
   }
 
   // Check 2: $unwind stage is present
@@ -352,6 +352,9 @@ printjson(result.toArray());
 
 ```javascript
 // filepath: checks/check-stage-2.js
+const fs = require("fs");
+const path = require("path");
+
 async function checkStage2(db) {
   const queryPath = path.join(__dirname, "../queries/stage-2-query.js");
   
@@ -513,6 +516,9 @@ printjson(result.toArray());
 
 ```javascript
 // filepath: checks/check-stage-3.js
+const fs = require("fs");
+const path = require("path");
+
 async function checkStage3(db) {
   const queryPath = path.join(__dirname, "../queries/stage-3-query.js");
   
@@ -540,7 +546,7 @@ async function checkStage3(db) {
   }
 
   // Check 3: $limit is 10
-  if (!queryContent.includes("$limit: 10")) {
+  if (!/\$limit\s*:\s*10/.test(queryContent)) {
     return { pass: false, error: "$limit not set to 10" };
   }
 
@@ -597,6 +603,7 @@ module.exports = { checkStage3 };
 - Recognize $set: adds or overwrites fields (commonly used with $filter for conditional inclusion)
 - Apply $filter: creates conditional arrays (e.g., keep only books matching criteria)
 - Understand stage sequencing: $lookup before $set, $match after $set to filter results
+- **New syntax:** `$$variable` (double-dollar) is used inside $filter expressions to reference the current array element
 
 #### Scaffolded Code
 
@@ -670,10 +677,12 @@ printjson(result.toArray());
    - Match `customer_id` (in sales) to `_id` (in customers)
    - Store result as `customer_details`
 
+**Mid-stage checkpoint:** Before continuing, execute the partial pipeline (matchStage → lookupStage → unwindStage) to verify the join is working correctly. Each document should now have a `customer_details` object with `first_name`, `last_name`, and `email`. Confirm this before adding $set.
+
 2. **Complete the `$set` stage:**
    - Add `childrensBooks` field using `$filter`:
      - Input: `$books` array
-     - Condition: `"$$book.genre" === "Children's literature"`
+     - Condition: `{ $eq: ["$$book.genre", "Children's literature"] }` (use MQL `$eq`, not JavaScript `===`)
 
 3. **Complete the `$project` stage:**
    - `customerName`: concatenate first_name + " " + last_name from customer_details
@@ -705,6 +714,9 @@ printjson(result.toArray());
 
 ```javascript
 // filepath: checks/check-stage-4.js
+const fs = require("fs");
+const path = require("path");
+
 async function checkStage4(db) {
   const queryPath = path.join(__dirname, "../queries/stage-4-query.js");
   
@@ -803,7 +815,7 @@ module.exports = { checkStage4 };
 
 ---
 
-### Stage 5: Transfer Task — Reflection (10 min)
+### Stage 5: Transfer Task — Reflection (15 min)
 
 **Checkpoint:** Learner designs an aggregation pipeline from business requirements
 
@@ -851,7 +863,7 @@ Stage 2: [Stage Name]
 | Criterion | Points | Evidence |
 |-----------|--------|----------|
 | **Identifies all necessary stages** | 2 | Learner lists 6–8 stages: $match, $unwind, $group, $sum, $avg, $addToSet (or similar), $match (second), $sort, $limit |
-| **Correct grouping strategy** | 2 | Learner groups by `genre` and correctly accumulates: totalRevenue ($sum), avgPrice ($avg), and customer count ($addToSet or $setUnion to track unique customers) |
+| **Correct grouping strategy** | 2 | Learner groups by `genre` and correctly accumulates: totalRevenue ($sum), avgPrice ($avg), and customer count ($addToSet or $setUnion to track unique customers). **Hint: consider how you'd track unique customers — look up `$addToSet`.** |
 | **Explains stage purpose** | 2 | Each stage includes a clear explanation of what it does (not just "use $match") |
 | **Correct stage sequencing** | 2 | $match-before-$group, second $match (filtering by revenue) after $group, $sort-before-$limit |
 | **Output schema is logical** | 1 | Final output schema includes genre, totalRevenue, avgPrice, uniqueCustomerCount (or similar naming) |
@@ -859,6 +871,62 @@ Stage 2: [Stage Name]
 | **Total** | **10** | — |
 
 **Passing threshold:** ≥ 7/10
+
+#### Validation Check
+
+**File:** `checks/check-reflection.js`
+
+```javascript
+// filepath: checks/check-reflection.js
+const fs = require("fs");
+const path = require("path");
+
+async function checkReflection() {
+  const reflectionPath = path.join(__dirname, "../REFLECTION.md");
+
+  if (!fs.existsSync(reflectionPath)) {
+    return { pass: false, error: "REFLECTION.md not found at lab root. Create this file and write your pipeline design." };
+  }
+
+  const content = fs.readFileSync(reflectionPath, "utf-8");
+
+  // Check 1: Minimum length (proxy for meaningful response)
+  if (content.trim().length < 150) {
+    return { pass: false, error: "REFLECTION.md is too short. Provide a complete pipeline design (minimum ~150 characters)." };
+  }
+
+  // Check 2: Required stage names present
+  const requiredStages = ["$match", "$unwind", "$group", "$sort", "$limit"];
+  const missingStages = requiredStages.filter(stage => !content.includes(stage));
+  if (missingStages.length > 0) {
+    return {
+      pass: false,
+      error: `Pipeline design is missing required stages: ${missingStages.join(", ")}`
+    };
+  }
+
+  // Check 3: Grouping by genre
+  if (!content.toLowerCase().includes("genre")) {
+    return { pass: false, error: "Pipeline design must reference grouping by genre." };
+  }
+
+  // Check 4: Revenue accumulation ($sum)
+  if (!content.includes("$sum") && !content.toLowerCase().includes("revenue")) {
+    return { pass: false, error: "Pipeline design must describe revenue accumulation (e.g., $sum or totalRevenue)." };
+  }
+
+  return {
+    pass: true,
+    message: "✓ Reflection check passed. Pipeline design includes required stages and explanations. Flag for human review if borderline."
+  };
+}
+
+module.exports = { checkReflection };
+```
+
+**Command:** `npm run check:reflection`
+
+> **Note for instructors:** `check-reflection.js` performs structural keyword validation only. For full assessment, review the learner's `REFLECTION.md` manually against the rubric above. The check passes if the minimum structural criteria are met; human review is still recommended for borderline responses.
 
 ---
 
@@ -873,6 +941,7 @@ lab-test-env/aggregation-foundations/
 ├── docker-compose.yml           # MongoDB 8.0.5 Enterprise
 ├── package.json
 ├── package-lock.json
+├── REFLECTION.md                # Learner reflection (transfer task)
 ├── scripts/
 │   ├── seed.js                  # Populate collections with sample data
 │   └── cleanup.js               # Drop collections (idempotent)
@@ -880,8 +949,7 @@ lab-test-env/aggregation-foundations/
 │   ├── stage-1-query.js         # Scaffolded: learner completes $match
 │   ├── stage-2-query.js         # Scaffolded: learner adds $group + $project
 │   ├── stage-3-query.js         # Scaffolded: learner adds $sort + $limit
-│   ├── stage-4-query.js         # Scaffolded: learner completes $lookup + $set + $filter
-│   └── REFLECTION.md            # Learner reflection (transfer task)
+│   └── stage-4-query.js         # Scaffolded: learner completes $lookup + $set + $filter
 ├── checks/
 │   ├── check-stage-1.js         # Validates Stage 1 completion
 │   ├── check-stage-2.js         # Validates Stage 2 completion
@@ -957,6 +1025,26 @@ const { checkReflection } = require("./check-reflection");
 
 const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost:27017";
 
+async function checkEnv() {
+  const client = new MongoClient(MONGODB_URI);
+  try {
+    await client.connect();
+    const db = client.db("online_bookstore");
+    const collections = await db.listCollections().toArray();
+    const names = collections.map(c => c.name);
+    const required = ["sales", "reviews", "customers"];
+    const missing = required.filter(name => !names.includes(name));
+    if (missing.length > 0) {
+      return { pass: false, error: `Missing collections: ${missing.join(", ")}. Run npm run seed first.` };
+    }
+    return { pass: true, message: "✓ Environment check passed. MongoDB connected, all collections present." };
+  } catch (err) {
+    return { pass: false, error: `Cannot connect to MongoDB: ${err.message}` };
+  } finally {
+    await client.close();
+  }
+}
+
 async function runChecks(stage) {
   const client = new MongoClient(MONGODB_URI);
 
@@ -977,7 +1065,9 @@ async function runChecks(stage) {
     const stagesToRun = stage === "all" ? [1, 2, 3, 4, "reflection"] : [stage];
 
     for (const s of stagesToRun) {
-      const result = await checks[s](db);
+      const result = s === "reflection"
+        ? await checks[s]()
+        : await checks[s](db);
       console.log(`Stage ${s}: ${result.pass ? "✓ PASS" : "✗ FAIL"}`);
       console.log(`${result.message || result.error}\n`);
     }
@@ -987,11 +1077,21 @@ async function runChecks(stage) {
 }
 
 const args = process.argv.slice(2);
-const stageArg = args.find(a => a.includes("stage="))?.split("=")[1] || 
-                 (args.includes("--all") ? "all" : null);
 
-if (stageArg) {
-  runChecks(stageArg).catch(console.error);
+if (args.includes("--env")) {
+  checkEnv().then(result => {
+    console.log(result.pass ? "✓ PASS" : "✗ FAIL");
+    console.log(result.message || result.error);
+    if (!result.pass) process.exit(1);
+  }).catch(console.error);
+} else {
+  const stageArg = args.find(a => a.includes("stage="))?.split("=")[1] ||
+                   (args.includes("--all") ? "all" : null) ||
+                   (args.includes("--reflection") ? "reflection" : null);
+
+  if (stageArg) {
+    runChecks(stageArg).catch(console.error);
+  }
 }
 ```
 
@@ -1128,7 +1228,7 @@ if (stageArg) {
 ### Stage 4
 
 **Common Mistake:** Forgetting to include `as` in $lookup  
-**Hint:** The `as` field names the joined data. Example: `as: "customer_details"`
+**Hint:** The `as` field names the output array on each document. Ensure `localField` references the field in the **source** collection (`sales.customer_id`) and `foreignField` references the field in the **joined** collection (`customers._id`).
 
 **Common Mistake:** Nested $filter syntax errors  
 **Hint:** Remember variable syntax: `$$book.genre` (double $$ inside $filter), not `$book.genre`
