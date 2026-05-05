@@ -6,6 +6,13 @@ A repository for designing, evaluating, and iterating AI agent training material
 
 ## Quick Start
 
+```bash
+git clone https://github.com/danielcurran/agent-training
+cd agent-training
+```
+
+Open in VS Code, enable `"chat.promptFiles": true` in settings, then type `/` in Copilot Chat to see available agents.
+
 ## Repo Structure
 
 ```

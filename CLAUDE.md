@@ -27,8 +27,9 @@ Reports are organized by lab topic in `labs/reports/{lab-name}/`:
 |---|---|---|---|---|---|
 | Builder Badge | [labs/outlines/builder-badge-outline.md](labs/outlines/builder-badge-outline.md) | [labs/specs/builder-badge-tech-spec.md](labs/specs/builder-badge-tech-spec.md) | [v1](labs/reports/builder-badge/builder-badge-tech-spec-eval-v1.md) (9.6/10) | [v1](labs/reports/builder-badge/builder-badge-env-eval-v1.md) | ✓ Production Ready |
 | Insert and Find | [labs/outlines/insert-and-find-outline.md](labs/outlines/insert-and-find-outline.md) | [labs/specs/insert-and-find-tech-spec.md](labs/specs/insert-and-find-tech-spec.md) | [v1](labs/reports/insert-and-find/insert-and-find-tech-spec-eval-v1.md) (8.8/10) | [v2](labs/reports/insert-and-find/insert-and-find-env-eval-v2.md) | ⚠️ Reference Spec (Environment Archived) |
-| ESR Indexing Strategy | [labs/outlines/esr-indexing-strategy-outline.md](labs/outlines/esr-indexing-strategy-outline.md) | [labs/specs/esr-indexing-strategy-tech-spec.md](labs/specs/esr-indexing-strategy-tech-spec.md) | [v1](labs/reports/esr-indexing-strategy/esr-indexing-strategy-tech-spec-eval-v1.md) (8.6/10) | — | ✓ Environment Ready |
-| Memory for AI | [labs/outlines/memory-for-ai-outline.md](labs/outlines/memory-for-ai-outline.md) | [labs/specs/memory-for-ai-tech-spec.md](labs/specs/memory-for-ai-tech-spec.md) | [v1](labs/reports/memory-for-ai/memory-for-ai-tech-spec-eval-v1.md) | [v1](labs/reports/memory-for-ai/memory-for-ai-env-eval-v1.md) | ✓ Production Ready |
+| ESR Indexing Strategy | [labs/outlines/esr-indexing-strategy-outline.md](labs/outlines/esr-indexing-strategy-outline.md) | [labs/specs/esr-indexing-strategy-tech-spec-v3.md](labs/specs/esr-indexing-strategy-tech-spec-v3.md) | [v1](labs/reports/esr-indexing-strategy/esr-indexing-strategy-tech-spec-eval-v1.md) (8.6/10) | [v4](labs/reports/esr-indexing-strategy/esr-indexing-strategy-env-eval-v4.md) | ✓ Production Ready |
+| Aggregation Foundations | [labs/outlines/aggregation-foundations-outline.md](labs/outlines/aggregation-foundations-outline.md) | [labs/specs/aggregation-foundations-tech-spec.md](labs/specs/aggregation-foundations-tech-spec.md) | [v2](labs/reports/aggregation-foundations/aggregation-foundations-tech-spec-eval-v2.md) (9.1/10) | [v1](labs/reports/aggregation-foundations/aggregation-foundations-env-eval-v1.md) | ✓ Production Ready |
+| Memory for AI | [labs/outlines/memory-for-ai.md](labs/outlines/memory-for-ai.md) | [labs/specs/memory-for-ai-tech-spec.md](labs/specs/memory-for-ai-tech-spec.md) | [v1](labs/reports/memory-for-ai/memory-for-ai-tech-spec-eval-v1.md) | [v1](labs/reports/memory-for-ai/memory-for-ai-env-eval-v1.md) | ✓ Production Ready |
 
 ## Workflow
 
@@ -46,7 +47,7 @@ Reports are organized by lab topic in `labs/reports/{lab-name}/`:
 
 ## Lab Execution
 
-Each lab has a self-contained environment in `lab-test-env/{name}/`. Currently only Builder Badge has an active environment:
+Each lab has a self-contained environment in `lab-test-env/{name}/`. Example using Builder Badge:
 
 ```bash
 cd lab-test-env/builder-badge
