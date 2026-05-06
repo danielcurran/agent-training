@@ -12,6 +12,11 @@
 
 set -e
 
+# Load .env file if it exists
+if [ -f .env ]; then
+  export $(cat .env | grep -v '^#' | grep -v '^$' | xargs)
+fi
+
 if [ $# -lt 2 ]; then
   echo "Usage: $0 <track-slug> <lab-name>"
   echo ""
