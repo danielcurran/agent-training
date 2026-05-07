@@ -1,0 +1,27 @@
+{
+  "name": "insert-and-find",
+  "version": "1.0.0",
+  "description": "Insert and Find - MongoDB Basics",
+  "main": "src/run.js",
+  "scripts": {
+    "start": "node src/run.js",
+    "seed": "node scripts/seed.js",
+    "reset": "node scripts/reset.js",
+    "check:env": "node scripts/check-env.js",
+    "check:insert": "node scripts/check-insert.js",
+    "check:find": "node scripts/check-find.js",
+    "check:reflection": "node scripts/check-reflection.js",
+    "check:all": "node scripts/index.js"
+  },
+  "keywords": [
+    "mongodb",
+    "insertOne",
+    "findOne"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^16.0.0",
+    "mongodb": "^6.8.0"
+  }
+}

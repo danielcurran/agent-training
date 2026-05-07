@@ -132,6 +132,15 @@ After all sections are evaluated individually, perform a single **cross-section 
 **Evaluate:** Whether the full set of milestone checks covers all learning objectives
 **Focus on:** Gaps — concepts introduced but never tested; tests that don't map to any stated objective
 
+**Critical check:** The spec must include `KNOWLEDGE.json` in the File Checklist as a required deliverable.
+- Verify the File Checklist section exists and is complete
+- Verify `KNOWLEDGE.json` is listed as required
+- If missing, flag as a spec quality issue requiring revision
+
+### 4a. File Checklist Completeness
+**Evaluate:** Whether the File Checklist specifies all required deliverables including `KNOWLEDGE.json`
+**Focus on:** Missing `KNOWLEDGE.json`, incomplete artifact lists, unclear creation responsibility (agent vs. pre-configured)
+
 ### 5. Failure Mode Coverage
 **Evaluate:** Whether failure paths are covered end-to-end, not just per-section
 **Focus on:** Cascading failures — what happens if Section 2 fails and the agent proceeds to Section 3?

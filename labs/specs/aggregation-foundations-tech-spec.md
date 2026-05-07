@@ -1281,3 +1281,16 @@ if (args.includes("--env")) {
 2. **Stage 6 extension:** Add $out to persist results to new collection
 3. **Performance focus:** Add explain() output to teach index usage and query optimization
 4. **Time-series data:** Extend to $bucketAuto for histogram generation
+
+---
+
+## 14. File Checklist
+
+| File | Created in | Required |
+|---|---|---|
+| `queries/stage-1-query.js` | Stage 1 | ✓ |
+| `queries/stage-2-query.js` | Stage 2 | ✓ |
+| `queries/stage-3-query.js` | Stage 3 | ✓ |
+| `queries/stage-4-query.js` | Stage 4 | ✓ |
+| `REFLECTION.md` | Transfer Task | ✓ |
+| `KNOWLEDGE.json` | After completion | ✓ |

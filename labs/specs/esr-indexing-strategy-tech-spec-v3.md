@@ -898,6 +898,17 @@ Answer the following in order:
 
 ---
 
+## File Checklist
+
+| File | Created in | Required |
+|---|---|---|
+| `src/solutions/indexes.js` | Stages 1–4 | ✓ |
+| `REFLECTION.md` | Transfer Task | ✓ |
+| `KNOWLEDGE.json` | After completion | ✓ |
+| `INDEX_DECISIONS.md` | Ongoing | ✓ (optional — for documenting decision rationale) |
+
+---
+
 ## References
 
 - [MongoDB Documentation: Create Indexes to Support Your Queries](https://docs.mongodb.com/manual/tutorial/create-indexes-to-support-queries/)

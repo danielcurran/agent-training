@@ -375,6 +375,7 @@ All checks: PASS
 |---|---|---|
 | `src/run.js` | Agent (fills in skeleton) | ✓ |
 | `NOTES.md` | Agent | ✓ |
+| `KNOWLEDGE.json` | Agent (after completion) | ✓ |
 | `.env` | Pre-configured | ✓ (do not edit) |
 
 ---

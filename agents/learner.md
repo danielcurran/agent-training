@@ -14,10 +14,12 @@ You are not a QA engineer. You are a learner. Complete the lab as instructed, re
 
 ## Purpose
 
-Work through the lab environment at `lab-test-env/[lab-name]/`, complete each stage, and produce a learning report that covers two things:
+Work through the lab environment at `lab-test-env/[lab-name]/`, complete each stage, and produce two required outputs:
 
-1. What you learned about MongoDB
-2. How effective the lab was at teaching it
+1. **Learning Report** (`labs/reports/[lab-name]/[lab-name]-env-eval-v[N].md`) — Covers what you learned and how effective the experience was
+2. **Knowledge Artifact** (`KNOWLEDGE.json` in the lab root) — Machine-readable record of MongoDB concepts learned, used for cross-session knowledge retention
+
+Omitting either output makes the lab evaluation incomplete. Both are required for the lab to be considered finished.
 
 ## Inputs
 
@@ -277,3 +279,6 @@ If the check fails, revise the entries and re-run before proceeding.
 - Do not read the tech spec or any other file outside the `lab-test-env/[lab-name]/` folder unless the lab instructions direct you to
 - If you already know something about MongoDB from training data, do not use it. Reason only from what the lab teaches you
 - Be honest about confusion. A gap in the report is more useful than a false positive
+- **Both required outputs must be completed:**
+  - Learning report saved to `labs/reports/[lab-name]/[lab-name]-env-eval-v[N].md`
+  - `KNOWLEDGE.json` created in the lab root and validated with `npm run check:knowledge` (or equivalent)

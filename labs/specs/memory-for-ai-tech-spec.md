@@ -401,3 +401,14 @@ Currently, your system uses a simple query: `db.tickets.find({ tenant_id: tenant
 This transfer task assesses **Rule 10 (Transfer):** Can learners generalize the namespace concept beyond user-level isolation to a higher-stakes multi-tenant scenario? The task also touches **Rule 3 (Sense-Making):** Learners must explain *why* the namespace approach is superior, not just replicate it.
 
 Success on this task signals that learners understand namespaces as a **general-purpose isolation primitive**, not a lab-specific trick.
+
+---
+
+## File Checklist
+
+| File | Created in | Required |
+|---|---|---|
+| `agent_simple.py` | Challenge 1 | ✓ (embedding model + index config + tools) |
+| `agent_with_tools.py` | Challenge 2 | ✓ (integrated agent with memory) |
+| `REFLECTION.md` | Transfer Task | ✓ |
+| `KNOWLEDGE.json` | After completion | ✓ |

@@ -619,6 +619,7 @@ If final checks fail:
 | `schema/vector-index.json` | Stage 3 | ✓ |
 | `src/routes/search.js` | Stage 3 | ✓ |
 | `REFLECTION.md` | Stage 4 | ✓ |
+| `KNOWLEDGE.json` | After completion | ✓ |
 | `.env` | Before Stage 1 | ✓ (copy from .env.example) |
 
 ---

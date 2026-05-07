@@ -78,7 +78,9 @@ lab-test-env/[lab-name]/
 ├── scripts/
 │   ├── seed.js
 │   ├── reset.js
-│   └── check-[stage-name].js ← one per stage
+│   ├── check-[stage-name].js ← one per stage
+│   ├── check-knowledge.js ← validates KNOWLEDGE.json
+│   └── index.js ← runs all checks in order
 ```
 
 Add additional `src/` files as needed based on the spec's artifact list. Do not assume a fixed `src/` structure — match whatever the spec defines. Add a `mock-embed-server.js` if the spec includes vector search.
@@ -122,10 +124,10 @@ Adjust the image version, ports, and add additional services (e.g., mock embeddi
 - Scripts:
   - `seed` and `seed:fresh` (with `--drop` flag)
   - `reset` and `reset:dry` (with `--dry-run` flag)
-  - `check:env`, `check:[stage]` (one per stage), `check:all`
-  - `start` (to run the main app)
-  - `check:[stage-name]` for each stage, matching the exact command from the spec
-  - `check:all` running all check scripts in stage order
+  - `check:env` — verify environment setup
+  - `check:[stage-name]` for each stage (one per stage)
+  - `check:knowledge` — validate `KNOWLEDGE.json` artifact (required)
+  - `check:all` — run all check scripts in order: env → stage 1 → stage 2 → ... → knowledge
 
 #### `lib/db.js`
 Standard MongoDB connection module. Connect using `MONGODB_URI` from `.env`. Export a `connect()` function that returns the db object. Pattern must match:
@@ -161,6 +163,17 @@ Drop all seeded collections and re-seed from scratch. Support `--dry-run` flag t
 #### `scripts/check-[stage-name].js` (one per stage)
 
 Each check script validates the artifact(s) the agent must produce in that stage. Follow this pattern exactly:
+
+#### `scripts/check-knowledge.js`
+
+Validates the `KNOWLEDGE.json` artifact after the agent completes the lab. This check script:
+- Verifies `KNOWLEDGE.json` exists in the lab root
+- Parses the JSON and validates structure (entries must have all required fields)
+- Confirms each entry has a valid `confidence` value (verified/corrected/self-assessed)
+- Validates that at least one entry per major lab concept exists
+- Outputs `Knowledge Check: PASS` if all validations succeed
+
+Follow this pattern:
 
 ```js
 #!/usr/bin/env node
@@ -248,9 +261,11 @@ Next step: cd lab-test-env/[lab-name] && npm install && npm run seed
 
 Before confirming, verify:
 - Every stage in the spec has a corresponding `check-[stage-name].js`
+- `check-knowledge.js` is generated to validate the `KNOWLEDGE.json` artifact
 - Every `npm run check:*` command in `package.json` matches the exact command name in the spec
 - The seed script reproduces every intentional gap listed in the spec's starting state
 - Every stub function in `src/dal/index.js` maps to an artifact described in at least one stage
+- The spec's File Checklist includes `KNOWLEDGE.json` as a required deliverable
 
 Flag any gaps:
 ```
