@@ -16,6 +16,12 @@ Testing whether structured knowledge artifacts and specifications alone can tran
 2. **SQL bridging hypothesis** — Explicit SQL contrasts reduce failure rates on novel problems
 3. **Decision-record hypothesis** — Structured artifacts outperform unstructured spec reading
 
+**Transfer task design:** The task requires agents to extend and infer beyond the lab pattern. It introduces:
+- A novel surgical scheduling domain (vs. product catalog)
+- Multiple fields in the same E/S/R role (requiring prioritization)
+- Array fields and write-performance trade-offs (requiring reasoning beyond mechanical ESR)
+- This tests whether the lab truly enables conceptual understanding or just pattern matching
+
 ## Scope
 
 **Current lab:** ESR Indexing Strategy (transfer task with 3 conditions: A, B, C — full scoring)

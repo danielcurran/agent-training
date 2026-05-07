@@ -2,37 +2,59 @@
 
 This task is completed **after** lab stages are finished and **after** `KNOWLEDGE.json` has been created and validated.
 
-**Domain:** Hospital appointment scheduling system (no overlap with the domain used in this lab)
+**Domain:** Surgical scheduling system for a hospital network (completely different from the product catalog domain in the lab)
 
-**Problem:** A hospital app runs this query thousands of times per day:
+**Context:** A surgical scheduling app manages bookings across multiple operating rooms. The system experiences high write volume (300+ surgeries booked per hour) and must answer the following query thousands of times per day:
 
 ```javascript
-db.appointments.find({
-  doctorId: "dr-smith",
-  appointmentDate: { $gte: new Date("2026-05-01"), $lte: new Date("2026-05-31") }
-}).sort({ urgency: -1 })
+db.surgeries.find({
+  operatingRoomId: "room-301",
+  surgicalSpecialty: ["cardiology"],  // array field — doctors have multiple specialties
+  scheduledDate: { $gte: new Date("2026-05-01"), $lte: new Date("2026-05-31") },
+  priority: { $gte: 2 }  // 0=routine, 1=urgent, 2=emergency
+}).sort({ estimatedDuration: -1 })
+.limit(25)
 ```
 
-The `appointments` collection has 500,000 documents. The query currently takes 800ms.
+The query currently takes 1.2 seconds on 2 million documents. Users report that the system is slow for both reads and writes.
 
-Answer the following in order:
+---
 
-1. **SQL instinct:** What would a SQL developer likely do when indexing this query? Name the specific column order they would choose and why.
+## Your Task
 
-2. **MongoDB failure mode:** What does that SQL-instinct index produce in MongoDB's query execution plan? Name the specific execution stage it introduces and explain why.
+Answer the following in order. **For each decision, explain not just what to do, but why you chose that approach — what trade-offs matter here?**
 
-3. **ESR solution:** Design the optimal ESR index. Classify each field as E, S, or R, state the field order, and explain why placing sort before range eliminates the execution stage you named above.
+### 1. ESR Classification
+Identify which fields are Equality (E), Sort (S), and Range (R). If you have multiple fields in a role, prioritize them: which equality field matters most for selectivity? Which range field is most restrictive? Explain your reasoning.
 
-4. **Explain output:** State what the explain output looks like before and after your index is applied.
+### 2. Index Strategy Decision
+Design your index strategy. Consider:
+- Should you include all fields, or omit one of the range fields to reduce index size and write overhead?
+- The surgicalSpecialty field is an array. What does indexing an array field do to index size and write performance? Is it worth it for this query pattern?
+- Given the high write volume, is there a trade-off between query speed and insert performance?
+
+State your final index design and explain the trade-offs you accepted and rejected.
+
+### 3. Failure Mode (Without Your Index)
+What does MongoDB's default behavior produce for this query without your index? Name the execution stage(s) that appear. Could the query use a partial index or a different strategy to reduce write overhead?
+
+### 4. Your Index and Why It Solves the Problem
+State your index syntax and explain why it eliminates the failure modes you identified above. If you omitted any fields, explain why the selectivity benefit of what you *did* include outweighs the cost of not including them.
 
 ---
 
 ## Scoring Rubric
 
-| Dimension | Evidence of mastery |
+| Dimension | Mastery Indicator |
 |---|---|
-| **Fluency** | Correct index syntax: `db.appointments.createIndex({ doctorId: 1, urgency: -1, appointmentDate: 1 })` |
-| **Induction** | Field order justified by E/S/R roles — `doctorId` as E, `urgency` as S, `appointmentDate` as R — not by analogy to lab queries |
-| **Sense-Making** | Explicitly names SQL instinct (e.g., column appearance order or by cardinality), explains why it causes SORT stage in MongoDB, and states the ESR alternative |
+| **Fluency** | Correct MongoDB index syntax for your chosen fields |
+| **Induction** | E/S/R roles identified correctly; reasoning about field priority and trade-offs — not mechanical application |
+| **Sense-Making** | Explains the failure modes MongoDB would encounter; articulates the trade-off between read speed and write volume; justifies whether to include all fields or optimize for write performance |
 
-**Passing bar:** Syntax correct, field order matches E→S→R, learner names the SQL instinct, explains the MongoDB failure mode by name (SORT stage), and explains *why* urgency must come before appointmentDate — not just that it should.
+**Passing bar:** 
+- E/S/R classification is sound
+- Index syntax is correct
+- Learner explains WHY they prioritized certain fields (selectivity reasoning)
+- Learner explicitly considers write volume and index size trade-offs
+- Learner explains what execution stage(s) would appear without the index
+

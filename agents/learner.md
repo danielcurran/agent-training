@@ -274,18 +274,20 @@ Knowledge Check: PASS
 
 **Read the transfer task from:** `lab-test-env/[lab-name]/TRANSFER_TASK.md` (inside the lab folder — do NOT read the tech spec)
 
-Complete it now, after KNOWLEDGE.json has been validated, using **only** what you recorded in `KNOWLEDGE.json`. Do not reason from lab examples or stages. Do not use prior MongoDB knowledge.
+The transfer task applies what you learned to a new context or scenario. It is designed to test whether your understanding transfers beyond the specific lab examples.
+
+Complete it now, after KNOWLEDGE.json has been validated, using **only** what you recorded in `KNOWLEDGE.json` plus your own reasoning applied to the new context. Do not look up external documentation. Do not use prior MongoDB knowledge from training data.
 
 **Your response format:**
 
 Provide your answer following the structure in TRANSFER_TASK.md. For each question:
 
 **Your response:**
-[Write your solution here. Explain your reasoning. Name the MongoDB concepts you applied and why. If you would make a different choice than the lab's pattern, explain why.]
+[Write your solution here. Explain your reasoning. Name the MongoDB concepts you applied and why. Explain the reasoning behind your choices, not just the final answer.]
 
 **What I drew on from KNOWLEDGE.json:** [list the specific entries from KNOWLEDGE.json that informed this response]
 
-**What I had to figure out that KNOWLEDGE.json didn't cover:** [anything you reasoned beyond what was explicitly recorded — or state "nothing"]
+**What I had to infer or reason beyond KNOWLEDGE.json:** [describe any reasoning you applied to adapt your learning to this new context — or state "I applied the concepts directly without requiring additional inference"]
 
 After completing the transfer task above, save it as part of your lab completion report to `labs/reports/[lab-name]/[lab-name]-env-eval-v[N].md`.
 
