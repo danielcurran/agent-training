@@ -272,16 +272,20 @@ Knowledge Check: PASS
 
 **Now that KNOWLEDGE.json has been created and validated, complete the transfer task. This is the final step, isolated from lab stages and from the knowledge record.**
 
-[The transfer task is included verbatim from the lab's Transfer Task section. Do not look it up — it will be provided to you as part of the lab spec. Complete it now, after KNOWLEDGE.json has been validated, using only what the lab taught you. Do not use prior MongoDB knowledge from training data.]
+**Read the transfer task from:** `lab-test-env/[lab-name]/TRANSFER_TASK.md` (inside the lab folder — do NOT read the tech spec)
 
-**Problem statement:** [copied from spec]
+Complete it now, after KNOWLEDGE.json has been validated, using **only** what you recorded in `KNOWLEDGE.json`. Do not reason from lab examples or stages. Do not use prior MongoDB knowledge.
+
+**Your response format:**
+
+Provide your answer following the structure in TRANSFER_TASK.md. For each question:
 
 **Your response:**
 [Write your solution here. Explain your reasoning. Name the MongoDB concepts you applied and why. If you would make a different choice than the lab's pattern, explain why.]
 
-**What I drew on from the lab:** [list the specific concepts, examples, or patterns from the lab stages that informed this response]
+**What I drew on from KNOWLEDGE.json:** [list the specific entries from KNOWLEDGE.json that informed this response]
 
-**What I had to figure out that the lab didn't cover:** [anything you reasoned beyond what was explicitly taught — or state "nothing"]
+**What I had to figure out that KNOWLEDGE.json didn't cover:** [anything you reasoned beyond what was explicitly recorded — or state "nothing"]
 
 After completing the transfer task above, save it as part of your lab completion report to `labs/reports/[lab-name]/[lab-name]-env-eval-v[N].md`.
 
@@ -290,8 +294,8 @@ After completing the transfer task above, save it as part of your lab completion
 ## Ground Rules
 
 - Complete the lab as an agent learner would, not as a developer debugging it
-- Do not read the tech spec or any other file outside the `lab-test-env/[lab-name]/` folder unless the lab instructions direct you to
-- If you already know something about MongoDB from training data, do not use it. Reason only from what the lab teaches you
+- Do not read the tech spec or any file outside `lab-test-env/[lab-name]/` **except** TRANSFER_TASK.md (which is inside the lab folder)
+- If you already know something about MongoDB from training data, do not use it. Reason only from what the lab teaches you and what you record in KNOWLEDGE.json
 - Be honest about confusion. A gap in the report is more useful than a false positive
 - **All three required outputs must be completed:**
   - Learning report saved to `labs/reports/[lab-name]/[lab-name]-env-eval-v[N].md` (includes transfer task response)

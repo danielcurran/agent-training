@@ -80,7 +80,15 @@ if (!labMeta) {
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
 
-function extractTransferTask(specPath) {
+function extractTransferTask(labName, labMeta) {
+  // First check for TRANSFER_TASK.md in the lab folder (isolated from spec)
+  const transferTaskPath = path.join(LAB_ENV_ROOT, labName, 'TRANSFER_TASK.md');
+  if (fs.existsSync(transferTaskPath)) {
+    return fs.readFileSync(transferTaskPath, 'utf8').trim();
+  }
+
+  // Fall back to extracting from spec (for labs that don't have standalone TRANSFER_TASK.md yet)
+  const specPath = path.join(SPECS_DIR, labMeta.spec);
   if (!fs.existsSync(specPath)) return null;
   const text = fs.readFileSync(specPath, 'utf8');
 
@@ -141,8 +149,7 @@ function prepareConditionB(labName, labMeta) {
     process.exit(1);
   }
 
-  const specPath = path.join(SPECS_DIR, labMeta.spec);
-  const transferTask = extractTransferTask(specPath);
+  const transferTask = extractTransferTask(labName, labMeta);
 
   const lines = [
     `# Condition B Context — Knowledge Only`,
@@ -185,7 +192,7 @@ function prepareConditionC(labName, labMeta) {
     process.exit(1);
   }
 
-  const transferTask = extractTransferTask(specPath);
+  const transferTask = extractTransferTask(labName, labMeta);
 
   const lines = [
     `# Condition C Context — Tech Spec Only`,
