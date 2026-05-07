@@ -22,31 +22,31 @@ const indexes = [
   // Query 1: db.products.find({ status: 'active' })
   {
     name: 'query1-status',
-    fields: { /* fill in ESR order */ }
+    fields: { status: 1 }
   },
 
   // Query 2: db.products.find({ status: 'active' }).sort({ createdAt: -1 })
   {
     name: 'query2-status-createdAt',
-    fields: { /* fill in ESR order */ }
+    fields: { status: 1, createdAt: -1 }
   },
 
   // Query 3: db.products.find({ status: 'active', price: { $gte: 50, $lte: 500 } })
   {
     name: 'query3-status-price',
-    fields: { /* fill in ESR order */ }
+    fields: { status: 1, price: 1 }
   },
 
   // Query 4: db.products.find({ status: 'active', price: { $gte: 50 } }).sort({ rating: -1 })
   {
     name: 'query4-status-rating-price',
-    fields: { /* fill in ESR order */ }
+    fields: { status: 1, rating: -1, price: 1 }
   },
 
   // Query 5: db.products.find({ tags: 'sale', rating: { $gte: 4 } }).sort({ createdAt: -1 })
   {
     name: 'query5-tags-createdAt-rating',
-    fields: { /* fill in ESR order */ }
+    fields: { tags: 1, createdAt: -1, rating: 1 }
   }
 ];
 

@@ -14,12 +14,13 @@ You are not a QA engineer. You are a learner. Complete the lab as instructed, re
 
 ## Purpose
 
-Work through the lab environment at `lab-test-env/[lab-name]/`, complete each stage, and produce two required outputs:
+Work through the lab environment at `lab-test-env/[lab-name]/`, complete each stage, and produce three required outputs:
 
-1. **Learning Report** (`labs/reports/[lab-name]/[lab-name]-env-eval-v[N].md`) — Covers what you learned and how effective the experience was
+1. **Learning Report** (`labs/reports/[lab-name]/[lab-name]-env-eval-v[N].md`) — Covers what you learned, how effective the experience was, **and your Transfer Task Response** (embedded in the report)
 2. **Knowledge Artifact** (`KNOWLEDGE.json` in the lab root) — Machine-readable record of MongoDB concepts learned, used for cross-session knowledge retention
+3. **Transfer Task Response** (embedded in the learning report) — Your answer to the transfer task, demonstrating that your learning transfers to a novel domain
 
-Omitting either output makes the lab evaluation incomplete. Both are required for the lab to be considered finished.
+Omitting any output makes the lab evaluation incomplete. All three are required for the lab to be considered finished.
 
 ## Inputs
 
@@ -270,13 +271,13 @@ Knowledge Check: PASS
 
 ### 5. Complete Transfer Task (AFTER Knowledge Artifact Created)
 
-**Now that KNOWLEDGE.json has been created and validated, complete the transfer task. This is the final step, isolated from lab stages and from the knowledge record.**
+**Now that KNOWLEDGE.json has been created and validated, complete the transfer task. This is the final step.**
 
 **Read the transfer task from:** `lab-test-env/[lab-name]/TRANSFER_TASK.md` (inside the lab folder — do NOT read the tech spec)
 
 The transfer task applies what you learned to a new context or scenario. It is designed to test whether your understanding transfers beyond the specific lab examples.
 
-Complete it now, after KNOWLEDGE.json has been validated, using **only** what you recorded in `KNOWLEDGE.json` plus your own reasoning applied to the new context. Do not look up external documentation. Do not use prior MongoDB knowledge from training data.
+Complete it now, after KNOWLEDGE.json has been validated, using what you learned throughout the lab experience (stages, reflections, decisions) plus what you recorded in KNOWLEDGE.json. You may apply the full depth of your learning from the lab — do not artificially restrict yourself to only KNOWLEDGE.json.
 
 **Your response format:**
 
@@ -285,11 +286,32 @@ Provide your answer following the structure in TRANSFER_TASK.md. For each questi
 **Your response:**
 [Write your solution here. Explain your reasoning. Name the MongoDB concepts you applied and why. Explain the reasoning behind your choices, not just the final answer.]
 
-**What I drew on from KNOWLEDGE.json:** [list the specific entries from KNOWLEDGE.json that informed this response]
+**What I drew on from the lab:** [reference specific stages, decisions, or concepts that informed this response — e.g., "Stage 3 performance measurements," "INDEX_DECISIONS trade-off reasoning," or "KNOWLEDGE.json entry: ESR Guideline"]
 
-**What I had to infer or reason beyond KNOWLEDGE.json:** [describe any reasoning you applied to adapt your learning to this new context — or state "I applied the concepts directly without requiring additional inference"]
+**What I had to reason through anew:** [describe any reasoning you applied to adapt your learning to this novel context — or state "I applied the concepts directly without requiring additional reasoning beyond the lab"]
 
-After completing the transfer task above, save it as part of your lab completion report to `labs/reports/[lab-name]/[lab-name]-env-eval-v[N].md`.
+After completing the transfer task above, embed your responses in your learning report under a new section:
+
+```markdown
+# Transfer Task Response
+
+**Transfer Task Domain:** [domain from TRANSFER_TASK.md]
+
+## [Question 1]
+
+**Your response:**
+[Your answer]
+
+**What I drew on from the lab:** [reference specific stages, decisions, KNOWLEDGE.json entries, etc.]
+
+**What I had to reason through anew:** [describe any novel reasoning]
+
+## [Question 2]
+
+[repeat for each question]
+```
+
+Then save the complete report (including Transfer Task Response) to `labs/reports/[lab-name]/[lab-name]-env-eval-v[N].md`.
 
 ---
 
@@ -297,9 +319,11 @@ After completing the transfer task above, save it as part of your lab completion
 
 - Complete the lab as an agent learner would, not as a developer debugging it
 - Do not read the tech spec or any file outside `lab-test-env/[lab-name]/` **except** TRANSFER_TASK.md (which is inside the lab folder)
-- If you already know something about MongoDB from training data, do not use it. Reason only from what the lab teaches you and what you record in KNOWLEDGE.json
+- Do not use prior MongoDB knowledge from training data beyond what the lab teaches you
 - Be honest about confusion. A gap in the report is more useful than a false positive
-- **All three required outputs must be completed:**
-  - Learning report saved to `labs/reports/[lab-name]/[lab-name]-env-eval-v[N].md` (includes transfer task response)
-  - `KNOWLEDGE.json` created in the lab root and validated with `npm run check:knowledge` (or equivalent)
-  - **Transfer task completed AFTER KNOWLEDGE.json is validated** — strict ordering to isolate the two
+- **Note on Transfer Task:** You have completed the full lab, so you naturally draw on the full depth of your learning (stages, reflections, decisions, KNOWLEDGE.json). The "What I drew on" and "What I had to reason through anew" sections are for documenting your reasoning, not constraints on what you can use. (Different agents like the Knowledge-Only Respondent have different constraints.)
+- **All three required outputs must be completed in this order:**
+  1. **Learning Report (stages only)** — Saved to `labs/reports/[lab-name]/[lab-name]-env-eval-v[N].md` after completing all lab stages
+  2. **KNOWLEDGE.json** — Created in lab root, validated with `npm run check:knowledge` (or equivalent). **CRITICAL: Do not start transfer task until KNOWLEDGE.json is validated.**
+  3. **Transfer Task Response** — Embedded in the learning report (append to the existing file). Completed AFTER KNOWLEDGE.json validation
+  4. **Final Report** — Complete report with all three sections saved to `labs/reports/[lab-name]/[lab-name]-env-eval-v[N].md`

@@ -1,0 +1,42 @@
+{
+  "timestamp": "2026-05-07T15:11:47.379Z",
+  "query": {
+    "filter": {
+      "status": "active",
+      "price": {
+        "$gte": 50,
+        "$lte": 500
+      }
+    },
+    "sort": {
+      "rating": -1
+    }
+  },
+  "checks": {
+    "noIndex": {
+      "time": 19,
+      "hasSortStage": true
+    },
+    "nonEsr": {
+      "index": {
+        "status": 1,
+        "price": 1,
+        "rating": -1
+      },
+      "time": 9,
+      "hasSortStage": true
+    },
+    "esr": {
+      "index": {
+        "status": 1,
+        "rating": -1,
+        "price": 1
+      },
+      "time": 11,
+      "hasSortStage": false
+    },
+    "esrNoSortStage": true,
+    "nonEsrHasSortStage": true
+  },
+  "passed": true
+}

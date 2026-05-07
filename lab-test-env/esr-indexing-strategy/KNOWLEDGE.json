@@ -1,0 +1,119 @@
+[
+  {
+    "concept": "ESR Indexing Guideline",
+    "confidence": "verified",
+    "sql_instinct_overridden": "Normalize fields into separate indexes",
+    "rule": "Order compound index fields as Equality → Sort → Range to match MongoDB query execution model",
+    "when_to_apply": "Every query with multiple conditions (filter, sort, or range)",
+    "description": "A systematic approach to compound index design that orders fields as Equality → Sort → Range to match MongoDB query execution model",
+    "key_points": [
+      "Equality fields first narrow the index range efficiently",
+      "Sort fields second allow results to be traversed in pre-sorted order",
+      "Range fields last use index bounds to filter without evaluating conditions on documents",
+      "Field order in compound indexes is critical for performance"
+    ]
+  },
+  {
+    "concept": "Compound Index Performance",
+    "confidence": "verified",
+    "sql_instinct_overridden": "Create multiple single-field indexes and let optimizer choose",
+    "rule": "Properly ordered compound indexes eliminate expensive SORT stages from query execution plans",
+    "when_to_apply": "Whenever queries combine filtering and sorting operations",
+    "description": "Properly ordered compound indexes eliminate expensive SORT stages from query execution plans",
+    "key_points": [
+      "SORT stages load documents into memory and are computationally expensive",
+      "ESR-ordered indexes can reduce query time by 30-40% by eliminating SORT stages",
+      "Non-ESR indexes force MongoDB to apply sorts after filtering, wasting resources",
+      "Performance benefit grows with dataset size"
+    ]
+  },
+  {
+    "concept": "Index Field Ordering Patterns",
+    "confidence": "verified",
+    "sql_instinct_overridden": "All index fields should serve the same purpose",
+    "rule": "Order compound index fields according to how they appear in the query: equality conditions, sort operations, then range conditions",
+    "when_to_apply": "When designing any compound index",
+    "description": "Specific patterns for how to order compound index fields based on query structure",
+    "key_points": [
+      "Equality only: single ascending field is sufficient",
+      "Equality + Sort: put sort field after equality field, match sort direction (-1 for descending)",
+      "Equality + Range: put range field after equality field, ascending or descending depending on query",
+      "Equality + Sort + Range: place in E-S-R order, sort direction must match query sort"
+    ]
+  },
+  {
+    "concept": "Index Trade-Off Analysis",
+    "confidence": "verified",
+    "sql_instinct_overridden": "Minimize index count to reduce storage overhead",
+    "rule": "Multi-field indexes justified when they eliminate SORT stages, even if storage and maintenance costs increase",
+    "when_to_apply": "When deciding between multiple single-field indexes and compound indexes",
+    "description": "Understanding when index storage and maintenance costs justify performance gains",
+    "key_points": [
+      "Complex compound indexes cost more storage and maintenance but provide larger performance gains",
+      "SORT stage elimination justifies the cost of multi-field indexes",
+      "Array field indexes incur higher maintenance costs but essential for array queries",
+      "Index design should prioritize eliminating SORT stages over minimizing index count"
+    ]
+  },
+  {
+    "concept": "Query Analysis Using explain()",
+    "confidence": "verified",
+    "sql_instinct_overridden": "Trust query optimizer without verification",
+    "rule": "Use explain() output to detect SORT stages and compare index strategies for performance impact",
+    "when_to_apply": "After creating any index to verify it eliminates unnecessary operations",
+    "description": "Using MongoDB explain() to verify index effectiveness and detect missing SORT stages",
+    "key_points": [
+      "SORT stage in explain output indicates suboptimal indexing",
+      "Comparing explain output across index strategies shows performance impact",
+      "Time reduction when SORT stage is eliminated demonstrates ESR guideline effectiveness"
+    ]
+  },
+  {
+    "concept": "E=status, S=createdAt, R=none indexing",
+    "confidence": "verified",
+    "sql_instinct_overridden": "Sort should happen after filtering in separate operation",
+    "query_pattern": "db.products.find({ status: 'active' }).sort({ createdAt: -1 })",
+    "index_definition": "{ status: 1, createdAt: -1 }",
+    "rule": "Sort field direction must match query sort direction in index definition",
+    "when_to_apply": "For queries that filter by one field and sort by another",
+    "learned": "Sort direction must match query sort direction in index definition"
+  },
+  {
+    "concept": "E=status, S=none, R=price indexing",
+    "confidence": "verified",
+    "sql_instinct_overridden": "Put range conditions in separate index",
+    "query_pattern": "db.products.find({ status: 'active', price: { $gte: 50, $lte: 500 } })",
+    "index_definition": "{ status: 1, price: 1 }",
+    "rule": "Range fields after equality enable index bounds for filtering",
+    "when_to_apply": "For queries that combine equality and range conditions",
+    "learned": "Range fields after equality enable index bounds for filtering"
+  },
+  {
+    "concept": "E=status, S=rating, R=price indexing (complex)",
+    "confidence": "verified",
+    "sql_instinct_overridden": "Create separate indexes for filter, sort, and range",
+    "query_pattern": "db.products.find({ status: 'active', price: { $gte: 50 } }).sort({ rating: -1 })",
+    "index_definition": "{ status: 1, rating: -1, price: 1 }",
+    "rule": "Sort must come before range in E-S-R order to maximize efficiency",
+    "when_to_apply": "For complex queries combining filter, sort, and range in one operation",
+    "learned": "Sort must come before range in E-S-R order to maximize efficiency; eliminates SORT stage"
+  },
+  {
+    "concept": "Misconception correction: field order in indexes",
+    "confidence": "corrected",
+    "sql_instinct_overridden": "Assume field order is arbitrary",
+    "previous_belief": "Field order in indexes doesn't matter much",
+    "corrected_belief": "Field order is critical—wrong order can force expensive SORT stages even with an index",
+    "rule": "Index field order determines query execution plan efficiency",
+    "when_to_apply": "When debugging why indexes don't improve query performance"
+  },
+  {
+    "concept": "Misconception correction: index performance impact",
+    "confidence": "corrected",
+    "sql_instinct_overridden": "Expect minimal index benefits",
+    "previous_belief": "Index performance improvements are marginal",
+    "corrected_belief": "ESR-ordered indexes can provide 30%+ performance improvements by eliminating SORT stages",
+    "rule": "Properly ordered indexes eliminate expensive operations, creating compound performance gains",
+    "when_to_apply": "When evaluating whether index optimization is worth the implementation effort"
+  }
+]

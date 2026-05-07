@@ -36,9 +36,6 @@ See [README.md](README.md) for the full experiment design and [standards/hypothe
 # Verify no stale KNOWLEDGE.json files exist — they must be absent before Condition B/C runs
 find lab-test-env -name KNOWLEDGE.json
 # Expected output: nothing (empty)
-
-# Check current experiment status
-node scripts/compare-conditions.js --all
 ```
 
 ---
