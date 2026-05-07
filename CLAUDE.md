@@ -29,7 +29,7 @@ Reports are organized by lab topic in `labs/reports/{lab-name}/`:
 | Insert and Find | [labs/outlines/insert-and-find-outline.md](labs/outlines/insert-and-find-outline.md) | [labs/specs/insert-and-find-tech-spec.md](labs/specs/insert-and-find-tech-spec.md) | [v1](labs/reports/insert-and-find/insert-and-find-tech-spec-eval-v1.md) (8.8/10) | [v2](labs/reports/insert-and-find/insert-and-find-env-eval-v2.md) | ⚠️ Reference Spec (Environment Archived) |
 | ESR Indexing Strategy | [labs/outlines/esr-indexing-strategy-outline.md](labs/outlines/esr-indexing-strategy-outline.md) | [labs/specs/esr-indexing-strategy-tech-spec-v3.md](labs/specs/esr-indexing-strategy-tech-spec-v3.md) | [v1](labs/reports/esr-indexing-strategy/esr-indexing-strategy-tech-spec-eval-v1.md) (8.6/10) | [v4](labs/reports/esr-indexing-strategy/esr-indexing-strategy-env-eval-v4.md) | ✓ Production Ready |
 | Aggregation Foundations | [labs/outlines/aggregation-foundations-outline.md](labs/outlines/aggregation-foundations-outline.md) | [labs/specs/aggregation-foundations-tech-spec.md](labs/specs/aggregation-foundations-tech-spec.md) | [v2](labs/reports/aggregation-foundations/aggregation-foundations-tech-spec-eval-v2.md) (9.1/10) | [v1](labs/reports/aggregation-foundations/aggregation-foundations-env-eval-v1.md) | ✓ Production Ready |
-| Memory for AI | [labs/outlines/memory-for-ai.md](labs/outlines/memory-for-ai.md) | [labs/specs/memory-for-ai-tech-spec.md](labs/specs/memory-for-ai-tech-spec.md) | [v1](labs/reports/memory-for-ai/memory-for-ai-tech-spec-eval-v1.md) | [v1](labs/reports/memory-for-ai/memory-for-ai-env-eval-v1.md) | ✓ Production Ready |
+| Memory for AI | [labs/outlines/memory-for-ai-outline.md](labs/outlines/memory-for-ai-outline.md) | [labs/specs/memory-for-ai-tech-spec.md](labs/specs/memory-for-ai-tech-spec.md) | [v1](labs/reports/memory-for-ai/memory-for-ai-tech-spec-eval-v1.md) | [v1](labs/reports/memory-for-ai/memory-for-ai-env-eval-v1.md) | ✓ Production Ready |
 
 ## Workflow
 
@@ -80,6 +80,11 @@ Custom Claude skills are stored in the `skills/` directory. These teach Claude s
 | [mongodb-learning-design](skills/mongodb-learning-design/SKILL.md) | Core principles for designing effective MongoDB training labs and learning experiences |
 
 See [skills/README.md](skills/README.md) for details on using and creating skills.
+
+## Research & Experiments
+
+- [standards/hypothesis-validation.md](standards/hypothesis-validation.md) — Ongoing KLI hypothesis tracking across all labs
+- [labs/reports/knowledge-transfer-test/](labs/reports/knowledge-transfer-test/) — Knowledge injection vs. lab completion comparison study
 
 ## Directory Reference
 

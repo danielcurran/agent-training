@@ -1,5 +1,7 @@
 # Lab Execution Environment
 
+> **This is a template. Do not modify this directory directly.** Copy this structure into `lab-test-env/{name}/` for your lab. See [CLAUDE.md](../CLAUDE.md) for details.
+
 Node.js harness template for validating learner implementations against MongoDB. Customize this structure for any MongoDB lab by specifying your own check scripts, seed data, and stage definitions.
 
 ## Setup

@@ -68,8 +68,7 @@ standards/           → Instructional design rulebook and research sources
 - **[standards/hypothesis-validation.md](standards/hypothesis-validation.md)** — Lab-by-lab hypothesis testing results and revision log
 - **[standards/sources/research-sources.md](standards/sources/research-sources.md)** — Learning science research backing the rulebook
 - **[skills/README.md](skills/README.md)** — Custom Claude skills guide
-- **[SKILLS_SETUP.md](SKILLS_SETUP.md)** — How to activate skills with agents (recommended for best results)
-- **[lab-execution/README.md](lab-execution/README.md)** — Lab environment setup & execution
+- **[lab-execution/README.md](lab-execution/README.md)** — Lab environment template documentation
 
 ---
 
@@ -91,18 +90,6 @@ Added infrastructure for agents to retain what they learn between lab sessions. 
 
 ---
 
-### April–May 2026 — Instruqt Integration (Incomplete)
+### April–May 2026 — Instruqt Integration (Abandoned)
 
-Investigated running the learner agent (`agents/learner.md`) inside Instruqt browser-based lab environments instead of local Docker. The goal was to eliminate local setup friction and run labs in a fully managed, resettable environment.
-
-**What was tried:**
-
-- Built an Instruqt browser adapter (`lib/instruqt-browser-adapter.js`) and a standalone runner (`scripts/run-learner-browser.js`) to drive Instruqt's in-browser terminal via Playwright
-- Added an Instruqt-specific learner variant and documented the intended integration in `docs/INSTRUQT_INTEGRATION.md`, `docs/INSTRUQT_BROWSER_README.md`, and `docs/INSTRUQT_QUICK_START.md`
-- Tested against live Instruqt lab URLs; the adapter could open the browser and navigate to the terminal, but reliable programmatic command execution and output capture proved inconsistent
-
-**Why it stalled:**
-
-Instruqt's terminal interface is rendered in a way that makes stable automation difficult without access to the Instruqt API. The web terminal does not expose a clean DOM target for input/output capture, and Playwright-level interactions were fragile across different lab configurations. More research into the Instruqt REST API and whether it exposes a terminal session endpoint is needed before this approach can be made reliable.
-
-**Status:** Paused. The local Docker-based workflow remains the primary execution path. Instruqt integration code is retained in `lib/` and `scripts/` for reference when the API investigation resumes.
+Investigated running the learner agent inside Instruqt browser-based lab environments. Attempted both API-token and Playwright browser automation approaches. Neither worked reliably — Instruqt's terminal DOM is not stable enough for programmatic automation without official API support. Code and documentation removed; local Docker remains the execution path.
