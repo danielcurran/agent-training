@@ -1,0 +1,40 @@
+[
+  {
+    "concept": "ESR Guideline — compound index field ordering",
+    "sql_instinct_overridden": "Ordering index columns by query appearance order or by column cardinality (most selective first)",
+    "rule": "In a MongoDB compound index, place Equality fields first, Sort fields second, and Range fields last (E→S→R) to allow the index to serve both filtering and sorting without an in-memory sort stage.",
+    "when_to_apply": "Whenever a query combines an equality filter, a sort, and a range filter on different fields — design the compound index with E fields first, S fields second, R fields last.",
+    "confidence": "verified",
+    "source_check": "npm run check:stage1"
+  },
+  {
+    "concept": "SORT stage in explain() output",
+    "sql_instinct_overridden": "Assuming any index will eliminate sorting overhead regardless of field order",
+    "rule": "If a compound index places a range field before a sort field, MongoDB cannot use the index to serve sort order and introduces an in-memory SORT stage; explain('executionStats') reveals this in the winning plan.",
+    "when_to_apply": "When a query is slow and involves both a sort and a range filter — check explain() output for a SORT stage; if present, the index field order likely violates ESR.",
+    "confidence": "verified",
+    "source_check": "npm run check:explain"
+  },
+  {
+    "concept": "Compound index prefix reuse",
+    "sql_instinct_overridden": "Creating one index per query regardless of shared leading fields",
+    "rule": "A compound index can serve queries that filter on any prefix of its fields; an index on { status, createdAt } also supports status-only queries without a separate single-field index.",
+    "when_to_apply": "When multiple queries share a leading equality field, design one compound index with that field as the prefix rather than separate indexes, reducing write overhead and index memory.",
+    "confidence": "self-assessed"
+  },
+  {
+    "concept": "Multikey index — array field indexing",
+    "sql_instinct_overridden": "Using a join table or normalizing arrays into a separate collection for indexing",
+    "rule": "MongoDB automatically creates a multikey index when an indexed field contains an array, indexing each array element individually so equality filters like { tags: 'sale' } work correctly.",
+    "when_to_apply": "When a document field holds an array (e.g., tags) and you need to filter by a specific element — a normal createIndex call on that field creates a multikey index automatically.",
+    "confidence": "verified",
+    "source_check": "npm run check:indexes"
+  },
+  {
+    "concept": "Index write cost vs. read benefit trade-off",
+    "sql_instinct_overridden": "Indexing every queried field without considering write overhead",
+    "rule": "Each additional index on a collection adds overhead to every insert and update; the benefit is justified only when the frequency of reads that use that index outweighs the cumulative write cost.",
+    "when_to_apply": "When deciding whether to add a new index — estimate query frequency and latency improvement; if the query is rare or the collection is write-heavy, prefer fewer indexes.",
+    "confidence": "self-assessed"
+  }
+]

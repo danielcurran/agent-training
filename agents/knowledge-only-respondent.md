@@ -63,14 +63,14 @@ This data is used to evaluate whether the KNOWLEDGE.json schema captures enough 
 Save your full response to:
 
 ```
-labs/reports/transfer-comparison/[lab-name]/condition-b-v[N]-response.md
+ABC-testing/[lab-name]/condition-b-v[N]-response.md
 ```
 
 Use the same version number as the context document prepared for this run.
 
 Confirm with:
 ```
-Response saved to labs/reports/transfer-comparison/[lab-name]/condition-b-v[N]-response.md
+Response saved to ABC-testing/[lab-name]/condition-b-v[N]-response.md
 ```
 
 ## Ground Rules

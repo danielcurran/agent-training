@@ -18,7 +18,7 @@ const path = require('path');
 
 const ROOT              = path.join(__dirname, '..');
 const REPORTS_ROOT      = path.join(ROOT, 'labs', 'reports');
-const COMPARISON_ROOT   = path.join(ROOT, 'labs', 'reports', 'transfer-comparison');
+const COMPARISON_ROOT   = path.join(ROOT, 'ABC-testing');
 
 const LABS = [
   'builder-badge',

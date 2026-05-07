@@ -10,7 +10,7 @@ All three conditions produce a transfer task response. Responses are scored iden
 
 ## Hypothesis Being Tested
 
-From [standards/hypothesis-validation.md](../../standards/hypothesis-validation.md):
+From [standards/hypothesis-validation.md](standards/hypothesis-validation.md):
 
 1. **KLI typing hypothesis** — Labs that produce KNOWLEDGE.json entries with fluency/induction/sense-making mappings enable transfer without lab completion
 2. **SQL bridging hypothesis** — Explicit SQL contrasts in KNOWLEDGE.json entries reduce failure rates on novel domain problems
@@ -29,7 +29,7 @@ From [standards/hypothesis-validation.md](../../standards/hypothesis-validation.
 ## Directory Structure
 
 ```
-labs/reports/transfer-comparison/
+ABC-testing/
   {lab-name}/
     condition-b-v1-context.md      ← prepared by: node scripts/prepare-condition.js --lab <name> --condition b
     condition-b-v1-response.md     ← produced by: /run-condition-b

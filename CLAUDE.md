@@ -86,7 +86,7 @@ See [skills/README.md](skills/README.md) for details on using and creating skill
 ## Research & Experiments
 
 - [standards/hypothesis-validation.md](standards/hypothesis-validation.md) — Ongoing KLI hypothesis tracking across all labs
-- [labs/reports/transfer-comparison/](labs/reports/transfer-comparison/) — Three-condition knowledge transfer experiment (lab completion vs. knowledge-only vs. spec-only)
+- [ABC-testing/](ABC-testing/) — Three-condition knowledge transfer experiment (lab completion vs. knowledge-only vs. spec-only)
 - [labs/reports/knowledge-transfer-test/](labs/reports/knowledge-transfer-test/) — Legacy single-lab knowledge injection vs. lab completion study
 
 ## Knowledge Transfer Experiment
@@ -131,7 +131,4 @@ Contains Copilot permission rules (`settings.local.json`) for git operations and
 - Chunk output: `labs/chunks/{name}/` — concept and task chunks for RAG pipelines (concepts/ + tasks/ + manifest.json)
 - Agent definitions live in `agents/` — `.github/prompts/` references them by filename, do not rename
 - Stage deliverables: `REFLECTION.md` (required in all labs), `KNOWLEDGE.json` (required in all labs — machine-readable knowledge record for cross-session retention). `SCHEMA.md` is optional for intro labs (labs with fewer than 3 stages or no schema design component); complex labs like Builder Badge include it to document the data model.
-- Transfer comparison outputs: `labs/reports/transfer-comparison/{name}/condition-{b|c}-v{N}-{context|response|score}.md`
-- Chunk output: `labs/chunks/{name}/` — concept and task chunks for RAG pipelines (concepts/ + tasks/ + manifest.json)
-- Agent definitions live in `agents/` — `.github/prompts/` references them by filename, do not rename
-- Stage deliverables: `REFLECTION.md` (required in all labs), `KNOWLEDGE.json` (required in all labs — machine-readable knowledge record for cross-session retention). `SCHEMA.md` is optional for intro labs (labs with fewer than 3 stages or no schema design component); complex labs like Builder Badge include it to document the data model.
+- ABC testing outputs: `ABC-testing/{name}/condition-{b|c}-v{N}-{context|response|score}.md`

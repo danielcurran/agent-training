@@ -76,14 +76,14 @@ This data is used to evaluate whether tech spec quality alone is sufficient for 
 Save your full response to:
 
 ```
-labs/reports/transfer-comparison/[lab-name]/condition-c-v[N]-response.md
+ABC-testing/[lab-name]/condition-c-v[N]-response.md
 ```
 
 Use the same version number as the context document prepared for this run.
 
 Confirm with:
 ```
-Response saved to labs/reports/transfer-comparison/[lab-name]/condition-c-v[N]-response.md
+Response saved to ABC-testing/[lab-name]/condition-c-v[N]-response.md
 ```
 
 ## Ground Rules

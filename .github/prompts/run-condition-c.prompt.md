@@ -12,13 +12,13 @@ Run Condition C of the knowledge-transfer experiment using the agent definition 
    ```
    node scripts/prepare-condition.js --lab [lab-name] --condition c
    ```
-2. Attach the generated context document from `labs/reports/transfer-comparison/[lab-name]/condition-c-v[N]-context.md`
+2. Attach the generated context document from `ABC-testing/[lab-name]/condition-c-v[N]-context.md`
 
 **Fill in before running:**
 - Lab name: [kebab-case lab name]
 
 No lab completion or KNOWLEDGE.json required — this condition starts cold with only the tech spec.
 
-Output saves to `labs/reports/transfer-comparison/[lab-name]/condition-c-v[N]-response.md`.
+Output saves to `ABC-testing/[lab-name]/condition-c-v[N]-response.md`.
 
 After saving, score with `/score-transfer-task` (attach the tech spec + the condition-c response as the env-eval).

@@ -18,7 +18,7 @@
  *
  * Output:
  *   Prints a ready-to-use context block for the agent.
- *   Saves a context document to labs/reports/transfer-comparison/<lab>/condition-<X>-context.md
+ *   Saves a context document to ABC-testing/<lab>/condition-<X>-context.md
  */
 
 'use strict';
@@ -29,7 +29,7 @@ const path = require('path');
 const ROOT          = path.join(__dirname, '..');
 const LAB_ENV_ROOT  = path.join(ROOT, 'lab-test-env');
 const SPECS_DIR     = path.join(ROOT, 'labs', 'specs');
-const OUTPUT_ROOT   = path.join(ROOT, 'labs', 'reports', 'transfer-comparison');
+const OUTPUT_ROOT   = path.join(ROOT, 'ABC-testing');
 
 // ─── Lab registry ────────────────────────────────────────────────────────────
 // Maps lab-name → spec filename and whether a transfer task exists
@@ -251,7 +251,7 @@ function main() {
 
   console.log(content);
   console.log('\n' + '─'.repeat(70));
-  console.log(`✓ Context saved to: labs/reports/transfer-comparison/${labName}/condition-${condition}-v${version}-context.md`);
+  console.log(`✓ Context saved to: ABC-testing/${labName}/condition-${condition}-v${version}-context.md`);
   console.log('');
 
   if (condition === 'b') {
@@ -259,14 +259,14 @@ function main() {
     console.log('  1. Open the context document above in Copilot Chat');
     console.log('  2. Run /run-condition-b with the lab name');
     console.log('  3. The agent will use only the KNOWLEDGE.json context to answer the transfer task');
-    console.log(`  4. Save the response to: labs/reports/transfer-comparison/${labName}/condition-b-v${version}-response.md`);
+    console.log(`  4. Save the response to: ABC-testing/${labName}/condition-b-v${version}-response.md`);
     console.log(`  5. Score with: /score-transfer-task (attach spec + response)`);
   } else {
     console.log('Next steps:');
     console.log('  1. Open the context document above in Copilot Chat');
     console.log('  2. Run /run-condition-c with the lab name');
     console.log(`  3. The agent will read labs/specs/${labMeta.spec} and answer the transfer task`);
-    console.log(`  4. Save the response to: labs/reports/transfer-comparison/${labName}/condition-c-v${version}-response.md`);
+    console.log(`  4. Save the response to: ABC-testing/${labName}/condition-c-v${version}-response.md`);
     console.log(`  5. Score with: /score-transfer-task (attach spec + response)`);
   }
   console.log('');
