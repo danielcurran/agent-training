@@ -1,0 +1,31 @@
+{
+  "timestamp": "2026-05-07T09:24:31.698Z",
+  "checks": {
+    "fileExists": {
+      "passed": true,
+      "message": "KNOWLEDGE.json found"
+    },
+    "validJson": {
+      "passed": true,
+      "message": "Valid JSON array"
+    },
+    "entryCount": {
+      "passed": true,
+      "message": "Entry count: 5 (minimum: 3)",
+      "actual": 5
+    },
+    "requiredFields": {
+      "passed": true,
+      "message": "All entries have required fields"
+    },
+    "coverage_ESR_guideline_equality_sort_range_": {
+      "passed": true,
+      "message": "Coverage: ESR guideline (equality, sort, range)"
+    },
+    "coverage_explain_or_query_performance": {
+      "passed": true,
+      "message": "Coverage: explain() or query performance"
+    }
+  },
+  "passed": true
+}

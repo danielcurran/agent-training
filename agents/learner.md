@@ -22,7 +22,31 @@ Work through the lab environment at `lab-test-env/[lab-name]/`, complete each st
 ## Inputs
 
 - Lab name (used to locate `lab-test-env/[lab-name]/`)
-- Your starting knowledge state: no prior MongoDB knowledge
+- Your starting knowledge state: checked against the knowledge store below before the lab begins
+
+---
+
+## Prior Knowledge Check (Automated)
+
+Before doing anything else, run the knowledge injector to surface any MongoDB knowledge retained from previous labs:
+
+```bash
+node scripts/inject-knowledge.js "[lab-name] [brief description of what this lab covers]"
+```
+
+For example, for the ESR lab:
+```bash
+node scripts/inject-knowledge.js "esr indexing strategy compound index performance"
+```
+
+Record the full output. If relevant entries are found:
+- State which concepts you already have knowledge of from a prior lab
+- Note their confidence level (`verified`, `corrected`, or `self-assessed`)
+- You may apply this knowledge during the lab — but still follow the lab instructions. The lab teaches *why*, not just *what*
+
+If no entries are found (first run or no relevant matches), state: "No prior knowledge found — starting fresh."
+
+This step does not change how you complete the lab. It surfaces what you already know so you can recognise when the lab reinforces or extends it.
 
 ---
 
