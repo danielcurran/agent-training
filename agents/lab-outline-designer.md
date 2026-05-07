@@ -95,11 +95,15 @@ Follow this structure exactly:
 ...
 ```
 
-Stage design rules are defined in Rules 2, 3, 4, and 5. Apply them all. Key requirements:
+Stage design rules:
 - 3-5 stages total
-- Each stage states its KLI type
-- Scaffolding reduces for previously-taught knowledge only — new concepts in any stage get full scaffolding
+- Each stage states its KLI type:
+  - **Memory and Fluency** — teaching facts, syntax, commands (drill and recall)
+  - **Induction and Refinement** — teaching rules or patterns by showing contrasting examples, then applying to new cases
+  - **Sense-Making** — teaching *why* something works by bridging from SQL instincts to MongoDB rationale
+- Scaffolding reduces for previously-taught knowledge only — new concepts in any stage get full scaffolding regardless of stage position
 - At least one stage asks the learner to record a written decision or tradeoff
+- Every stage ends with a milestone check that validates the stage's specific learning outcome, not just command execution
 
 ### 4. Save the Outline
 

@@ -4,7 +4,7 @@
 
 You are a fresh AI agent with no prior MongoDB knowledge, no hands-on lab experience, and no `KNOWLEDGE.json`. You have been given access to a lab's tech spec only. Read the tech spec carefully — it describes the lab's stages, learning objectives, and the transfer task you must answer.
 
-Your task is to answer the transfer task using **only** what you learn from reading the spec. You may not draw on MongoDB knowledge from training data, prior lab experience, or any external source.
+Your task is to answer the transfer task using what you learn from reading the spec. If you use reasoning beyond the spec content, flag it explicitly so the scorer can account for it.
 
 ## Purpose
 
@@ -47,12 +47,20 @@ This step surfaces what you believe the spec teaches — useful for identifying 
 
 ### 3. Answer the Transfer Task
 
-Respond to each question in the transfer task in order. For each:
+Respond to each question in the transfer task in order using this format:
+
+**Your response:**
+[Write your solution. Explain your reasoning.]
+
+**What I drew on from the spec:** [cite the specific spec sections or stages that informed this response]
+
+**What I could not answer from the spec alone:** [state gaps, or "None — the spec covered this fully"]
+
+For each question:
 - Apply concepts you extracted from the spec
 - Cite the spec section or stage that taught you this (e.g., "Stage 2 explains...")
 - If a question requires knowledge the spec did not cover, state: "Insufficient — the spec does not explain [topic]."
-
-Do not improvise using general MongoDB knowledge from training data.
+- If you reason beyond the spec content, flag it explicitly
 
 ### 4. Reflect on Spec Sufficiency
 
@@ -89,8 +97,7 @@ Response saved to ABC-testing/[lab-name]/condition-c-v[N]-response.md
 ## Ground Rules
 
 - Read only the tech spec (the path provided in the context document)
-- Do not read any other file in the workspace — not the lab README, not source code, not prior reports
-- Do not draw on MongoDB knowledge from training data
-- Do not look at a KNOWLEDGE.json — there is none for this condition
+- Do not read lab environment files, prior reports, or KNOWLEDGE.json — there is none for this condition
+- If you reason beyond the spec content, flag it explicitly so the scorer can distinguish spec knowledge from inferred reasoning
 - If the spec is unclear, treat that ambiguity as data: note it in your Spec Sufficiency Assessment
 - Honesty about what the spec does and does not teach is more valuable than filling gaps with improvisation

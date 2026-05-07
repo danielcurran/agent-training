@@ -130,23 +130,7 @@ Adjust the image version, ports, and add additional services (e.g., mock embeddi
   - `check:all` — run all check scripts in order: env → stage 1 → stage 2 → ... → knowledge
 
 #### `lib/db.js`
-Standard MongoDB connection module. Connect using `MONGODB_URI` from `.env`. Export a `connect()` function that returns the db object. Pattern must match:
-```js
-const { MongoClient } = require('mongodb');
-require('dotenv').config();
-
-let client;
-
-async function connect() {
-  if (!client) {
-    client = new MongoClient(process.env.MONGODB_URI);
-    await client.connect();
-  }
-  return client.db();
-}
-
-module.exports = { connect };
-```
+Standard MongoDB connection module. Connect using `MONGODB_URI` from `.env`. Export a `connect()` function that returns the db object. Use the `mongodb` driver with a singleton client pattern.
 
 #### `scripts/seed.js`
 - Use stable ObjectIds so foreign key references are consistent across collections
@@ -166,62 +150,29 @@ Each check script validates the artifact(s) the agent must produce in that stage
 
 #### `scripts/check-knowledge.js`
 
-Validates the `KNOWLEDGE.json` artifact after the agent completes the lab. This check script:
+Validates the `KNOWLEDGE.json` artifact after the agent completes the lab:
 - Verifies `KNOWLEDGE.json` exists in the lab root
 - Parses the JSON and validates structure (entries must have all required fields)
 - Confirms each entry has a valid `confidence` value (verified/corrected/self-assessed)
 - Validates that at least one entry per major lab concept exists
 - Outputs `Knowledge Check: PASS` if all validations succeed
 
-Follow this pattern:
-
-```js
-#!/usr/bin/env node
-
-const fs = require('fs');
-const path = require('path');
-
-const ROOT = path.join(__dirname, '..');
-
-let passed = 0;
-let failed = 0;
-
-function pass(msg) { console.log(`✓ ${msg}`); passed++; }
-function fail(msg) { console.error(`✗ ${msg}`); failed++; }
-
-// --- checks here ---
-
-console.log(`\n${passed} passed, ${failed} failed`);
-process.exit(failed > 0 ? 1 : 0);
-```
-
-Rules for check scripts:
+All check scripts must follow this pattern:
+- Use `pass(msg)` / `fail(msg)` helpers for consistent output
 - Check file existence before reading content
+- Each check is independent — a failing check must not throw, only call `fail()`
+- Exit with code 1 if any checks failed
 - Validate the exact fields, sections, or values described in the spec's milestone check
 - Validate minimum content length for any notes files (minimum 150 words unless spec specifies otherwise)
 - For MongoDB checks: connect to the db, query the collection, assert on shape or count
 - The terminal output when all checks pass must match the exact expected output stated in the spec
 - Each check is independent — a failing check must not throw, only call `fail()`
 
-#### `src/dal/index.js`
-Stub file with one exported function per data access pattern described in the spec. Each stub must:
-- Have the correct function signature
+#### `src/` stub files
+Generate stub files matching the spec's artifact list. Not every lab has a DAL — match whatever file structure the spec defines (e.g., `src/stage1-esr-identification.js`, `src/indexes.js`, `src/dal/index.js`). Each stub must:
+- Have the correct function signature or export structure
 - Include a `// TODO:` comment stating exactly what the agent must implement
 - Throw a clear error if called unimplemented: `throw new Error('Not implemented: [function name]')`
-
-Example:
-```js
-const { connect } = require('../../lib/db');
-
-// TODO: Implement getTicketWithComments(ticketId)
-// Return a single ticket document with its comments embedded.
-// Use the schema you designed in Stage 1.
-async function getTicketWithComments(ticketId) {
-  throw new Error('Not implemented: getTicketWithComments');
-}
-
-module.exports = { getTicketWithComments };
-```
 
 #### `README.md`
 ```

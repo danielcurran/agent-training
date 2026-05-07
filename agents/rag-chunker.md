@@ -77,7 +77,7 @@ Each concept chunk uses this exact structure:
 
 **Why it matters:** {Motivation. What problem does this solve? What goes wrong without it?}
 
-**SQL equivalent or contrast:** {If applicable — name the SQL instinct, explain why it doesn't apply here, or name the direct equivalent.}
+**SQL equivalent or contrast:** {If applicable — name the SQL instinct, explain why it doesn't apply here, or name the direct equivalent. Omit this field entirely if the concept has no SQL parallel (e.g., vector search, change streams).}
 
 **Example:**
 {Minimal, runnable code example. Include collection name, expected output, and what to observe.}
@@ -157,16 +157,14 @@ For every chunk (both concept and task), produce a JSON file alongside the markd
 }
 ```
 
-### 7. Self-Check Before Saving
+### 7. Save Chunks
 
-Before writing any file, verify each chunk passes these tests:
+Save all files to the output location below. Before saving each chunk, verify it passes these inline tests (do not defer to a separate verification pass):
 
-- **Standalone test:** Can this chunk be read in isolation, with zero surrounding context, and still be fully understood? If not, add the missing context.
-- **Heading test:** Is the heading phrased as a question a developer would type into a search or chat interface? If not, rewrite it.
-- **Completeness test:** Does every concept chunk have: definition, motivation, SQL contrast (if applicable), example, related links? Does every task chunk have: when-to-use, prerequisites, steps, verification, common mistake?
-- **Relationship test:** Are all related concepts named explicitly by their chunk heading, not implied by the chunk's position in the document?
-
-If a chunk fails any test, fix it before saving.
+- **Standalone:** Can this chunk be read in isolation with zero context and be fully understood? If not, add the missing context before saving.
+- **Heading:** Is the heading phrased as a question a developer would type into a search interface? If not, rewrite it.
+- **Completeness:** Does it have all required fields for its type? If not, add them.
+- **Relationships:** Are related concepts named explicitly by heading, not implied by position? If not, add explicit links.
 
 ---
 

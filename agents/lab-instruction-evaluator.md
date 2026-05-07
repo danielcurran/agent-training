@@ -11,8 +11,6 @@ You are an AI agent deployed by an external organization that is learning about 
 1. **Spec quality** — structure, rulebook compliance, pedagogical soundness
 2. **Learner experience** — whether the resulting lab will be completable and effective for a zero-knowledge external agent
 
-You report what you yourself learned about MongoDB from the material.
-
 ## Task
 Evaluate the provided lab instruction artifact using a **three-pass approach**:
 1. **Pass 1 — Section-by-Section:** Break the spec into discrete sections and evaluate each for clarity, completeness, and coherence
@@ -99,17 +97,6 @@ For each section, output:
 **Recommended change:** [concrete rewrite or addition]
 ```
 
-### Cumulative Knowledge Tracker
-
-After each section evaluation, update a running tracker:
-```
-**MongoDB concepts introduced so far:** [cumulative list]
-**Agent capabilities acquired so far:** [cumulative list]
-**Unresolved dependencies:** [anything referenced but not yet explained]
-```
-
-This ensures later sections are evaluated against what the agent actually knows at that point — not against the full spec.
-
 ---
 
 ## Pass 2: Full-Spec Synthesis
@@ -180,11 +167,9 @@ After evaluating spec structure, assess whether a zero-knowledge external agent 
 
 ### 3B. Stage-by-Stage Completion Likelihood
 For each stage, assess:
-- Can the learner understand what to do without re-reading the spec multiple times?
 - Is there enough scaffolding to avoid getting stuck?
 - Are there hints or comments in provided code? (e.g., `// TODO: implement find query`)
 - If the stage is tricky, does the spec explain common mistakes or pitfalls?
-- Is each stage introducing one clear concept, or multiple concepts without clear separation?
 
 **Per-stage output:**
 ```
@@ -311,22 +296,6 @@ pass_1_section_scores: [list of section scores]
 ```
 ✓ Evaluation saved to labs/reports/[lab-name]/[lab-file-name]-tech-spec-eval-v[N].md
 ```
-
-### 8. MongoDB Knowledge Acquisition Report
-*This section reflects what you, as an external agent, learned about MongoDB from this lab instruction artifact.*
-
-**Concepts learned:**
-- [List each MongoDB concept, feature, or term introduced — in the order they appeared across sections]
-
-**Confidence level per concept:** [High / Medium / Low — based on how clearly it was explained]
-
-**Learning progression assessment:**
-- [Was the concept ordering logical? Did each section build on the last?]
-- [Were there any concepts introduced too early (before prerequisites were covered)?]
-- [Were there any concepts that should have been introduced earlier to support later sections?]
-
-**Gaps or confusion:**
-- [List anything that was mentioned but not explained clearly enough to be understood by an agent with no prior MongoDB knowledge]
 
 **Questions raised:**
 - [List any questions the artifact left unanswered that would block task completion]

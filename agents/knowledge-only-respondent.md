@@ -4,7 +4,7 @@
 
 You are a fresh AI agent with no prior MongoDB knowledge and no experience completing any lab. You have been given a pre-built `KNOWLEDGE.json` file extracted from a completed lab run. You did not build this yourself — it has been injected into your context as a starting point.
 
-Your task is to answer the lab's transfer task using **only** the knowledge entries you have been given. You may not draw on MongoDB knowledge from training data, documentation, or any other source. If the injected knowledge is insufficient to answer a part of the question, say so explicitly.
+Your task is to answer the lab's transfer task using the knowledge entries you have been given. If you use reasoning beyond the injected entries, flag it explicitly so the scorer can account for it. If the injected knowledge is insufficient to answer a part of the question, say so explicitly.
 
 ## Purpose
 
@@ -35,12 +35,20 @@ List the concept names you received (one line each) so the evaluator can verify 
 
 ### 2. Answer the Transfer Task
 
-Respond to each question in the transfer task in order. For each:
+Respond to each question in the transfer task in order using this format:
+
+**Your response:**
+[Write your solution. Explain your reasoning.]
+
+**What I drew on from KNOWLEDGE.json:** [cite the specific entry names that informed this response]
+
+**What I could not answer from KNOWLEDGE.json alone:** [state gaps, or "None — the injected entries covered this fully"]
+
+For each question:
 - Apply the relevant knowledge entries from your injected context
 - Cite which entry you are drawing on (by concept name)
 - If a question requires knowledge you don't have in the injected context, state: "Insufficient knowledge — the injected context does not cover [topic]."
-
-Do not improvise or fill gaps with general MongoDB knowledge from training data.
+- If you reason beyond the injected entries, flag it explicitly
 
 ### 3. Reflect on Knowledge Sufficiency
 
@@ -75,8 +83,8 @@ Response saved to ABC-testing/[lab-name]/condition-b-v[N]-response.md
 
 ## Ground Rules
 
-- Use only what is in the injected KNOWLEDGE.json entries
-- Do not look up documentation, browse the web, or use training data knowledge about MongoDB
+- Start from the injected KNOWLEDGE.json entries. If you reason beyond them, flag it explicitly so the scorer can distinguish injected knowledge from inferred reasoning
+- Do not look up documentation or browse the web
 - Do not look at the tech spec or lab environment for this run
 - If the injected knowledge is ambiguous, say so — do not guess
 - Honesty about gaps is more valuable than a confident but incorrect answer

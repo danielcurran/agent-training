@@ -77,7 +77,7 @@ State:
 - Lab name and spec version recorded in manifest
 - Date chunked
 
-Then evaluate every chunk. Do not sample. Every chunk gets scored.
+Then evaluate every chunk. If multiple chunks share the same structural pattern (e.g., all concept chunks missing the same field), you may batch-evaluate them: score one representative chunk fully, then list the others that share the same verdict and required fix.
 
 ### 2. Score Each Chunk
 

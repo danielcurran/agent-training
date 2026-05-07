@@ -35,8 +35,8 @@ Before writing, extract and state:
 If critical information is missing (e.g., no application domain defined, no access patterns specified), ask **one round of up to 5 clarifying questions** before proceeding. If the user does not answer, make reasonable assumptions and document them in the Pre-Writing Analysis.
 
 **Default Agent Skills** (use if outline does not specify):
-- Schema Design Advisor — helps design MongoDB schemas for access patterns
-- Query Optimizer — helps write and optimize MongoDB queries
+- MongoDB Schema Design — helps design MongoDB schemas for access patterns
+- MongoDB Query Optimizer — helps write and optimize MongoDB queries
 - Test Suite Runner — runs tests and interprets results
 - Data Explorer — inspects MongoDB collections and documents
 
@@ -140,24 +140,13 @@ Confirm to the user:
 ✓ Tech spec saved to labs/specs/[lab-name]-tech-spec.md
 ```
 
-### 7. Self-Evaluate
-After saving, score the spec against these 7 criteria internally using Rule 12 scoring (✓ met, △ partial, ✗ not met):
+### 7. Self-Check
+After saving, verify:
+- Every stage has a named `npm run check:*` command with exact expected output
+- Every MongoDB term is defined on first use and appears in the Glossary
+- A zero-knowledge agent could begin without asking clarifying questions
 
-1. **Task Clarity** — Is the target task concrete and unambiguous? Can a zero-knowledge agent begin without asking clarifying questions? (Writing Execution preamble)
-2. **Input/Output Definition** — Are all stage inputs available from prior stages or the environment? Are outputs named and formatted explicitly? (Rule 5)
-3. **Instructional Coherence** — Does each stage state its KLI type? Does scaffolding reduce correctly for prior knowledge while fully supporting new knowledge? (Rules 3, 5)
-4. **Testability** — Does each stage have a named milestone check with exact expected output? (Rule 6)
-5. **Failure Fallbacks** — Does every external dependency have a health check and fallback? Does every stage have a max iteration rule? (Rules 6, 7)
-6. **Concept Coverage** — Does every MongoDB term appear in the Glossary and defined on first use? (Rule 8)
-7. **Buildability** — Can someone provision the lab without trial-and-error from the Environment Requirements and Seed Data sections? (Rule 11)
-
-If the overall score is 6+ (mostly ✓), save as-is. If below 6, revise the lowest-scoring criterion and re-save. Maximum 2 self-revision passes — if still below 6 after 2 passes, save as-is and flag the remaining issues:
-
-```
-⚠ Self-evaluation incomplete. Remaining issues (score: [X/7]):
-- [criterion]: [specific issue]
-Run /evaluate-lab-instructions for a full external review.
-```
+If any check fails, revise and re-save (max 2 passes). Then confirm completion.
 
 ## Output Format
 
@@ -183,17 +172,3 @@ The complete spec following the structure in Behavior 3.
 ```
 ✓ Tech spec saved to labs/specs/[lab-name]-tech-spec.md
 ```
-
-## Success Criteria
-- The spec includes a clear "Target Agent Task or Capability" section at the top
-- The spec includes a "Learning Objectives" section with 3+ specific, measurable outcomes
-- Learning objectives are carried forward from the input outline (or clearly inferred if not explicitly provided)
-- **Environment Requirements and Seed Data sections are present and buildable** — someone can provision the lab without trial-and-error
-- The spec specifies 3-5 stages, each with clear scope and one milestone check command
-- Every stage has a milestone check with exact expected terminal output
-- Every MongoDB term is defined on first use + appears in the Glossary
-- Every agent skill interaction has an example prompt and expected output
-- Every external dependency (MongoDB, mock servers, APIs) has a health check and fallback instruction
-- A zero-knowledge agent could complete the lab without asking any clarifying questions
-- **The spec self-evaluates at 6/7 or higher on the 7 evaluation criteria** (or flags remaining issues after 2 revision passes)
-- **The spec could be built in Instruqt, local VS Code, or Codespaces** — all environment assumptions are explicit
