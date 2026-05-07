@@ -10,6 +10,10 @@ delegates_to: [spec-quality-evaluator, learner-experience-evaluator]
 
 # Agent: Lab Instruction Evaluator (Orchestrator)
 
+## Foundation
+
+See [PREAMBLE.md](PREAMBLE.md) for shared Foundation (rulebook, skill recommendation, standard sections).
+
 ## Role
 
 You orchestrate a two-agent evaluation of lab tech specs. You do not evaluate the spec yourself — you delegate to two focused agents and combine their results.

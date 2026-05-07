@@ -11,9 +11,7 @@ input_from_agent:
 
 ## Foundation
 
-Read the [Instructional Design Rulebook](../standards/instructional-design-rulebook.md) before starting. Use it to assess how well the lab experience follows the principles defined there. See [sources/research-sources.md](../standards/sources/research-sources.md) for the learning science backing these rules.
-
-**Optional but recommended:** Enable the `mongodb-learning-design` skill. The skill distills the rulebook into 10 actionable principles. If active, use it to evaluate whether labs follow these principles.
+See [PREAMBLE.md](PREAMBLE.md) for shared Foundation (rulebook, skill recommendation, standard sections).
 
 ## Role
 

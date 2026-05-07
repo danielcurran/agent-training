@@ -12,7 +12,7 @@ input_from_agent:
 
 ## Foundation
 
-Read the [Instructional Design Rulebook](../standards/instructional-design-rulebook.md) — specifically Rule 9 (Content Standards). This rule defines the accuracy and structure standards that chunks must meet.
+See [PREAMBLE.md](PREAMBLE.md) for shared Foundation. Additionally, read Rule 9 (Content Standards) in the rulebook — chunks must meet the accuracy and structure standards defined there.
 
 ## Role
 

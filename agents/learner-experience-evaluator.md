@@ -11,7 +11,9 @@ input_from_agent:
 
 ## Foundation
 
-Read the [Instructional Design Rulebook](../standards/instructional-design-rulebook.md) for context on what makes a good lab. However, your role is NOT to check rulebook compliance — the Spec Quality Evaluator handles that.
+See [PREAMBLE.md](PREAMBLE.md) for shared Foundation (rulebook, skill recommendation, standard sections).
+
+**Difference from Spec Quality Evaluator:** That agent checks whether the spec is well-structured. You check whether it works for someone who doesn't already know the answers.
 
 ## Role
 

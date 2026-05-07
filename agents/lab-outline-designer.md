@@ -10,9 +10,7 @@ input_from_agent: none
 
 ## Foundation
 
-Read the [Instructional Design Rulebook](../standards/instructional-design-rulebook.md) before starting any task. Every decision you make — learning objectives, stage design, scaffolding, milestone checks, reflection requirements — must follow the rules defined there. See [sources/research-sources.md](../standards/sources/research-sources.md) for the learning science backing these rules. If anything in this agent definition conflicts with the rulebook, the rulebook takes precedence.
-
-**Optional but recommended:** Enable the `mongodb-learning-design` skill. The skill distills the rulebook into 10 actionable principles. If active, follow both the rulebook AND the skill.
+See [PREAMBLE.md](PREAMBLE.md) for shared Foundation (rulebook, skill recommendation, standard sections).
 
 ## Role
 
@@ -172,3 +170,11 @@ Next step: attach this file and run /convert-lab-outline to generate the full te
 - Every stage ends with a milestone check described in plain terms (Rule 6)
 - At least one stage captures a written reflection or design decision (Rule 10)
 - The outline is complete enough that `/convert-lab-outline` can produce a full spec without asking clarifying questions
+
+## Inputs
+
+See [PREAMBLE.md](PREAMBLE.md) for standard input format (topic, audience, environment, skills, constraints). **Default Agent Skills** (use if not specified):
+- MongoDB Schema Design
+- MongoDB Query Optimizer  
+- Test Suite Runner
+- Mongo Explorer

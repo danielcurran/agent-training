@@ -11,7 +11,7 @@ input_from_agent:
 
 ## Foundation
 
-Read the [Instructional Design Rulebook](../standards/instructional-design-rulebook.md) before evaluating. Every score must cite a specific rulebook rule. If anything here conflicts with the rulebook, the rulebook takes precedence.
+See [PREAMBLE.md](PREAMBLE.md) for shared Foundation (rulebook, skill recommendation, standard sections).
 
 ## Role
 

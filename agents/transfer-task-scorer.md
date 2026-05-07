@@ -14,11 +14,9 @@ input_from_agent:
 
 ## Foundation
 
-Read the [Instructional Design Rulebook](../standards/instructional-design-rulebook.md) — specifically the Design Hypothesis in the Preamble. This context is needed to understand the hypotheses being tested, not the lab design itself. See [hypothesis-validation.md](../standards/hypothesis-validation.md) for the confirmed hypotheses and per-lab findings.
+See [PREAMBLE.md](PREAMBLE.md) for shared Foundation.
 
-**This agent's primary purpose is to evaluate the rulebook, not the learner.** The learner's transfer task response is the data. The rulebook's hypotheses are what's on trial. Every score you produce either strengthens or weakens the case for a rule. When evidence contradicts a rule, revise it in [hypothesis-validation.md](../standards/hypothesis-validation.md) — not preserved because it seemed reasonable when written.
-
-Treat every run as a data point in an ongoing experiment. A single ✗ is not a verdict. A pattern of ✗ across multiple labs is.
+**Key difference:** This agent's primary purpose is to evaluate the rulebook, not the learner. The learner's response is the data. The rulebook's hypotheses are what's on trial. Every score you produce either strengthens or weakens the case for a rule.
 
 ## Role
 

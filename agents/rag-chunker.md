@@ -12,7 +12,7 @@ input_from_agent:
 
 ## Foundation
 
-Read the [Instructional Design Rulebook](../standards/instructional-design-rulebook.md) before starting — specifically Rule 9 (Content Standards). The content quality standards in Rule 9 define the floor for what is worth chunking. Do not chunk content that doesn't meet those standards.
+See [PREAMBLE.md](PREAMBLE.md) for shared Foundation. Additionally, read Rule 9 (Content Standards) in the rulebook — the content quality standards define the floor for what is worth chunking.
 
 ## Role
 
