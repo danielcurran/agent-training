@@ -70,3 +70,39 @@ standards/           → Instructional design rulebook and research sources
 - **[skills/README.md](skills/README.md)** — Custom Claude skills guide
 - **[SKILLS_SETUP.md](SKILLS_SETUP.md)** — How to activate skills with agents (recommended for best results)
 - **[lab-execution/README.md](lab-execution/README.md)** — Lab environment setup & execution
+
+---
+
+## Changelog
+
+### May 2026 — Cross-Session Knowledge Retention
+
+Added infrastructure for agents to retain what they learn between lab sessions. Previously, the learner agent completed a lab and produced a markdown report, but all knowledge was ephemeral — the next run started from scratch. This change introduces a structured knowledge artifact and validation layer across all production labs.
+
+**What changed:**
+
+- **`KNOWLEDGE.json` required in all labs.** Each lab now instructs the agent to produce a machine-readable knowledge file after completing stages. The file is a JSON array of knowledge entries, each capturing the concept learned, the SQL instinct it replaces, the rule in one sentence, when to apply it, and a confidence level grounded in whether the associated milestone check passed (`verified`), required correction (`corrected`), or was self-assessed. This gives every knowledge claim a provenance signal.
+
+- **`check:knowledge` added to all lab environments.** Check scripts validate schema structure, minimum entry count, required fields, and lab-specific concept coverage (e.g., ESR lab must cover the equality-sort-range rule; memory-for-ai must cover namespace isolation and vector retrieval). The check runs as the final step of `check:all`. Labs: Builder Badge, ESR Indexing Strategy, Aggregation Foundations, Memory for AI.
+
+- **Learner agent updated.** `agents/learner.md` now includes a Step 4 after the learning report: generate and validate `KNOWLEDGE.json`. The agent is given the full schema, confidence value definitions, and the validation command for both Node.js and Python lab environments.
+
+- **Rulebook updated.** Rule 10 (Reflection and Decision Records) now includes the `KNOWLEDGE.json` requirement, full schema, and lab environment expectations for spec authors and the environment builder agent.
+
+---
+
+### April–May 2026 — Instruqt Integration (Incomplete)
+
+Investigated running the learner agent (`agents/learner.md`) inside Instruqt browser-based lab environments instead of local Docker. The goal was to eliminate local setup friction and run labs in a fully managed, resettable environment.
+
+**What was tried:**
+
+- Built an Instruqt browser adapter (`lib/instruqt-browser-adapter.js`) and a standalone runner (`scripts/run-learner-browser.js`) to drive Instruqt's in-browser terminal via Playwright
+- Added an Instruqt-specific learner variant and documented the intended integration in `docs/INSTRUQT_INTEGRATION.md`, `docs/INSTRUQT_BROWSER_README.md`, and `docs/INSTRUQT_QUICK_START.md`
+- Tested against live Instruqt lab URLs; the adapter could open the browser and navigate to the terminal, but reliable programmatic command execution and output capture proved inconsistent
+
+**Why it stalled:**
+
+Instruqt's terminal interface is rendered in a way that makes stable automation difficult without access to the Instruqt API. The web terminal does not expose a clean DOM target for input/output capture, and Playwright-level interactions were fragile across different lab configurations. More research into the Instruqt REST API and whether it exposes a terminal session endpoint is needed before this approach can be made reliable.
+
+**Status:** Paused. The local Docker-based workflow remains the primary execution path. Instruqt integration code is retained in `lib/` and `scripts/` for reference when the API investigation resumes.
