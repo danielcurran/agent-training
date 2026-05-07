@@ -6,6 +6,7 @@ const { checkStage2 } = require('./check-stage-2');
 const { checkStage3 } = require('./check-stage-3');
 const { checkStage4 } = require('./check-stage-4');
 const { checkReflection } = require('./check-reflection');
+const { checkKnowledge } = require('./check-knowledge');
 
 const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017';
 const DB_NAME = process.env.MONGODB_DB || 'online_bookstore';
@@ -42,17 +43,18 @@ async function runChecks(stage) {
       '2': checkStage2,
       '3': checkStage3,
       '4': checkStage4,
-      reflection: checkReflection
+      reflection: checkReflection,
+      knowledge: checkKnowledge
     };
 
-    const stagesToRun = stage === 'all' ? ['1', '2', '3', '4', 'reflection'] : [stage];
+    const stagesToRun = stage === 'all' ? ['1', '2', '3', '4', 'reflection', 'knowledge'] : [stage];
 
     let totalPassed = 0;
     let totalFailed = 0;
 
     for (const s of stagesToRun) {
       console.log(`\n--- Stage ${s} ---`);
-      const result = s === 'reflection'
+      const result = (s === 'reflection' || s === 'knowledge')
         ? await checks[s]()
         : await checks[s](db);
 
@@ -87,6 +89,9 @@ if (args.includes('--env')) {
 
 } else if (args.includes('--reflection')) {
   runChecks('reflection').catch(console.error);
+
+} else if (args.includes('--knowledge')) {
+  runChecks('knowledge').catch(console.error);
 
 } else if (args.includes('--all')) {
   runChecks('all').catch(console.error);

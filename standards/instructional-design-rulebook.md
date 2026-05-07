@@ -224,6 +224,34 @@ At least one stage per lab has the agent record a design decision (e.g., `SCHEMA
 - Prompts ask: what you chose, why, what you're giving up
 - Check validates file exists and has minimum content — doesn't score reasoning
 
+#### Knowledge Artifact
+
+Every lab must produce a `KNOWLEDGE.json` at the lab root. This is a machine-readable record of what was learned, validated by the same check infrastructure as other deliverables. It enables cross-session knowledge retention and retrieval.
+
+**Required schema — each entry:**
+
+```json
+{
+  "concept": "Short, named concept",
+  "sql_instinct_overridden": "The SQL pattern this replaces",
+  "rule": "The MongoDB rule or guideline in one sentence",
+  "when_to_apply": "Context or signal that tells you when to apply this rule",
+  "confidence": "verified | corrected | self-assessed",
+  "source_check": "The check command that validated this (optional)"
+}
+```
+
+**Confidence values:**
+- `verified` — milestone check passed first try
+- `corrected` — check failed, then fixed; rule reflects the correction
+- `self-assessed` — no check directly validated this concept
+
+**Lab environment requirements:**
+- Every lab must include a `check:knowledge` script (Node.js: `npm run check:knowledge`; Python: `python scripts/check_knowledge.py`)
+- The check validates: file exists, valid JSON array, minimum entries (≥ 3), required fields, valid confidence values, and lab-specific concept coverage
+- `check:knowledge` must be included in `check:all`
+- The spec must state the minimum entry count and list the lab-specific concepts that must be covered
+
 ### 11. Buildability
 
 Every lab provisions without trial-and-error. Ambiguous setup produces failed runs before learning can start.

@@ -14,6 +14,7 @@
     "check:explain": "node scripts/check-explain.js",
     "check:decisions": "node scripts/check-decisions.js",
     "check:reflection": "node scripts/check-reflection.js",
+    "check:knowledge": "node scripts/check-knowledge.js",
     "check:all": "node scripts/check-all.js"
   },
   "keywords": ["mongodb", "indexing", "esr", "performance", "education"],

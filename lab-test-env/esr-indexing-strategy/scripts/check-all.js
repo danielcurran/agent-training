@@ -9,7 +9,8 @@ const CHECKS = [
   { name: 'Indexes',       script: 'check-indexes.js' },
   { name: 'Performance',   script: 'check-explain.js' },
   { name: 'Decisions',     script: 'check-decisions.js' },
-  { name: 'Reflection',    script: 'check-reflection.js' }
+  { name: 'Reflection',    script: 'check-reflection.js' },
+  { name: 'Knowledge',     script: 'check-knowledge.js' }
 ];
 
 console.log('=== ESR Indexing Strategy Lab — Full Check ===\n');

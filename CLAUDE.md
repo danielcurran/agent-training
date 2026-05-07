@@ -95,4 +95,4 @@ Contains Copilot permission rules (`settings.local.json`) for git operations and
 - Lab environments: `lab-test-env/{name}/` — self-contained Node.js + Docker environment per lab
 - Chunk output: `labs/chunks/{name}/` — concept and task chunks for RAG pipelines (concepts/ + tasks/ + manifest.json)
 - Agent definitions live in `agents/` — `.github/prompts/` references them by filename, do not rename
-- Stage deliverables: `REFLECTION.md` (required in all labs). `SCHEMA.md` is optional for intro labs (labs with fewer than 3 stages or no schema design component); complex labs like Builder Badge include it to document the data model.
+- Stage deliverables: `REFLECTION.md` (required in all labs), `KNOWLEDGE.json` (required in all labs — machine-readable knowledge record for cross-session retention). `SCHEMA.md` is optional for intro labs (labs with fewer than 3 stages or no schema design component); complex labs like Builder Badge include it to document the data model.

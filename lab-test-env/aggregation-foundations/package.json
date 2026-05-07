@@ -15,6 +15,7 @@
     "check:stage-3": "node checks/index.js --stage=3",
     "check:stage-4": "node checks/index.js --stage=4",
     "check:reflection": "node checks/index.js --reflection",
+    "check:knowledge": "node checks/index.js --knowledge",
     "check:all": "node checks/index.js --all"
   },
   "dependencies": {

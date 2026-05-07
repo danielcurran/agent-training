@@ -12,7 +12,8 @@
     "check:vector": "node scripts/check-vector.js",
     "check:final": "node scripts/check-final.js",
     "check:reflection": "node scripts/check-reflection.js",
-    "check:all": "npm run check:env && npm run check:schema && npm run check:dal && npm run check:vector && npm run check:final && npm run check:reflection"
+    "check:knowledge": "node scripts/check-knowledge.js",
+    "check:all": "npm run check:env && npm run check:schema && npm run check:dal && npm run check:vector && npm run check:final && npm run check:reflection && npm run check:knowledge"
   },
   "dependencies": {
     "dotenv": "^16.0.0",

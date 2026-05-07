@@ -201,6 +201,50 @@ Confirm:
 Report saved to labs/reports/[lab-name]/[lab-name]-env-eval-v[N].md
 ```
 
+### 4. Generate Knowledge Artifact
+
+After saving the learning report, write `KNOWLEDGE.json` to the lab root. This is a machine-readable record of what you learned. It is used to persist knowledge across sessions and to retrieve relevant MongoDB patterns in future tasks.
+
+**Schema — each entry:**
+
+```json
+{
+  "concept": "Short, named concept (e.g., 'Document embedding')",
+  "sql_instinct_overridden": "The SQL pattern this replaces (e.g., 'Normalize into separate tables joined by foreign key')",
+  "rule": "The MongoDB rule or guideline in one sentence",
+  "when_to_apply": "Context or signal that tells you when to apply this rule",
+  "confidence": "verified | corrected | self-assessed",
+  "source_check": "The npm run check:* command that confirmed this (optional)"
+}
+```
+
+**Confidence values:**
+- `verified` — the associated milestone check passed first try, confirming the rule is correct
+- `corrected` — you got the check wrong first, then fixed it; the rule now reflects what you corrected to
+- `self-assessed` — no check directly validated this concept; based on your own understanding
+
+**Requirements:**
+- At least one entry per major concept taught in the lab
+- Every entry must have all five required fields (`source_check` is optional)
+- `confidence` must be exactly one of the three valid values
+- Entries should be specific enough to apply to a new problem — not just "I learned about indexes"
+
+**Validate the artifact:**
+
+For Node.js labs:
+```bash
+npm run check:knowledge
+```
+
+For Python labs (memory-for-ai):
+```bash
+python scripts/check_knowledge.py
+```
+
+Expected output: `Knowledge Check: PASS`
+
+If the check fails, revise the entries and re-run before proceeding.
+
 ---
 
 ## Ground Rules
