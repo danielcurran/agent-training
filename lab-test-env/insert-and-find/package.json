@@ -11,6 +11,7 @@
     "check:insert": "node scripts/check-insert.js",
     "check:find": "node scripts/check-find.js",
     "check:reflection": "node scripts/check-reflection.js",
+    "check:knowledge": "node scripts/check-knowledge.js",
     "check:all": "node scripts/index.js"
   },
   "keywords": [

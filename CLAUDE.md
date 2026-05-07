@@ -13,6 +13,8 @@ Repository for designing, evaluating, and iterating AI agent training materials 
 | Lab Instruction Evaluator | [agents/lab-instruction-evaluator.md](agents/lab-instruction-evaluator.md) | `/evaluate-lab-instructions` in Copilot Chat | Scores lab specs on spec quality and learner experience (3-pass evaluation) |
 | Lab Environment Builder | [agents/lab-environment-builder.md](agents/lab-environment-builder.md) | `/build-lab-environment` in Copilot Chat | Generates a working skeleton app and check scripts from a tech spec |
 | Agent Learner | [agents/learner.md](agents/learner.md) | `/run-learner-agent` in Copilot Chat | Completes a lab as an external AI agent learner and produces a learning report |
+| Knowledge-Only Respondent | [agents/knowledge-only-respondent.md](agents/knowledge-only-respondent.md) | `/run-condition-b` in Copilot Chat | Answers a transfer task using only an injected KNOWLEDGE.json (Condition B of knowledge-transfer experiment) |
+| Spec-Only Respondent | [agents/spec-only-respondent.md](agents/spec-only-respondent.md) | `/run-condition-c` in Copilot Chat | Answers a transfer task after reading only the tech spec (Condition C of knowledge-transfer experiment) |
 | Transfer Task Scorer | [agents/transfer-task-scorer.md](agents/transfer-task-scorer.md) | `/score-transfer-task` in Copilot Chat | Scores the learner's transfer task response against the three KLI hypotheses; produces a hypothesis-validation finding |
 | RAG Chunker | [agents/rag-chunker.md](agents/rag-chunker.md) | `/chunk-lab-content` in Copilot Chat | Converts validated lab content into semantically self-contained chunks for LLM retrieval and RAG pipelines |
 | RAG Chunk Evaluator | [agents/rag-chunk-evaluator.md](agents/rag-chunk-evaluator.md) | `/evaluate-lab-chunks` in Copilot Chat | Scores every chunk for standalone coherence, heading retrievability, structural completeness, relationship explicitness, and metadata accuracy |
@@ -84,7 +86,35 @@ See [skills/README.md](skills/README.md) for details on using and creating skill
 ## Research & Experiments
 
 - [standards/hypothesis-validation.md](standards/hypothesis-validation.md) — Ongoing KLI hypothesis tracking across all labs
-- [labs/reports/knowledge-transfer-test/](labs/reports/knowledge-transfer-test/) — Knowledge injection vs. lab completion comparison study
+- [labs/reports/transfer-comparison/](labs/reports/transfer-comparison/) — Three-condition knowledge transfer experiment (lab completion vs. knowledge-only vs. spec-only)
+- [labs/reports/knowledge-transfer-test/](labs/reports/knowledge-transfer-test/) — Legacy single-lab knowledge injection vs. lab completion study
+
+## Knowledge Transfer Experiment
+
+Tests three conditions against a transfer task to determine whether hands-on lab completion is necessary:
+
+| Condition | Method | Prompt |
+|---|---|---|
+| A — Lab Completion | Complete full lab | `/run-learner-agent` |
+| B — Knowledge Only | Receive KNOWLEDGE.json; no lab work | `/run-condition-b` |
+| C — Spec Only | Read tech spec; no lab work, no KNOWLEDGE.json | `/run-condition-c` |
+
+**Labs with transfer tasks (fully testable):** ESR Indexing Strategy, Aggregation Foundations, Memory for AI  
+**Labs without transfer tasks (KNOWLEDGE.json quality audit only):** Builder Badge, Insert and Find
+
+```bash
+# Prepare context for a condition
+node scripts/prepare-condition.js --lab esr-indexing-strategy --condition b
+node scripts/prepare-condition.js --lab esr-indexing-strategy --condition c
+
+# Check progress across all labs
+node scripts/compare-conditions.js --all
+```
+
+**Important:** Each condition must run in a fresh Copilot Chat session. Delete all `KNOWLEDGE.json` files before Condition B/C runs:
+```bash
+find lab-test-env -name KNOWLEDGE.json
+```
 
 ## Directory Reference
 
@@ -98,6 +128,10 @@ Contains Copilot permission rules (`settings.local.json`) for git operations and
 - Tech spec evaluations: `labs/reports/{name}/{name}-tech-spec-eval-v{N}.md` — increment N each revision cycle
 - Environment evaluations: `labs/reports/{name}/{name}-env-eval-v{N}.md` — tracks learner execution results
 - Lab environments: `lab-test-env/{name}/` — self-contained Node.js + Docker environment per lab
+- Chunk output: `labs/chunks/{name}/` — concept and task chunks for RAG pipelines (concepts/ + tasks/ + manifest.json)
+- Agent definitions live in `agents/` — `.github/prompts/` references them by filename, do not rename
+- Stage deliverables: `REFLECTION.md` (required in all labs), `KNOWLEDGE.json` (required in all labs — machine-readable knowledge record for cross-session retention). `SCHEMA.md` is optional for intro labs (labs with fewer than 3 stages or no schema design component); complex labs like Builder Badge include it to document the data model.
+- Transfer comparison outputs: `labs/reports/transfer-comparison/{name}/condition-{b|c}-v{N}-{context|response|score}.md`
 - Chunk output: `labs/chunks/{name}/` — concept and task chunks for RAG pipelines (concepts/ + tasks/ + manifest.json)
 - Agent definitions live in `agents/` — `.github/prompts/` references them by filename, do not rename
 - Stage deliverables: `REFLECTION.md` (required in all labs), `KNOWLEDGE.json` (required in all labs — machine-readable knowledge record for cross-session retention). `SCHEMA.md` is optional for intro labs (labs with fewer than 3 stages or no schema design component); complex labs like Builder Badge include it to document the data model.

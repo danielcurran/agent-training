@@ -7,7 +7,8 @@ const scripts = [
   { name: 'check:env', label: 'Environment Setup' },
   { name: 'check:insert', label: 'Stage 1: Insert' },
   { name: 'check:find', label: 'Stage 2: Find' },
-  { name: 'check:reflection', label: 'Stage 3: Reflection' }
+  { name: 'check:reflection', label: 'Stage 3: Reflection' },
+  { name: 'check:knowledge', label: 'Knowledge Artifact' }
 ];
 
 async function runAll() {
