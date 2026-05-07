@@ -1,21 +1,18 @@
 ---
 mode: ask
-description: Evaluate a lab instruction artifact for spec quality and learner experience
+description: Evaluate a lab spec for both spec quality and learner experience (runs both evaluators)
 ---
-
-**Recommended:** First activate the `mongodb-learning-design` skill in your Claude session for more consistent evaluation.
 
 [agents/lab-instruction-evaluator.md](../../agents/lab-instruction-evaluator.md)
 
-Evaluate the attached lab instruction artifact using the agent definition above. The evaluation covers three passes:
-1. **Pass 1:** Section-by-section pedagogical evaluation
-2. **Pass 2:** Full-spec structural synthesis
-3. **Pass 3:** Learner experience assessment (completion likelihood, pacing, recovery)
+Run a combined evaluation of the attached lab spec using both sub-agents:
+1. **Spec Quality Evaluator** — structural quality and rulebook compliance
+2. **Learner Experience Evaluator** — completion likelihood from a zero-knowledge perspective
+
+To run each evaluator independently, use `/evaluate-spec-quality` or `/evaluate-learner-experience`.
 
 **Fill in before running:**
 - Target task: [e.g., "help an agent query MongoDB using Atlas Search"]
-- Audience: an external AI agent with no prior MongoDB knowledge
-- Current knowledge state: No prior MongoDB knowledge
 
 Attach the spec file from `labs/specs/` using #file before sending.
-Output saves to `labs/reports/{name}-tech-spec-eval-v{N}.md`.
+Output saves to `labs/reports/{name}/{name}-tech-spec-eval-v{N}.md`.

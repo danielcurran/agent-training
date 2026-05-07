@@ -34,7 +34,9 @@ standards/           → Instructional design rulebook and research sources
 |---|---|---|
 | [Lab Outline Designer](agents/lab-outline-designer.md) | Design new lab outlines | `/design-lab-outline` |
 | [Lab Outline Converter](agents/lab-outline-converter.md) | Convert outlines into zero-knowledge technical specs | `/convert-lab-outline` |
-| [Lab Instruction Evaluator](agents/lab-instruction-evaluator.md) | Evaluate lab specs for spec quality and learner experience | `/evaluate-lab-instructions` |
+| [Lab Instruction Evaluator](agents/lab-instruction-evaluator.md) | Orchestrate both evaluators and combine scores | `/evaluate-lab-instructions` |
+| [Spec Quality Evaluator](agents/spec-quality-evaluator.md) | Evaluate spec structure and rulebook compliance | `/evaluate-spec-quality` |
+| [Learner Experience Evaluator](agents/learner-experience-evaluator.md) | Evaluate completion likelihood from zero-knowledge perspective | `/evaluate-learner-experience` |
 | [Lab Environment Builder](agents/lab-environment-builder.md) | Generate skeleton app and check scripts from a tech spec | `/build-lab-environment` |
 | [Agent Learner](agents/learner.md) | Complete a lab as an AI learner and produce a learning report | `/run-learner-agent` |
 | [Transfer Task Scorer](agents/transfer-task-scorer.md) | Score learner's transfer task; produce KLI hypothesis verdicts and hypothesis-validation finding | `/score-transfer-task` |

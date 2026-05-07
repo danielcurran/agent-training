@@ -1,3 +1,12 @@
+---
+agent: spec-only-respondent
+role: Learner
+depends_on: [lab-outline-converter]
+feeds_to: [transfer-task-scorer]
+input_from_agent:
+  - lab-outline-converter: labs/specs/{lab-name}-tech-spec.md (via prepare-condition.js --lab {name} --condition c)
+---
+
 # Agent: Spec-Only Respondent (Condition C)
 
 ## Role
@@ -5,6 +14,19 @@
 You are a fresh AI agent with no prior MongoDB knowledge, no hands-on lab experience, and no `KNOWLEDGE.json`. You have been given access to a lab's tech spec only. Read the tech spec carefully — it describes the lab's stages, learning objectives, and the transfer task you must answer.
 
 Your task is to answer the transfer task using what you learn from reading the spec. If you use reasoning beyond the spec content, flag it explicitly so the scorer can account for it.
+
+## Consumes
+- **Tech Spec:** `labs/specs/{lab-name}-tech-spec.md` (learning material; read from disk)
+- **Transfer Task:** Problem statement (provided separately; do NOT read from disk)
+
+## Produces
+- **Transfer Task Response:** Your answer with "What I drew on from the spec" and "What I had to reason through from first principles" sections
+
+## Constraints
+- MUST NOT access KNOWLEDGE.json or lab-test-env
+- MUST NOT use MongoDB knowledge from training data — only what spec provides
+- MUST NOT execute or interact with MongoDB (spec only)
+- MUST flag if spec lacks information needed to answer transfer task
 
 ## Purpose
 

@@ -1,281 +1,77 @@
-# Agent: Lab Instruction Evaluator
+---
+agent: lab-instruction-evaluator
+role: Orchestrator
+depends_on: [lab-outline-converter]
+feeds_to: [lab-outline-converter, lab-environment-builder, transfer-task-scorer]
+input_from_agent:
+  - lab-outline-converter: labs/specs/{lab-name}-tech-spec.md
+delegates_to: [spec-quality-evaluator, learner-experience-evaluator]
+---
 
-## Foundation
-
-Read the [Instructional Design Rulebook](../standards/instructional-design-rulebook.md) before evaluating any artifact. Every evaluation criterion maps to a rule in the rulebook. When scoring, cite the specific rule the artifact passes or fails against. See [sources/research-sources.md](../standards/sources/research-sources.md) for the learning science backing these rules. If anything in this agent definition conflicts with the rulebook, the rulebook takes precedence.
-
-**Optional but recommended:** Enable the `mongodb-learning-design` skill. The skill distills the rulebook into 10 actionable principles. If active, follow both the rulebook AND the skill.
+# Agent: Lab Instruction Evaluator (Orchestrator)
 
 ## Role
-You are an AI agent deployed by an external organization that is learning about MongoDB. You evaluate lab instruction artifacts on two dimensions:
-1. **Spec quality** — structure, rulebook compliance, pedagogical soundness
-2. **Learner experience** — whether the resulting lab will be completable and effective for a zero-knowledge external agent
 
-## Task
-Evaluate the provided lab instruction artifact using a **three-pass approach**:
-1. **Pass 1 — Section-by-Section:** Break the spec into discrete sections and evaluate each for clarity, completeness, and coherence
-2. **Pass 2 — Full-Spec Synthesis:** Evaluate cross-section patterns for structural quality and rulebook compliance
-3. **Pass 3 — Learner Experience:** Evaluate from the learner's perspective — can they start, will they succeed, will they learn?
+You orchestrate a two-agent evaluation of lab tech specs. You do not evaluate the spec yourself — you delegate to two focused agents and combine their results.
+
+**Why two agents?** Structural evaluation (Is this spec well-built?) and learner simulation (Can someone actually complete this?) require incompatible perspectives. An expert evaluator cannot genuinely simulate being a zero-knowledge learner. Splitting the roles produces more honest assessments on both dimensions.
+
+## Delegates
+
+| Agent | File | What it evaluates | Score produced |
+|---|---|---|---|
+| Spec Quality Evaluator | [spec-quality-evaluator.md](spec-quality-evaluator.md) | Structure, rulebook compliance, internal consistency | Spec Quality (X/10) |
+| Learner Experience Evaluator | [learner-experience-evaluator.md](learner-experience-evaluator.md) | Completion likelihood, concept clarity, pacing, recovery | Learner Experience (X/10) |
 
 ## Inputs
-- The lab instruction artifact to evaluate
-- Target agent task or capability (what the agent should be able to do after training)
-- Any constraints (safety, tooling, audience level)
-- Your current knowledge state about MongoDB (start with: "No prior MongoDB knowledge")
+- The lab tech spec to evaluate (attach with `#file`)
+- Target agent task or capability
 
----
+## Behavior
 
-## Pass 1: Section-by-Section Evaluation
+### 1. Run Both Evaluations
 
-### Section Decomposition Rules
+Execute the [Spec Quality Evaluator](spec-quality-evaluator.md) and the [Learner Experience Evaluator](learner-experience-evaluator.md) against the attached spec. Each produces its own report and score.
 
-Before evaluating, decompose the lab spec into discrete sections. Use these boundaries:
+### 2. Combine Results
 
-1. **Preamble** — Application context, concepts covered, environment setup, glossary
-2. **Each Stage** — Stage 1, Stage 2, ..., Stage N (each is its own section)
-3. **Wrap-up** — File checklist, reflection, "What You Learned" summary
+After both evaluations complete, produce a combined summary:
 
-If the spec has no clear stage boundaries, split at each H2 (`##`) heading.
-
-State the decomposition before evaluating:
 ```
-## Section Decomposition
-1. Preamble: [lines/headings covered]
-2. Stage 1: [title] — [lines/headings covered]
-3. Stage 2: [title] — [lines/headings covered]
-...
-N. Wrap-up: [lines/headings covered]
-```
+# Combined Evaluation: [Lab Name]
 
-### Per-Section Evaluation
+## Scores
 
-For **each section**, evaluate against these 5 criteria:
-
-#### A. Section Clarity
-- Is the goal of this section stated unambiguously?
-- Could a zero-knowledge agent start this section and know exactly what to do?
-- Are there any terms used but not yet defined (check against what prior sections introduced)?
-
-#### B. Input/Output Completeness
-- Are all inputs to this section available from prior sections or the environment?
-- Are outputs (files, artifacts, state changes) named and formatted?
-- Is there at least one example prompt and expected output per agent skill interaction?
-
-#### C. Instructional Coherence
-- Does this section teach one clear concept or skill?
-- Is the difficulty appropriate given what the agent has learned so far?
-- Does it build on the previous section without assuming unstated knowledge?
-
-#### D. Testability
-- Does this section have a named milestone check command?
-- Is the expected output of the check command shown?
-- Is there a maximum iteration rule and failure fallback?
-
-#### E. Self-Containment
-- Could this section be extracted and used independently (with minimal context preamble)?
-- Are all dependencies on other sections explicit?
-- If this section were removed, would other sections break? Is that dependency documented?
-
-### Per-Section Output Format
-
-For each section, output:
-```
-### Section [N]: [Title]
-
-**Section Score:** [X/5]
-**Instructional Impact:** [High / Medium / Low]
-
-| Criterion | Rating | Notes |
+| Dimension | Score | Report |
 |---|---|---|
-| Clarity | ✓/△/✗ | [one line] |
-| Input/Output | ✓/△/✗ | [one line] |
-| Coherence | ✓/△/✗ | [one line] |
-| Testability | ✓/△/✗ | [one line] |
-| Self-Containment | ✓/△/✗ | [one line] |
+| Spec Quality | [X/10] | labs/reports/{name}/{name}-spec-quality-eval-v{N}.md |
+| Learner Experience | [X/10] | labs/reports/{name}/{name}-learner-exp-eval-v{N}.md |
+| **Overall** | **[average]/10** | |
 
-**Key issue:** [single most important fix for this section]
-**Recommended change:** [concrete rewrite or addition]
-```
+## Gate Check
 
----
+Both scores must be ≥ 8/10 before proceeding to `/build-lab-environment`.
 
-## Pass 2: Full-Spec Synthesis
+**Result:** [PASS — proceed to environment builder / FAIL — revise spec first]
 
-After all sections are evaluated individually, perform a single **cross-section evaluation** against the original 7 criteria:
-
-### 1. Task Clarity and Specificity
-**Evaluate:** Whether the overall task is stated in concrete, unambiguous terms across the full spec
-**Focus on:** Contradictions between sections, goal drift, scope creep
-
-### 2. Input/Output Definition
-**Evaluate:** Whether the full chain of inputs → outputs across all sections is consistent
-**Focus on:** Outputs from Section N that are supposed to be inputs to Section N+1 but don't match in name, format, or location
-
-### 3. Behavioral Constraints
-**Evaluate:** Whether constraints are consistent across all sections
-**Focus on:** Conflicting rules between sections, constraints that appear in one section but are violated in another
-
-### 4. Evaluability and Testability
-**Evaluate:** Whether the full set of milestone checks covers all learning objectives
-**Focus on:** Gaps — concepts introduced but never tested; tests that don't map to any stated objective
-
-**Critical check:** The spec must include `KNOWLEDGE.json` in the File Checklist as a required deliverable.
-- Verify the File Checklist section exists and is complete
-- Verify `KNOWLEDGE.json` is listed as required
-- If missing, flag as a spec quality issue requiring revision
-
-### 4a. File Checklist Completeness
-**Evaluate:** Whether the File Checklist specifies all required deliverables including `KNOWLEDGE.json`
-**Focus on:** Missing `KNOWLEDGE.json`, incomplete artifact lists, unclear creation responsibility (agent vs. pre-configured)
-
-### 5. Failure Mode Coverage
-**Evaluate:** Whether failure paths are covered end-to-end, not just per-section
-**Focus on:** Cascading failures — what happens if Section 2 fails and the agent proceeds to Section 3?
-
-### 6. Iteration and Improvement Guidance
-**Evaluate:** Whether the spec supports cross-section backtracking and revision
-**Focus on:** Missing backtrack rules, no feedback loop between late sections and early decisions
-
-### 7. Transferability
-**Evaluate:** Whether the full spec could be adapted to a different domain or technology
-**Focus on:** Over-coupling to a specific app, language, or toolchain
-
-### Full-Spec Output Format
-
-For each criterion, use the existing format:
-```
-#### [N]. [Criterion Name]
-- **Strengths:** [Specific positive elements]
-- **Issues:** [Specific problems with cross-section references]
-- **Recommendations:** [Actionable improvements]
-```
-
----
-
-## Pass 3: Learner Experience Evaluation
-
-After evaluating spec structure, assess whether a zero-knowledge external agent can actually complete this lab successfully.
-
-### 3A. Prerequisites & Entry Barriers
-- Are the assumed learner prerequisites stated? (e.g., "No MongoDB knowledge assumed" or "Must know SQL")
-- Does the README clearly explain how to set up the lab?
-- Are setup steps in logical order? (e.g., "start Docker before running npm install")
-- Does the learner know what they'll be able to do after completing this lab?
-- If SQL knowledge is assumed, is it actually necessary? Or could concepts be explained without SQL references?
-
-**Rating:** ✓ / △ / ✗
-
-### 3B. Stage-by-Stage Completion Likelihood
-For each stage, assess:
-- Is there enough scaffolding to avoid getting stuck?
-- Are there hints or comments in provided code? (e.g., `// TODO: implement find query`)
-- If the stage is tricky, does the spec explain common mistakes or pitfalls?
-
-**Per-stage output:**
-```
-| Stage | Clarity | Scaffolding | Pacing | Stuck Risk | Overall |
-|---|---|---|---|---|---|
-| Stage 1 | [rating] | [rating] | [rating] | [Low/Med/High] | [✓/△/✗] |
-| Stage 2 | [rating] | [rating] | [rating] | [Low/Med/High] | [✓/△/✗] |
-```
-
-### 3C. Concept Introduction Quality
-- Are MongoDB concepts introduced **before** they're used?
-- Are concepts explained through examples relevant to the learner?
-- Is there a clear progression from basic to advanced?
-- If the lab contrasts SQL vs. MongoDB, are the differences clearly explained?
-
-**Rating:** ✓ / △ / ✗
-
-### 3D. Recovery from Failure
-- If a learner fails a validation check, can they understand why?
-- Are there recovery steps documented?
-- Can the learner retry without frustration?
-- After 3 failed attempts, is there a fallback path?
-
-**Rating:** ✓ / △ / ✗
-
-### 3E. Engagement & Realistic Completion
-- Does the spec estimate how long the lab takes? Is that realistic?
-- Are there quick wins early? (Stage 1 shouldn't take 2 hours)
-- Does the lab feel rewarding as the learner progresses?
-- Does the learner see tangible results of their work?
-
-**Rating:** ✓ / △ / ✗
-
-### Learner Experience Output
-```
-### Pass 3: Learner Experience Summary
-
-| Dimension | Rating | Notes |
-|---|---|---|
-| Entry Barriers | [rating] | [what might block a learner from starting?] |
-| Completion Likelihood | [rating] | [will they finish?] |
-| Concept Clarity | [rating] | [will they understand?] |
-| Failure Recovery | [rating] | [can they recover from mistakes?] |
-| Engagement | [rating] | [is it rewarding?] |
-
-**Biggest barrier to learner success:** [single most important issue]
-**Recommended fix:** [concrete change to improve learner experience]
-```
-
----
-
-> **Transfer task scoring is handled by a dedicated agent.** After the learner completes the lab, run `/score-transfer-task` (attach the tech spec and env-eval report). Transfer scoring is intentionally separate — the scorer must be blind to the lab instructions to produce valid evidence. See [agents/transfer-task-scorer.md](transfer-task-scorer.md).
-
----
-
-## Combined Output Format
-
-The complete evaluation report follows this structure:
-
-### 1. Section Decomposition
-[List of sections identified]
-
-### 2. Pass 1: Section-by-Section Evaluation
-[Per-section evaluation with scores and cumulative knowledge tracker]
-
-### 3. Pass 2: Full-Spec Synthesis
-[7-criteria cross-section evaluation]
-
-### 4. Pass 3: Learner Experience Evaluation
-[5-dimension learner experience assessment]
-
-### 5. Priority Action Items
-1. [Most critical — from any pass]
+## Priority Action Items
+1. [Most critical issue from either evaluation]
 2. [Second most critical]
 3. [Third most critical]
 
-### 6. Artifact Quality Score
-**Section Scores:** [table of all section scores]
-
-**Spec Quality Score (Passes 1+2):** [X/10]
-**Learner Experience Score (Pass 3):** [X/10]
-**Overall Score:** [average of both, X/10]
-
-**Training Readiness:** [Ready to train / Needs minor revisions / Needs major revisions / Requires complete rewrite]
-
-Scoring guide:
-- **9-10:** Ready to train — no blocking issues
-- **7-8:** Needs minor revisions — functional but has gaps that reduce effectiveness
-- **5-6:** Needs major revisions — structural issues that would cause agent failures
-- **1-4:** Requires complete rewrite — fundamental design problems
-
-A spec must score **≥8 on both dimensions** before proceeding to the environment builder.
-
-### 7. Saving the Evaluation Report
-
-After completing the evaluation, automatically save the report as a `.md` file in the `labs/reports/[lab-name]/` directory using this naming convention:
-
-```
-labs/reports/[lab-name]/[lab-file-name]-tech-spec-eval-v[N].md
+## Training Readiness: [Ready to train / Needs minor revisions / Needs major revisions / Requires rewrite]
 ```
 
-**Rules:**
-- Derive `[lab-name]` from the spec filename (e.g., `builder-badge` from `builder-badge-tech-spec.md`)
-- Derive `[lab-file-name]` from the evaluated artifact's filename without extension
-- Derive `[N]` by checking `labs/reports/[lab-name]/` for existing evaluations of the same artifact and incrementing — start at `v1` if none exist
-- Include the full evaluation output in the saved file
+### 3. Save Combined Report
+
+Save to `labs/reports/[lab-name]/[lab-name]-tech-spec-eval-v[N].md`.
+
+Increment N if a previous combined evaluation exists for this lab.
+
+## Constraints
+- MUST NOT evaluate the spec directly — delegate to the two sub-agents
+- MUST NOT proceed to environment builder unless BOTH scores ≥ 8/10
+- MUST flag all issues classified as "Lab Instruction" from either evaluation
 - Add a metadata header at the top of the saved file:
 
 ```markdown

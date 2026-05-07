@@ -1,3 +1,12 @@
+---
+agent: lab-environment-builder
+role: Optimizer
+depends_on: [lab-outline-converter]
+feeds_to: [learner]
+input_from_agent:
+  - lab-outline-converter: labs/specs/{lab-name}-tech-spec.md
+---
+
 # Agent: Lab Environment Builder
 
 ## Foundation

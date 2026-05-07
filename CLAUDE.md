@@ -10,7 +10,9 @@ Repository for designing, evaluating, and iterating AI agent training materials 
 |---|---|---|---|
 | Lab Outline Designer | [agents/lab-outline-designer.md](agents/lab-outline-designer.md) | `/design-lab-outline` in Copilot Chat | Creates lab outlines to feed into the Lab Outline Converter |
 | Lab Outline Converter | [agents/lab-outline-converter.md](agents/lab-outline-converter.md) | `/convert-lab-outline` in Copilot Chat | Converts high-level outlines into detailed technical specs |
-| Lab Instruction Evaluator | [agents/lab-instruction-evaluator.md](agents/lab-instruction-evaluator.md) | `/evaluate-lab-instructions` in Copilot Chat | Scores lab specs on spec quality and learner experience (3-pass evaluation) |
+| Lab Instruction Evaluator | [agents/lab-instruction-evaluator.md](agents/lab-instruction-evaluator.md) | `/evaluate-lab-instructions` in Copilot Chat | Orchestrates both evaluators below and combines scores into a gate check |
+| Spec Quality Evaluator | [agents/spec-quality-evaluator.md](agents/spec-quality-evaluator.md) | `/evaluate-spec-quality` in Copilot Chat | Evaluates spec structure, rulebook compliance, and internal consistency |
+| Learner Experience Evaluator | [agents/learner-experience-evaluator.md](agents/learner-experience-evaluator.md) | `/evaluate-learner-experience` in Copilot Chat | Evaluates completion likelihood from a zero-knowledge learner perspective |
 | Lab Environment Builder | [agents/lab-environment-builder.md](agents/lab-environment-builder.md) | `/build-lab-environment` in Copilot Chat | Generates a working skeleton app and check scripts from a tech spec |
 | Agent Learner | [agents/learner.md](agents/learner.md) | `/run-learner-agent` in Copilot Chat | Completes a lab as an external AI agent learner and produces a learning report |
 | Knowledge-Only Respondent | [agents/knowledge-only-respondent.md](agents/knowledge-only-respondent.md) | `/run-condition-b` in Copilot Chat | Answers a transfer task using only an injected KNOWLEDGE.json (Condition B of knowledge-transfer experiment) |
