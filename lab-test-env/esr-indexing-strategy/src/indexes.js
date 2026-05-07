@@ -20,38 +20,33 @@
 
 const indexes = [
   // Query 1: db.products.find({ status: 'active' })
-  // ESR: E=status, S=none, R=none → index on status only
   {
     name: 'query1-status',
-    fields: { status: 1 }
+    fields: { /* fill in ESR order */ }
   },
 
   // Query 2: db.products.find({ status: 'active' }).sort({ createdAt: -1 })
-  // ESR: E=status, S=createdAt, R=none → status first (equality), then createdAt (sort)
   {
     name: 'query2-status-createdAt',
-    fields: { status: 1, createdAt: -1 }
+    fields: { /* fill in ESR order */ }
   },
 
   // Query 3: db.products.find({ status: 'active', price: { $gte: 50, $lte: 500 } })
-  // ESR: E=status, S=none, R=price → status first (equality), then price (range)
   {
     name: 'query3-status-price',
-    fields: { status: 1, price: 1 }
+    fields: { /* fill in ESR order */ }
   },
 
-  // Query 4: db.products.find({ status: 'active', price: { $gte: 50, $lte: 500 } }).sort({ rating: -1 })
-  // ESR: E=status, S=rating, R=price → status first, rating (sort) second, price (range) last
+  // Query 4: db.products.find({ status: 'active', price: { $gte: 50 } }).sort({ rating: -1 })
   {
     name: 'query4-status-rating-price',
-    fields: { status: 1, rating: -1, price: 1 }
+    fields: { /* fill in ESR order */ }
   },
 
   // Query 5: db.products.find({ tags: 'sale', rating: { $gte: 4 } }).sort({ createdAt: -1 })
-  // ESR: E=tags, S=createdAt, R=rating → tags first (equality), createdAt (sort), rating (range) last
   {
     name: 'query5-tags-createdAt-rating',
-    fields: { tags: 1, createdAt: -1, rating: 1 }
+    fields: { /* fill in ESR order */ }
   }
 ];
 

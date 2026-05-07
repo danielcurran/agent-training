@@ -203,19 +203,6 @@ Score each dimension as ✓ (effective), △ (partial), or ✗ (ineffective) wit
 **Stages that need spec revision:** [list stage numbers and the specific instruction issue]
 **Stages that need environment fixes:** [list stage numbers and the technical issue]
 **Stages where scaffolding was insufficient:** [list stage numbers and what additional support would help]
-
-## Transfer Task
-
-[The transfer task is included verbatim from the lab's Transfer Task section. Do not look it up — it will be provided to you as part of the lab spec. Complete it now, immediately after finishing the lab stages, using only what the lab taught you. Do not use prior MongoDB knowledge from training data.]
-
-**Problem statement:** [copied from spec]
-
-**Your response:**
-[Write your solution here. Explain your reasoning. Name the MongoDB concepts you applied and why. If you would make a different choice than the lab's pattern, explain why.]
-
-**What I drew on from the lab:** [list the specific concepts, examples, or patterns from the lab stages that informed this response]
-
-**What I had to figure out that the lab didn't cover:** [anything you reasoned beyond what was explicitly taught — or state "nothing"]
 ```
 
 ---
@@ -227,9 +214,11 @@ Confirm:
 Report saved to labs/reports/[lab-name]/[lab-name]-env-eval-v[N].md
 ```
 
-### 4. Generate Knowledge Artifact
+### 4. Generate Knowledge Artifact (BEFORE Transfer Task)
 
 After saving the learning report, write `KNOWLEDGE.json` to the lab root. This is a machine-readable record of what you learned. It is used to persist knowledge across sessions and to retrieve relevant MongoDB patterns in future tasks.
+
+**CRITICAL:** Generate KNOWLEDGE.json now, before completing the transfer task. This creates a formal boundary — the transfer task will be answered after knowledge has been explicitly recorded.
 
 **Schema — each entry:**
 
@@ -271,6 +260,31 @@ Expected output: `Knowledge Check: PASS`
 
 If the check fails, revise the entries and re-run before proceeding.
 
+Confirm:
+```
+KNOWLEDGE.json saved to lab-test-env/[lab-name]/KNOWLEDGE.json
+Knowledge Check: PASS
+```
+
+---
+
+### 5. Complete Transfer Task (AFTER Knowledge Artifact Created)
+
+**Now that KNOWLEDGE.json has been created and validated, complete the transfer task. This is the final step, isolated from lab stages and from the knowledge record.**
+
+[The transfer task is included verbatim from the lab's Transfer Task section. Do not look it up — it will be provided to you as part of the lab spec. Complete it now, after KNOWLEDGE.json has been validated, using only what the lab taught you. Do not use prior MongoDB knowledge from training data.]
+
+**Problem statement:** [copied from spec]
+
+**Your response:**
+[Write your solution here. Explain your reasoning. Name the MongoDB concepts you applied and why. If you would make a different choice than the lab's pattern, explain why.]
+
+**What I drew on from the lab:** [list the specific concepts, examples, or patterns from the lab stages that informed this response]
+
+**What I had to figure out that the lab didn't cover:** [anything you reasoned beyond what was explicitly taught — or state "nothing"]
+
+After completing the transfer task above, save it as part of your lab completion report to `labs/reports/[lab-name]/[lab-name]-env-eval-v[N].md`.
+
 ---
 
 ## Ground Rules
@@ -279,6 +293,7 @@ If the check fails, revise the entries and re-run before proceeding.
 - Do not read the tech spec or any other file outside the `lab-test-env/[lab-name]/` folder unless the lab instructions direct you to
 - If you already know something about MongoDB from training data, do not use it. Reason only from what the lab teaches you
 - Be honest about confusion. A gap in the report is more useful than a false positive
-- **Both required outputs must be completed:**
-  - Learning report saved to `labs/reports/[lab-name]/[lab-name]-env-eval-v[N].md`
+- **All three required outputs must be completed:**
+  - Learning report saved to `labs/reports/[lab-name]/[lab-name]-env-eval-v[N].md` (includes transfer task response)
   - `KNOWLEDGE.json` created in the lab root and validated with `npm run check:knowledge` (or equivalent)
+  - **Transfer task completed AFTER KNOWLEDGE.json is validated** — strict ordering to isolate the two

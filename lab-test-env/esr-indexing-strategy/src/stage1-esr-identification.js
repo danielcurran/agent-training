@@ -17,37 +17,37 @@
 
 // Query 1: db.products.find({ status: 'active' })
 const query1 = {
-  E: 'status',
-  S: 'none',
-  R: 'none'
+  E: '',
+  S: '',
+  R: ''
 };
 
 // Query 2: db.products.find({ status: 'active' }).sort({ createdAt: -1 })
 const query2 = {
-  E: 'status',
-  S: 'createdAt',
-  R: 'none'
+  E: '',
+  S: '',
+  R: ''
 };
 
 // Query 3: db.products.find({ status: 'active', price: { $gte: 50, $lte: 500 } })
 const query3 = {
-  E: 'status',
-  S: 'none',
-  R: 'price'
+  E: '',
+  S: '',
+  R: ''
 };
 
 // Query 4: db.products.find({ status: 'active', price: { $gte: 50 } }).sort({ rating: -1 })
 const query4 = {
-  E: 'status',
-  S: 'rating',
-  R: 'price'
+  E: '',
+  S: '',
+  R: ''
 };
 
 // Query 5: db.products.find({ tags: 'sale', rating: { $gte: 4 } }).sort({ createdAt: -1 })
 const query5 = {
-  E: 'tags',
-  S: 'createdAt',
-  R: 'rating'
+  E: '',
+  S: '',
+  R: ''
 };
 
 module.exports = { query1, query2, query3, query4, query5 };
