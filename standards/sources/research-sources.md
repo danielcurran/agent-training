@@ -14,6 +14,7 @@ Reference materials informing the instructional design approach for AI agent tra
 - **Misconfidence-Based Demonstration Selection for LLM In-Context Learning** (Xu & Zhang, arXiv 2401.06301) — Strategic selection to reduce LLM performance discrepancy; introduces In-Context Reflection (ICR) framework
 - **Large Language Model (LLM)-Enabled In-Context Learning for Wireless Network Optimization** (Zhou et al., arXiv 2408.00214) — Domain-specific ICL effectiveness in unfamiliar technical spaces
 - **From Context to Skills: Can Language Models Learn from Context Skillfully?** (Si et al., arXiv 2604.27660) — Direct evaluation of context-to-skill transfer and generalization
+- **Context Training with Active Information Seeking** (Huang et al., arXiv 2605.13050) — Context optimization for domain adaptation without weight updates; equips context optimizers with Wikipedia search and browser tools to actively seek task-relevant information; demonstrates that naive tool integration degrades performance, requiring structured active-seeking pipelines
 
 ## Grounding LLMs in Unfamiliar Domains
 
@@ -22,6 +23,7 @@ Reference materials informing the instructional design approach for AI agent tra
 - **Grounding Multimodal Large Language Models in Actions** (Szot et al., NeurIPS 2024) — Grounding MLLMs via affordance prediction; multi-modal re-parameterization for embodied agents
 - **When Large Language Model Agents Meet 6G Networks: Perception, Grounding, and Alignment** (Xu et al., IEEE Wireless Communications 2024) — Perception-grounding-alignment pipeline for networked agents
 - **Self-Driven Grounding: Large Language Model Agents with Automatical Language-Aligned Skill Learning** (Peng et al., arXiv 2309.01352) — Autonomous grounding through language-aligned skill discovery in environmental interaction
+- **Grounded Continuation: A Linear-Time Runtime Verifier for LLM Conversations** (He et al., arXiv 2605.14175) — Runtime dependency-graph verifier that classifies each conversation turn into one of 8 epistemic update operations to check whether each LLM utterance is grounded in established premises; achieves 89.7% accuracy on LongMemEval-KU and 100% on a stale-premise grounding subset; directly addresses context drift in long-horizon agent interactions
 
 ## Documentation Structure for AI Agents
 
