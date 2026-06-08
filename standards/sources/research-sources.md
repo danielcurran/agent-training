@@ -15,6 +15,7 @@ Reference materials informing the instructional design approach for AI agent tra
 - **Large Language Model (LLM)-Enabled In-Context Learning for Wireless Network Optimization** (Zhou et al., arXiv 2408.00214) — Domain-specific ICL effectiveness in unfamiliar technical spaces
 - **From Context to Skills: Can Language Models Learn from Context Skillfully?** (Si et al., arXiv 2604.27660) — Direct evaluation of context-to-skill transfer and generalization
 - **Context Training with Active Information Seeking** (Huang et al., arXiv 2605.13050) — Context optimization for domain adaptation without weight updates; equips context optimizers with Wikipedia search and browser tools to actively seek task-relevant information; demonstrates that naive tool integration degrades performance, requiring structured active-seeking pipelines
+- **Unified Context Evolution for LLM Agents** (Zhu et al., arXiv 2606.02304) — Gradient-free UCE framework that externalizes agent experience into a typed, evolving library of Evolvable Context Units (ECUs) spanning Memory, Strategy, Workflow, and Skill; units are generated from trajectories, scored through repeated use, and pruned; eliminates the cold-start problem of fixed context and models how agents compound knowledge across episodes
 
 ## Grounding LLMs in Unfamiliar Domains
 
@@ -61,6 +62,8 @@ Reference materials informing the instructional design approach for AI agent tra
 - **From Unstructured Recall to Schema-Grounded Memory: Reliable AI Memory via Iterative, Schema-Aware Extraction** (Petrov et al., arXiv 2604.27906) — Schema-based memory extraction for reliability in long-horizon tasks
 - **Building Persona-Based Agents On Demand: Tailoring Multi-Agent Workflows to User Needs** (Arbore et al., arXiv 2604.27882) — Just-in-time agent specialization
 - **Skills-Coach: A Self-Evolving Skill Optimizer via Training-Free GRPO** (Tian et al., arXiv 2604.27488) — Skill evolution without parameter updates through practice-based optimization
+- **ExpWeaver: LLM Agents Learn from Experience via Latent RAG** (arXiv 2606.01041) — End-to-end framework for experience-based learning without a separate RAG module; encodes past interactions in the LLM's own hidden states, retrieves relevant experiences in latent space at each decoding step via cross-attention, and optimizes the full pipeline with reinforcement learning; removes token overhead of textual experience replay
+- **Rethinking Continual Experience Internalization for Self-Evolving LLM Agents** (Chen et al., arXiv 2606.04703) — Discovers that multi-iteration experience internalization causes progressive capability collapse, not compounding improvement; identifies principle-level abstraction as more durable than instance-level transfer and step-wise injection as superior to global injection for long-horizon tool use; directly relevant to designing agents that improve through repeated task practice
 
 ## Few-Shot Learning & Tool Use
 
