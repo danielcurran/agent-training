@@ -50,6 +50,8 @@ Reference materials informing the instructional design approach for AI agent tra
 - **Developing Instructional Design Agents to Support Novice and K-12 Design Education** (Schimpf et al., ASEE 2019, cited 2024+) — Framework for agent-mediated scaffolded learning experiences
 - **Generative AI Agent to Promote Teaching Reflection in a K-12 AI Course** (Cao et al., IEEE Transactions on Learning Technologies 2026) — Agent support for iterative reflective practice cycles; effects on teacher self-efficacy and design quality
 - **Rethinking Agentic Reinforcement Learning In Large Language Models** (Cui et al., arXiv 2604.27859) — Reconceptualizes RL assumptions for agentic LLM contexts
+- [Beyond Helpfulness: Measuring Whether LLM Tutors Teach or Solve — Yao, Zheng & Li (arXiv 2606.16206, Jun 2026)](https://arxiv.org/html/2606.16206) — Proposes a lightweight diagnostic for distinguishing learning-supportive behavior from answer production in LLM tutors; finds solving ability and pedagogical ability are only partially correlated (r=0.421 across eight models on MathTutorBench); directly relevant to evaluating whether AI instructional agents genuinely teach vs. shortcut to answers
+- [Learning to Prompt: Improving Student Engagement with Adaptive LLM-based High-School Tutoring — Chang et al. (arXiv 2606.20138, Jun 2026)](https://arxiv.org/abs/2606.20138v1) — Trains a prompt routing model on 14 pedagogical features (including scaffolding, student understanding) to adaptively switch instructional strategies; A/B testing with 359 students demonstrates sim-to-real transfer; directly relevant to designing adaptive scaffolding policies for LLM-based instructional agents
 
 ## Agent Evaluation & Benchmarking (2024–2026)
 
